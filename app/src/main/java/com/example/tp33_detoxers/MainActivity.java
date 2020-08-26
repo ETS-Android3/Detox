@@ -12,4 +12,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Hello Xin
     }
+
+    public void open(){
+        //R.id.sawtooth;
+    }
 }
