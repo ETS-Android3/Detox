@@ -1,0 +1,2 @@
+rootProject.name='TP33-detoxers'
+include ':app'
