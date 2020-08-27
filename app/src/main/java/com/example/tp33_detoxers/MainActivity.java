@@ -3,6 +3,8 @@ package com.example.tp33_detoxers;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigation);
 
+        replaceFragment(new HomeFragment());
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigation=new
@@ -27,23 +30,28 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     int id = item.getItemId();
-                    Fragment fragment = null;
 
                     switch (id){
                         case R.id.page_category:
-                            fragment = new CategoryFragment();
+                            replaceFragment(new CategoryFragment());
                             break;
                         case  R.id.page_home:
-                            fragment = new HomeFragment();
+                            replaceFragment(new HomeFragment());
+                            break;
+                        case R.id.page_search:
+                            replaceFragment(new SearchFragment());
                             break;
                     }
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
                     return true;
                 }
 
 
     };
 
-
+    private void replaceFragment(Fragment nextFragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, nextFragment);
+        fragmentTransaction.commit();
+    }
 }
