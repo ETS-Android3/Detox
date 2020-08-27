@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#94b56f"
     android:orientation="vertical">
 
     <ImageView
         android:layout_width="300dp"
         android:layout_height="270dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_action_name"
+        android:src="@drawable/logo"
         android:layout_marginTop="90dp" />
 
 
