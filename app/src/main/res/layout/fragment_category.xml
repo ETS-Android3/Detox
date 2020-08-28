@@ -15,11 +15,17 @@
         android:textColor="#fff"
         android:textStyle="bold"
         android:textSize="25dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="30dp"
 
         />
-    
-    
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categoryTitle_tv">
+
+
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,13 +57,14 @@
                 <ImageView
                     android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:src="@drawable/meat" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
                     android:text="Meat"
                     android:textSize="16dp"
                     android:textColor="#658543"
@@ -88,12 +95,13 @@
                 <ImageView
                     android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:src="@drawable/veggie"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:text="Vegetable"
                     android:textSize="16dp"
                     android:textColor="#658543"
@@ -124,11 +132,12 @@
                 <ImageView
                     android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:src="@drawable/fruit" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:text="Fruit"
                     android:textSize="16dp"
                     android:textColor="#658543"
@@ -159,12 +168,13 @@
                 <ImageView
                     android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:src="@drawable/ic_baseline_category_24"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:text="Snack"
                     android:textSize="16dp"
                     android:textColor="#658543"
@@ -195,12 +205,13 @@
                 <ImageView
                     android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:src="@drawable/ic_baseline_category_24"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:text="Dairy"
                     android:textSize="16dp"
                     android:textColor="#658543"
@@ -231,12 +242,13 @@
                 <ImageView
                     android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:src="@drawable/ic_baseline_category_24"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:text="Something"
                     android:textSize="16dp"
                     android:textColor="#658543"
@@ -246,16 +258,21 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-
+        //this is a dummy image view just to test the scroll view is wworking
+        <ImageView
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="100dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:src="@drawable/veggie"
+            ></ImageView>
 
     </GridLayout>
 
 
 
-
-
-
-
+    </ScrollView>
 
 
 </RelativeLayout>
