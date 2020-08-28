@@ -21,9 +21,9 @@
         android:title="Scan" />
 
     <item
-        android:id="@+id/page_setting"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Setting" />
+        android:id="@+id/page_map"
+        android:icon="@drawable/ic_baseline_map_24"
+        android:title="Map" />
 
 
 </menu>

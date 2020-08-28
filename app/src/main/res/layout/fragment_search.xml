@@ -5,12 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:orientation="horizontal">
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
         android:hint="search word"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_baseline_search_24"
+        app:startIconDrawable="@drawable/ic_baseline_search_24"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp">
 
@@ -19,6 +23,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_search"
+            android:layout_marginLeft="8dp"
+            android:hint="Search" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recySearch"
@@ -26,5 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:scrollbars="vertical" />
+
 
 </LinearLayout>
