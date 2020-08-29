@@ -50,4 +50,22 @@ public class SearchAPI {
         }
         return source;
     }
+
+    //API call to get a json array containing food within the category
+    public static String searchCategory(String category) {
+        String result = null;
+        Request request = new Request.Builder()
+                .url(BASE_URL + "category/"+ category +".json")
+                .get()
+                .build();
+        try{
+            Response response = client.newCall(request).execute();
+            result = response.body().string();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return result;
+    }
 }
