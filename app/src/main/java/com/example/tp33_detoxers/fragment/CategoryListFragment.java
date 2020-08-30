@@ -1,4 +1,4 @@
-package com.example.tp33_detoxers;
+package com.example.tp33_detoxers.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tp33_detoxers.adapter.RVSearchAdpater;
+import com.example.tp33_detoxers.R;
+import com.example.tp33_detoxers.SearchAPI;
+import com.example.tp33_detoxers.adapter.RVSearchAdapter;
 import com.example.tp33_detoxers.model.SearchResult;
 
 import org.json.JSONArray;
@@ -30,7 +32,7 @@ public class CategoryListFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<SearchResult> products;
-    private RVSearchAdpater adapter;
+    private RVSearchAdapter adapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -39,7 +41,7 @@ public class CategoryListFragment extends Fragment {
         products = new ArrayList<>();
         TextView categoryName = catListView.findViewById(R.id.category_bundle);
         searchAPI = new SearchAPI();
-        adapter = new RVSearchAdpater(products);
+        adapter = new RVSearchAdapter(products);
         products = new ArrayList<>();
 
         if (getArguments() != null) { //make sure the bundle contains category info
@@ -58,10 +60,10 @@ public class CategoryListFragment extends Fragment {
         adapter.addProducts(products);
     }
 
-    public class searchProduct extends AsyncTask<String,Void,RVSearchAdpater>{
+    public class searchProduct extends AsyncTask<String,Void,RVSearchAdapter>{
 
         @Override
-        protected RVSearchAdpater doInBackground(String... strings) {
+        protected RVSearchAdapter doInBackground(String... strings) {
             String result = SearchAPI.searchCategory(strings[0]);
             try{
                 JSONArray j = new JSONArray(SearchAPI.getSource(result));
@@ -80,12 +82,12 @@ public class CategoryListFragment extends Fragment {
             }catch (Exception e){
                 e.printStackTrace();
             }
-            adapter = new RVSearchAdpater(products);
+            adapter = new RVSearchAdapter(products);
             return adapter;
         }
 
         @Override
-        protected void onPostExecute(RVSearchAdpater a){
+        protected void onPostExecute(RVSearchAdapter a){
             recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
             recyclerView.setAdapter(a);
             layoutManager = new LinearLayoutManager(getActivity());

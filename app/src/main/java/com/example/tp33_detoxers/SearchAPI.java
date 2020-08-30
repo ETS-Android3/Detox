@@ -51,6 +51,36 @@ public class SearchAPI {
         return source;
     }
 
+    public static String searchProductDetail(String keyword){
+        String result = null;
+        Request request = new Request.Builder()
+                .url(BASE_URL + "api/vo/product/" + keyword + ".json")
+                .get()
+                .build();
+        try{
+            Response response = client.newCall(request).execute();
+            result = response.body().string();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static String getDetail(String result){
+        String source = null;
+        try{
+            JSONObject jsonObject = new JSONObject(result).getJSONObject("product");
+            if(jsonObject.length() > 0) {
+                source = jsonObject.toString();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            source = "No info found";
+        }
+        return source;
+    }
+
     //API call to get a json array containing food within the category
     public static String searchCategory(String category) {
         String result = null;
@@ -64,8 +94,6 @@ public class SearchAPI {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
         return result;
     }
 }

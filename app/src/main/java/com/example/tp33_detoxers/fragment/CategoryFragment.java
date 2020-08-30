@@ -1,4 +1,4 @@
-package com.example.tp33_detoxers;
+package com.example.tp33_detoxers.fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,6 +11,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.tp33_detoxers.R;
 
 public class CategoryFragment extends Fragment {
 

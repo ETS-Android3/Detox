@@ -9,7 +9,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.example.tp33_detoxers.fragment.CategoryFragment;
+import com.example.tp33_detoxers.fragment.HomeFragment;
+import com.example.tp33_detoxers.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

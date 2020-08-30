@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tp33_detoxers.HomeFragment;
 import com.example.tp33_detoxers.R;
+import com.example.tp33_detoxers.fragment.IngredientFragment;
 import com.example.tp33_detoxers.model.SearchResult;
 import com.squareup.picasso.Picasso;
 
@@ -21,10 +21,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class RVSearchAdpater extends RecyclerView.Adapter<RVSearchAdpater.ViewHolder> {
+public class RVSearchAdapter extends RecyclerView.Adapter<RVSearchAdapter.ViewHolder> {
     private List<SearchResult> searchResults;
 
-    public RVSearchAdpater(List<SearchResult> products) {
+    public RVSearchAdapter(List<SearchResult> products) {
         searchResults = products;
     }
 
@@ -52,7 +52,7 @@ public class RVSearchAdpater extends RecyclerView.Adapter<RVSearchAdpater.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RVSearchAdpater.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RVSearchAdapter.ViewHolder holder, int position) {
         final SearchResult products = searchResults.get(position);
         TextView tvName = holder.nameTextView;
         tvName.setText(products.getpName());
@@ -70,7 +70,7 @@ public class RVSearchAdpater extends RecyclerView.Adapter<RVSearchAdpater.ViewHo
                 spEdit.putString("id",id);
                 spEdit.apply();
 
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new IngredientFragment()).addToBackStack(null).commit();
             }
         };
 
