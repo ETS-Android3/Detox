@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -23,6 +24,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="15dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="Choose illness:"
+            android:textSize="15dp"
+            android:fontFamily="sans-serif-condensed"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/sp_illness"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:entries="@array/illness_array" />
 
     </LinearLayout>
 

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TP33-detoxers</string>
+
+    <string-array name="illness_array">
+        <item>All</item>
+        <item>High blood sugar</item>
+        <item>High blood pressure</item>
+        <item>High cholesterol</item>
+    </string-array>
 </resources>

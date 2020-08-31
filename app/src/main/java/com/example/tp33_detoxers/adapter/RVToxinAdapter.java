@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,7 +60,6 @@ public class RVToxinAdapter extends RecyclerView.Adapter<RVToxinAdapter.ViewHold
         TextView tvName = holder.tv_name;
         tvName.setText(text);
         ImageView iv_circle = holder.imageView;
-        //Picasso.get().load(R.drawable.greencircle).placeholder(R.drawable.greencircle).into(iv_circle);
         switch (level){
             case "low":
                 Picasso.get().load(R.drawable.greencircle).placeholder(R.drawable.greencircle).into(iv_circle);
@@ -82,4 +82,8 @@ public class RVToxinAdapter extends RecyclerView.Adapter<RVToxinAdapter.ViewHold
         ingredientDetails = products;
         notifyDataSetChanged();
     }
+
+//    public Filter getFilter() {
+//        return filter;
+//    }
 }
