@@ -27,7 +27,7 @@
 
         <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/categoryTitle_tv"
             android:layout_margin="25dp"
             android:columnCount="2"
@@ -46,7 +46,7 @@
                 android:elevation="8dp"
                 app:cardCornerRadius="8dp">
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
@@ -54,13 +54,13 @@
                     android:orientation="vertical">
 
 
-                    <ImageView
-                        android:layout_width="150dp"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="130dp"
                         android:layout_height="100dp"
                         android:layout_marginBottom="5dp"
                         android:src="@drawable/meat" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
@@ -70,7 +70,7 @@
                         android:textColor="#658543"
                         android:textSize="16dp"
                         android:textStyle="bold" />
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -86,7 +86,7 @@
                 android:elevation="8dp"
                 app:cardCornerRadius="8dp">
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
@@ -94,13 +94,13 @@
                     android:orientation="vertical"
                     tools:ignore="UseCompoundDrawables">
 
-                    <ImageView
-                        android:layout_width="150dp"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="130dp"
                         android:layout_height="100dp"
                         android:layout_marginBottom="5dp"
                         android:src="@drawable/veggie" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
@@ -110,7 +110,7 @@
                         android:textColor="#658543"
                         android:textSize="16dp"
                         android:textStyle="bold" />
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -126,20 +126,20 @@
                 android:elevation="8dp"
                 app:cardCornerRadius="8dp">
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="150dp"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="130dp"
                         android:layout_height="100dp"
                         android:layout_marginBottom="5dp"
                         android:src="@drawable/fruit" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
@@ -149,7 +149,7 @@
                         android:textColor="#658543"
                         android:textSize="16dp"
                         android:textStyle="bold" />
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -165,22 +165,22 @@
                 android:elevation="8dp"
                 app:cardCornerRadius="8dp">
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="150dp"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="130dp"
                         android:layout_height="100dp"
                         android:layout_row="1"
                         android:layout_column="3"
                         android:layout_marginBottom="5dp"
                         android:src="@drawable/dairy" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
@@ -190,7 +190,7 @@
                         android:textColor="#658543"
                         android:textSize="16dp"
                         android:textStyle="bold" />
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -206,20 +206,20 @@
                 android:elevation="8dp"
                 app:cardCornerRadius="8dp">
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="150dp"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="130dp"
                         android:layout_height="100dp"
                         android:layout_marginBottom="5dp"
                         android:src="@drawable/snacks" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
@@ -229,7 +229,7 @@
                         android:textColor="#658543"
                         android:textSize="16dp"
                         android:textStyle="bold" />
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
 
@@ -246,20 +246,20 @@
                 android:elevation="8dp"
                 app:cardCornerRadius="8dp">
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="150dp"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="130dp"
                         android:layout_height="100dp"
                         android:layout_marginBottom="5dp"
                         android:src="@drawable/drinks" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
@@ -269,17 +269,9 @@
                         android:textColor="#658543"
                         android:textSize="16dp"
                         android:textStyle="bold" />
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
-            //this is a dummy image view just to test the scroll view is wworking
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="100dp"
-                android:src="@drawable/veggie"></ImageView>
 
 
         </GridLayout>
