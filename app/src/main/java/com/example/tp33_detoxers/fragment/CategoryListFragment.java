@@ -22,8 +22,7 @@ import com.example.tp33_detoxers.SearchAPI;
 import com.example.tp33_detoxers.adapter.RVSearchAdapter;
 import com.example.tp33_detoxers.model.IngredientDetail;
 import com.example.tp33_detoxers.model.SearchResult;
-import com.example.tp33_detoxers.viewModel.IngredientListViewModel;
-import com.example.tp33_detoxers.viewModel.ToxinLevelViewModel;
+import com.example.tp33_detoxers.viewModel.resultListViewModel;
 
 import org.json.JSONArray;
 
@@ -42,8 +41,9 @@ public class CategoryListFragment extends Fragment {
     private RVSearchAdapter adapter;
     private String selectedIngredient = "all";
     private String selectedLevel = "all";
-    private IngredientListViewModel ingredientListViewModel;
+    private resultListViewModel resultListViewModel;
     private List<SearchResult> filterResult;
+    private searchProduct search = new searchProduct(); //
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,37 +58,18 @@ public class CategoryListFragment extends Fragment {
         adapter = new RVSearchAdapter(products);
         filterResult = new ArrayList<>();
         products = new ArrayList<>();
-//         ingredientListViewModel = new ViewModelProvider(this.getActivity()).get(ToxinLevelViewModel.class);
+//        resultListViewModel = new ViewModelProvider(this.requireActivity()).get(resultListViewModel.class);
+
 
         if (getArguments() != null) { //make sure the bundle contains category info
             category = getArguments().getString("CATEGORY");
             categoryName.setText(category);
-            searchProduct search = new searchProduct();
-            search.execute(category);
+            search.execute(category); //***
         }
 //        sp_ingredient.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {}
 //
-//                if (parent.getItemAtPosition(position).toString().equals("All")){
-//                    ingredientListViewModel.getAllResult(products).observe(getActivity(), new Observer<List<SearchResult>>() {
-//                        @Override
-//                        public void onChanged(List<SearchResult> resultList) {
-//                            adapter.addProducts(resultList);
-//                        }
-//                    });
-//            }
-//                else {
-//                    filterResult.clear();
-//                    filterResult = getFilterList(parent.getItemAtPosition(position).toString());
-//                    toxinLevelViewModel.getAllToxin(filterList).observe(getActivity(), new Observer<List<IngredientDetail>>() {
-//                        @Override
-//                        public void onChanged(List<IngredientDetail> ingredientDetails) {
-//                            toxinAdapter.addLevel(ingredientDetails);
-//                        }
-//                    });
-//                }
-//            }
 //
 //            @Override
 //            public void onNothingSelected(AdapterView<?> parent) {
@@ -101,6 +82,7 @@ public class CategoryListFragment extends Fragment {
 //            @Override
 //            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 //                selectedLevel = parent.getItemAtPosition(position).toString().toLowerCase();
+//                search.execute(category, selectedIngredient, selectedLevel);
 //            }
 //
 //            @Override
@@ -125,12 +107,20 @@ public class CategoryListFragment extends Fragment {
         @Override
         protected RVSearchAdapter doInBackground(String... strings) {
             String result = SearchAPI.searchCategory(strings[0]);
+
             try{
                 JSONArray j = new JSONArray(SearchAPI.getSource(result));
 
                     for(int i = 0; i < 20; i++){
 
-                        if (j.getJSONObject(i).has("image_url")) {
+                        if ((j.getJSONObject(i).has("image_url")) && (j.getJSONObject(i).has("nutrient_levels"))
+                                && (j.getJSONObject(i).has("product_name"))
+                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("saturated-fat"))
+                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("sugars"))
+                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("fat"))
+                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("salt"))
+                                && (j.getJSONObject(i).has("nutriments"))
+                        ) {
                                 String name = j.getJSONObject(i).getString("product_name");
                                 String id = j.getJSONObject(i).getString("_id");
                                 String url = j.getJSONObject(i).getString("image_url");
@@ -154,6 +144,7 @@ public class CategoryListFragment extends Fragment {
             recyclerView.setLayoutManager(layoutManager);
         }
     }
+
 
 
 
