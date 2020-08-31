@@ -90,10 +90,20 @@ public class SearchFragment extends Fragment {
             try{
                 JSONArray j = new JSONArray(SearchAPI.getSource(result));
                 for(int i = 0; i < 10; i++){
-                    String name = j.getJSONObject(i).getString("product_name");
-                    String id = j.getJSONObject(i).getString("id");
-                    String url = j.getJSONObject(i).getString("image_front_url");
-                    saveData(name, url, id);
+
+                    if ((j.getJSONObject(i).has("image_url")) && (j.getJSONObject(i).has("nutrient_levels"))
+                            && (j.getJSONObject(i).has("product_name"))
+                            && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("saturated-fat"))
+                            && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("sugars"))
+                            && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("fat"))
+                            && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("salt"))
+                            && (j.getJSONObject(i).has("nutriments"))
+                            &&(j.getJSONObject(i).getJSONObject("nutriments").length() != 0)
+                    ){
+                        String name = j.getJSONObject(i).getString("product_name");
+                        String id = j.getJSONObject(i).getString("id");
+                        String url = j.getJSONObject(i).getString("image_front_url");
+                        saveData(name, url, id);}
                 }
             }catch (Exception e){
                 e.printStackTrace();
