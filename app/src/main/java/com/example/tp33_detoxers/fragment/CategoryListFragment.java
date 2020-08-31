@@ -115,11 +115,12 @@ public class CategoryListFragment extends Fragment {
 
                         if ((j.getJSONObject(i).has("image_url")) && (j.getJSONObject(i).has("nutrient_levels"))
                                 && (j.getJSONObject(i).has("product_name"))
-                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("saturated-fat"))
+                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("saturated-fat"))
                                 && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("sugars"))
-                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("fat"))
+                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("fat"))
                                 && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("salt"))
                                 && (j.getJSONObject(i).has("nutriments"))
+                                &&(j.getJSONObject(i).getJSONObject("nutriments").length() != 0)
                         ) {
                                 String name = j.getJSONObject(i).getString("product_name");
                                 String id = j.getJSONObject(i).getString("_id");

@@ -98,6 +98,7 @@ public class SearchFragment extends Fragment {
                             && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("fat"))
                             && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("salt"))
                             && (j.getJSONObject(i).has("nutriments"))
+                            &&(j.getJSONObject(i).getJSONObject("nutriments").length() != 0)
                     ){
                         String name = j.getJSONObject(i).getString("product_name");
                         String id = j.getJSONObject(i).getString("id");
