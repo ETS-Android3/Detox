@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
+    >
 
     <TextView
         android:id="@+id/category_bundle"
@@ -15,37 +17,83 @@
         android:gravity="center"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
         android:orientation="horizontal">
-
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:background="@drawable/et_background"
-            android:text="This area will be replaced by a function bar" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Show"
+            android:layout_marginRight="10dp"/>
+        <Spinner
+            android:id="@+id/categoryList_sp_ingredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:entries="@array/nutrient_array"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ingredient"
+            android:layout_marginRight="10dp"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="in"/>
+        <Spinner
+            android:id="@+id/categoryList_sp_ingredient_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:entries="@array/nutrient_level_array"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="level"/>
+
+    </LinearLayout>
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:gravity="center"-->
+<!--            android:background="@drawable/et_background"-->
+<!--            android:text="This area will be replaced by a function bar" />-->
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="80dp"
-            android:layout_height="150dp"
-            android:layout_margin="10dp"
-            android:gravity="center_horizontal"
-            android:text="This is where the drop down list will go"
-            android:background="@drawable/et_background"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categoryList_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:scrollbars="vertical" />
 
     </LinearLayout>
 
 </LinearLayout>
+
+
+<!--<TextView-->
+<!--android:layout_width="80dp"-->
+<!--android:layout_height="150dp"-->
+<!--android:layout_margin="10dp"-->
+<!--android:gravity="center_horizontal"-->
+<!--android:text="This is where the drop down list will go"-->
+<!--android:background="@drawable/et_background"/>-->
