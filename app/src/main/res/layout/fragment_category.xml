@@ -22,6 +22,7 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/categoryTitle_tv">
 
 
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/categoryTitle_tv"
             android:layout_margin="25dp"
+            android:layout_gravity="center_horizontal"
             android:columnCount="2"
             android:rowCount="3">
 

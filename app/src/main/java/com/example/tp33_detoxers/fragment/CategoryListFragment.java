@@ -22,7 +22,6 @@ import com.example.tp33_detoxers.SearchAPI;
 import com.example.tp33_detoxers.adapter.RVSearchAdapter;
 import com.example.tp33_detoxers.model.IngredientDetail;
 import com.example.tp33_detoxers.model.SearchResult;
-import com.example.tp33_detoxers.viewModel.resultListViewModel;
 
 import org.json.JSONArray;
 
@@ -41,7 +40,6 @@ public class CategoryListFragment extends Fragment {
     private RVSearchAdapter adapter;
     private String selectedIngredient = "all";
     private String selectedLevel = "all";
-    private resultListViewModel resultListViewModel;
     private List<SearchResult> filterResult;
     private searchProduct search = new searchProduct(); //
 
@@ -115,12 +113,11 @@ public class CategoryListFragment extends Fragment {
 
                         if ((j.getJSONObject(i).has("image_url")) && (j.getJSONObject(i).has("nutrient_levels"))
                                 && (j.getJSONObject(i).has("product_name"))
-                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("saturated-fat"))
+                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("saturated-fat"))
                                 && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("sugars"))
-                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("fat"))
+                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("fat"))
                                 && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("salt"))
-                                && (j.getJSONObject(i).has("nutriments"))
-                                &&(j.getJSONObject(i).getJSONObject("nutriments").length() != 0)
+                                && (j.getJSONObject(i).getJSONObject("nutriments")!= null)
                         ) {
                                 String name = j.getJSONObject(i).getString("product_name");
                                 String id = j.getJSONObject(i).getString("_id");
