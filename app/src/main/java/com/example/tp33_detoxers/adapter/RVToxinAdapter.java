@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,13 +18,17 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class RVToxinAdapter extends RecyclerView.Adapter<RVToxinAdapter.ViewHolder> {
-    private List<IngredientDetail> ingredientDetails;
+public class RVToxinAdapter extends RecyclerView.Adapter<RVToxinAdapter.ViewHolder> implements Filterable {
+    private List<IngredientDetail> ingredientDetails; // orinigal data
+    private List<IngredientDetail> ingredientFiltered; // the copy one
 
     public RVToxinAdapter(List<IngredientDetail> products) {
         ingredientDetails = products;
+        ingredientFiltered = new ArrayList<>(products);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -52,7 +57,7 @@ public class RVToxinAdapter extends RecyclerView.Adapter<RVToxinAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RVToxinAdapter.ViewHolder holder, int position) {
-        final IngredientDetail products = ingredientDetails.get(position);
+        final IngredientDetail products = ingredientFiltered.get(position);
         String name = products.getiName();
         String level = products.getiLevel();
         String quantity = products.getiQuantity();
@@ -75,7 +80,7 @@ public class RVToxinAdapter extends RecyclerView.Adapter<RVToxinAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return ingredientDetails.size();
+        return ingredientFiltered.size();
     }
 
     public void addLevel(List<IngredientDetail> products){
@@ -83,7 +88,54 @@ public class RVToxinAdapter extends RecyclerView.Adapter<RVToxinAdapter.ViewHold
         notifyDataSetChanged();
     }
 
-//    public Filter getFilter() {
-//        return filter;
-//    }
+
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        //run on background thread
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<IngredientDetail> toxins = new ArrayList<>();
+            List<String> result = new ArrayList<>();
+
+            switch (constraint.toString()){
+                case "High blood sugar":
+                    result.add("sugars");
+                    result.add("saturated-fat");
+                    break;
+                case "High blood pressure":
+                    result.add("salt");
+                    result.add("sugars");
+                    break;
+                case "High cholesterol":
+                    result.add("fat");
+                    result.add("saturated-fat");
+            }
+
+            if (constraint.toString().equals("All")){
+                toxins.addAll(ingredientDetails);
+            }else {
+                for (IngredientDetail item: ingredientDetails){
+                    for (String value: result){
+                        if(item.getiName().equals(value)){
+                            toxins.add(item);
+                        }
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = toxins;
+            return filterResults;
+        }
+
+        //runs on a ui thread
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            ingredientFiltered.clear();
+            ingredientFiltered =(ArrayList<IngredientDetail>) results.values;
+            notifyDataSetChanged();
+        }
+    };
 }
