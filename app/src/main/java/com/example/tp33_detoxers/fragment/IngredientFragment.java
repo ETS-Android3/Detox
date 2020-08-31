@@ -111,6 +111,9 @@ public class IngredientFragment extends Fragment {
                 String url = j.getString("image_front_url");
                 for (String value : iName) {
                     String quantity = j.getJSONObject("nutriments").getString(value + "_100g");
+                    if(quantity.length() > 6){
+                        quantity = quantity.substring(0, 6);
+                    }
                     list.add(quantity);
                 }
                 for (String value: levelName){
