@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class CategoryListFragment extends Fragment {
 
     private SearchAPI searchAPI;
     private TextView bundle;
+    private ProgressBar progressBar;
     private String category;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -41,7 +43,7 @@ public class CategoryListFragment extends Fragment {
     private String selectedIngredient = "all";
     private String selectedLevel = "all";
     private List<SearchResult> filterResult;
-    private searchProduct search = new searchProduct(); //
+    //private searchProduct search = new searchProduct(); //
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,12 +58,15 @@ public class CategoryListFragment extends Fragment {
         adapter = new RVSearchAdapter(products);
         filterResult = new ArrayList<>();
         products = new ArrayList<>();
+        progressBar = catListView.findViewById(R.id.progress_category);
+        progressBar.setVisibility(View.GONE);
 //        resultListViewModel = new ViewModelProvider(this.requireActivity()).get(resultListViewModel.class);
 
 
         if (getArguments() != null) { //make sure the bundle contains category info
             category = getArguments().getString("CATEGORY");
             categoryName.setText(category);
+            searchProduct search = new searchProduct();
             search.execute(category); //***
         }
 //        sp_ingredient.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -135,7 +140,13 @@ public class CategoryListFragment extends Fragment {
         }
 
         @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
         protected void onPostExecute(RVSearchAdapter a){
+            progressBar.setVisibility(View.GONE);
             recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
             recyclerView.setAdapter(a);
             layoutManager = new LinearLayoutManager(getActivity());

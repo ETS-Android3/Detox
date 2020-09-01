@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,7 @@ import java.util.List;
 public class SearchFragment extends Fragment {
     private SearchAPI searchAPI=null;
     private RecyclerView recyclerView;
+    private ProgressBar progressBar;
     private RecyclerView.LayoutManager layoutManager;
     private List<SearchResult> products;
     private RVSearchAdapter adapter;
@@ -47,6 +49,19 @@ public class SearchFragment extends Fragment {
 
         final EditText et_search = searchView.findViewById(R.id.ed_search);
         final Button btn_search =searchView.findViewById(R.id.btn_search);
+        progressBar = searchView.findViewById(R.id.progress_circular);
+        progressBar.setVisibility(View.GONE);
+
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                products.clear();
+                adapter = new RVSearchAdapter(products);
+                String keyword1 = et_search.getText().toString();
+                searchProductList searchProduct = new searchProductList();
+                searchProduct.execute(keyword1);
+            }
+        });
 
         et_search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -61,16 +76,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                btn_search.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        products.clear();
-                        adapter = new RVSearchAdapter(products);
-                        String keyword = et_search.getText().toString();
-                        searchProduct searchProduct = new searchProduct();
-                        searchProduct.execute(keyword);
-                    }
-                });
+
             }
         });
         return searchView;
@@ -83,7 +89,7 @@ public class SearchFragment extends Fragment {
     }
 
     //async to get the result of the search
-    public class searchProduct extends AsyncTask<String,Void, RVSearchAdapter>{
+    public class searchProductList extends AsyncTask<String,Void, RVSearchAdapter>{
 
         @Override
         protected RVSearchAdapter doInBackground(String... strings) {
@@ -118,7 +124,13 @@ public class SearchFragment extends Fragment {
         }
 
         @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
         protected void onPostExecute(RVSearchAdapter a){
+            progressBar.setVisibility(View.GONE);
             if (a == null){
                 Toast.makeText(getActivity(), "No result found", Toast.LENGTH_LONG).show();
             }else {

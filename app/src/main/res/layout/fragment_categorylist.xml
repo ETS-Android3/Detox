@@ -71,7 +71,12 @@
 <!--            android:gravity="center"-->
 <!--            android:background="@drawable/et_background"-->
 <!--            android:text="This area will be replaced by a function bar" />-->
-
+    <ProgressBar
+        android:id="@+id/progress_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:layout_gravity="center" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
