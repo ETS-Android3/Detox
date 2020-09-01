@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -88,8 +89,12 @@ public class SearchFragment extends Fragment {
         protected RVSearchAdapter doInBackground(String... strings) {
             String result = SearchAPI.search(strings[0]);
             try{
+                String json = SearchAPI.getSource(result);
+                if (json == null){
+                    return null;
+                }
                 JSONArray j = new JSONArray(SearchAPI.getSource(result));
-                for(int i = 0; i < 10; i++){
+                for(int i = 0; i < 20; i++){
 
                     if ((j.getJSONObject(i).has("image_url")) && (j.getJSONObject(i).has("nutrient_levels"))
                             && (j.getJSONObject(i).has("product_name"))
@@ -101,7 +106,7 @@ public class SearchFragment extends Fragment {
                             &&(j.getJSONObject(i).getJSONObject("nutriments").length() != 0)
                     ){
                         String name = j.getJSONObject(i).getString("product_name");
-                        String id = j.getJSONObject(i).getString("id");
+                        String id = j.getJSONObject(i).getString("code");
                         String url = j.getJSONObject(i).getString("image_front_url");
                         saveData(name, url, id);}
                 }
@@ -114,10 +119,15 @@ public class SearchFragment extends Fragment {
 
         @Override
         protected void onPostExecute(RVSearchAdapter a){
-            recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-            recyclerView.setAdapter(a);
-            layoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(layoutManager);
+            if (a == null){
+                Toast.makeText(getActivity(), "No result found", Toast.LENGTH_LONG).show();
+            }else {
+                recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+                recyclerView.setAdapter(a);
+                layoutManager = new LinearLayoutManager(getActivity());
+                recyclerView.setLayoutManager(layoutManager);
+            }
+
         }
     }
 }

@@ -11,6 +11,8 @@ import android.view.MenuItem;
 
 import com.example.tp33_detoxers.fragment.CategoryFragment;
 import com.example.tp33_detoxers.fragment.HomeFragment;
+import com.example.tp33_detoxers.fragment.MapFragment;
+import com.example.tp33_detoxers.fragment.ScanFragment;
 import com.example.tp33_detoxers.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -43,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.page_search:
                             replaceFragment(new SearchFragment());
                             break;
+                        case R.id.page_scan:
+                            replaceFragment(new ScanFragment());
+                            break;
+                        case R.id.page_map:
+                            replaceFragment(new MapFragment());
+                            break;
                     }
                     return true;
                 }
@@ -54,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, nextFragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 }

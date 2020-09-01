@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TP33-detoxers</string>
+    <string name="app_name">Detox</string>
 
     <string-array name="illness_array">
         <item>All</item>

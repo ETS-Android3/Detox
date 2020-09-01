@@ -100,7 +100,7 @@ public class CategoryFragment extends Fragment {
         bundle.putString("CATEGORY", category);
         newFrag.setArguments(bundle);
         FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.container, newFrag).commit();
+        fm.beginTransaction().replace(R.id.container, newFrag).addToBackStack(null).commit();
     }
 
 
