@@ -54,7 +54,7 @@ public class SearchAPI {
     public static String searchProductDetail(String keyword){
         String result = null;
         Request request = new Request.Builder()
-                .url(BASE_URL + "api/vo/product/" + keyword + ".json")
+                .url(BASE_URL + "api/v0/product/" + keyword + ".json")
                 .get()
                 .build();
         try{
@@ -85,7 +85,7 @@ public class SearchAPI {
     public static String searchCategory(String category) {
         String result = null;
         Request request = new Request.Builder()
-                .url(BASE_URL + "category/"+ category +".json")
+                .url(BASE_URL + "category/"+ category +"/1.json")
                 .get()
                 .build();
         try{
