@@ -80,7 +80,5 @@ public class ScanFragment extends Fragment {
                 tv_scan.setText(result.getContents());
             }
         }
-
-        //super.onActivityResult(requestCode, resultCode, data);
     }
 }
