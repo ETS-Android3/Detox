@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
@@ -15,6 +16,22 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View homeView = inflater.inflate(R.layout.fragment_home, container, false);
+        Button bt_health = homeView.findViewById(R.id.bt_tips);
+        Button bt_about = homeView.findViewById(R.id.bt_aboutUs);
+
+        bt_health.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new MapFragment()).addToBackStack(null).commit();
+            }
+        });
+
+        bt_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new MapFragment()).addToBackStack(null).commit();
+            }
+        });
         return homeView;
     }
 }
