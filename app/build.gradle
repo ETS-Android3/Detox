@@ -58,6 +58,13 @@ dependencies {
     //scan function
     implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
     implementation 'com.google.zxing:core:3.4.0'
+    //icon
+    implementation 'com.joanzapata.iconify:android-iconify:2.2.2'
+    implementation 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+    //fragment
+    implementation 'me.yokeyword:fragmentationx:1.0.2'
+    implementation 'me.yokeyword:fragmentationx-swipeback:1.0.2'
+
 
 
 

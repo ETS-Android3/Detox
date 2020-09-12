@@ -19,8 +19,6 @@ import com.example.tp33_detoxers.fragment.MapFragment;
 import com.example.tp33_detoxers.fragment.ScanFragment;
 import com.example.tp33_detoxers.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity {
 
