@@ -4,9 +4,23 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#FFFFEE</item>
+        <item name="colorPrimary">#94B56F</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/MyTextViewStyle</item>
+    </style>
+
+    <style name="MyTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+<!--    style for splash screen-->
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
 <!--    <style name="AppTheme" parent="Theme.MaterialComponents">-->

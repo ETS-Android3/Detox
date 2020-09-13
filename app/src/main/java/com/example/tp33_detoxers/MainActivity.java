@@ -18,6 +18,7 @@ import com.example.tp33_detoxers.fragment.HomeFragment;
 import com.example.tp33_detoxers.fragment.MapFragment;
 import com.example.tp33_detoxers.fragment.ScanFragment;
 import com.example.tp33_detoxers.fragment.SearchFragment;
+import com.example.tp33_detoxers.fragment.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -56,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.page_scan:
                             replaceFragment(new ScanFragment());
                             break;
-                        case R.id.page_map:
-                            replaceFragment(new MapFragment());
+                        case R.id.page_setting:
+                            replaceFragment(new SettingFragment());
                             break;
                     }
                     return true;

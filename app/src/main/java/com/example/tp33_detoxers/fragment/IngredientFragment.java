@@ -108,16 +108,16 @@ public class IngredientFragment extends Fragment {
             try{
                 JSONObject j = new JSONObject(SearchAPI.getDetail(result));
                 String pName = j.getString("product_name");
-                String url = j.getString("image_front_url");
+                String url = j.getString("image_url");
                 for (String value : iName) {
-                    String quantity = j.getJSONObject("nutriments").getString(value + "_100g");
+                    String quantity = j.getString(value + "_100g");
                     if(quantity.length() > 6){
                         quantity = quantity.substring(0, 6);
                     }
                     list.add(quantity);
                 }
                 for (String value: levelName){
-                    String level = j.getJSONObject("nutrient_levels").getString(value);
+                    String level = j.getString(value + "_100g");
                     list.add(level);
                 }
                 list.add(pName);
@@ -125,6 +125,26 @@ public class IngredientFragment extends Fragment {
             }catch (Exception e){
                 e.printStackTrace();
             }
+//            try{
+//                JSONObject j = new JSONObject(SearchAPI.getDetail(result));
+//                String pName = j.getString("product_name");
+//                String url = j.getString("image_front_url");
+//                for (String value : iName) {
+//                    String quantity = j.getJSONObject("nutriments").getString(value + "_100g");
+//                    if(quantity.length() > 6){
+//                        quantity = quantity.substring(0, 6);
+//                    }
+//                    list.add(quantity);
+//                }
+//                for (String value: levelName){
+//                    String level = j.getJSONObject("nutrient_levels").getString(value);
+//                    list.add(level);
+//                }
+//                list.add(pName);
+//                list.add(url);
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
             return list;
         }
 

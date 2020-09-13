@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1111"
     android:layout_marginBottom="?attr/actionBarSize"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Search"
+            app:titleTextColor="@color/black"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -37,7 +52,6 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginLeft="8dp"
-            android:textColorHint="#ffffff"
             android:background="@drawable/btn_background"
             android:hint="Search" />
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -54,6 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            style="@style/Base.CardView"
             android:scrollbars="vertical" />
 
 

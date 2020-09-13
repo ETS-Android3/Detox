@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="?attr/actionBarSize"
-    android:background="#4D89a866"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -15,17 +15,36 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:gravity="center_horizontal"
             app:title="Detox"
+            app:titleTextColor="@color/black"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="270dp"
+        android:layout_width="240dp"
+        android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/logo"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="20dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Choose your best diet" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:hint="Get Start Now"
+        android:textColorHint="@color/black" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,6 +57,7 @@
             android:layout_width="120dp"
             android:layout_height="80dp"
             android:layout_margin="20dp"
+            android:textColorHint="@color/black"
             android:hint="Healthy tips" />
 
         <com.google.android.material.button.MaterialButton
@@ -45,8 +65,9 @@
             android:layout_width="120dp"
             android:layout_height="80dp"
             android:layout_margin="20dp"
-            android:hint="About us"
-            android:drawableLeft="@drawable/ic_baseline_person_24"/>
+            android:textColorHint="#FFFFFF"
+            android:hint="healthy center "
+            android:drawableLeft="@drawable/ic_baseline_map_24"/>
 
     </LinearLayout>
 

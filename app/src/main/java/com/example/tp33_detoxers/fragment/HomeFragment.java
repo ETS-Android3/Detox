@@ -22,7 +22,7 @@ public class HomeFragment extends Fragment {
         bt_health.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new MapFragment()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new TipsCollectionFragment()).addToBackStack(null).commit();
             }
         });
 

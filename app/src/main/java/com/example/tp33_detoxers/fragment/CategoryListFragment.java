@@ -49,7 +49,7 @@ public class CategoryListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View catListView = inflater.inflate(R.layout.fragment_categorylist, container, false);
-        recyclerView = catListView.findViewById(R.id.categoryList_rv);
+        recyclerView = catListView.findViewById(R.id.recySearch);
         products = new ArrayList<>();
         TextView categoryName = catListView.findViewById(R.id.category_bundle);
         searchAPI = new SearchAPI();
@@ -109,26 +109,31 @@ public class CategoryListFragment extends Fragment {
 
         @Override
         protected RVSearchAdapter doInBackground(String... strings) {
-            String result = SearchAPI.searchCategory(strings[0]);
+            String result = SearchAPI.search(strings[0]);
 
             try{
                 JSONArray j = new JSONArray(SearchAPI.getSource(result));
 
                     for(int i = 0; i < 20; i++){
 
-                        if ((j.getJSONObject(i).has("image_url")) && (j.getJSONObject(i).has("nutrient_levels"))
-                                && (j.getJSONObject(i).has("product_name"))
-                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("saturated-fat"))
-                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("sugars"))
-                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("fat"))
-                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("salt"))
-                                && (j.getJSONObject(i).getJSONObject("nutriments")!= null)
-                        ) {
-                                String name = j.getJSONObject(i).getString("product_name");
-                                String id = j.getJSONObject(i).getString("_id");
-                                String url = j.getJSONObject(i).getString("image_url");
-                                saveData(name, url, id);
-                        }
+                        String name = j.getJSONObject(i).getString("product_name");
+                        String id = j.getJSONObject(i).getString("code");
+                        String url = j.getJSONObject(i).getString("image_url");
+                        saveData(name, url, id);
+
+//                        if ((j.getJSONObject(i).has("image_url")) && (j.getJSONObject(i).has("nutrient_levels"))
+//                                && (j.getJSONObject(i).has("product_name"))
+//                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("saturated-fat"))
+//                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("sugars"))
+//                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("fat"))
+//                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("salt"))
+//                                && (j.getJSONObject(i).getJSONObject("nutriments")!= null)
+//                        ) {
+//                                String name = j.getJSONObject(i).getString("product_name");
+//                                String id = j.getJSONObject(i).getString("_id");
+//                                String url = j.getJSONObject(i).getString("image_url");
+//                                saveData(name, url, id);
+//                        }
                     }
 
             }
@@ -147,7 +152,7 @@ public class CategoryListFragment extends Fragment {
         @Override
         protected void onPostExecute(RVSearchAdapter a){
             progressBar.setVisibility(View.GONE);
-            recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+            //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
             recyclerView.setAdapter(a);
             layoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(layoutManager);

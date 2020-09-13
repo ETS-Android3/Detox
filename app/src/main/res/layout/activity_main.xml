@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="#F1F1F1"
         app:itemIconTint="@color/bnv_tab_item_foreground"
         app:itemTextColor="@color/bnv_tab_item_foreground"
         app:labelVisibilityMode="labeled"

@@ -23,7 +23,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class RVToxinAdapter extends RecyclerView.Adapter<RVToxinAdapter.ViewHolder> implements Filterable {
-    private List<IngredientDetail> ingredientDetails; // orinigal data
+    private List<IngredientDetail> ingredientDetails; // original data
     private List<IngredientDetail> ingredientFiltered; // the copy one
 
     public RVToxinAdapter(List<IngredientDetail> products) {
@@ -59,8 +59,48 @@ public class RVToxinAdapter extends RecyclerView.Adapter<RVToxinAdapter.ViewHold
     public void onBindViewHolder(@NonNull RVToxinAdapter.ViewHolder holder, int position) {
         final IngredientDetail products = ingredientFiltered.get(position);
         String name = products.getiName();
-        String level = products.getiLevel();
         String quantity = products.getiQuantity();
+        String level = "";
+        switch (name){
+            case "salt":
+                if(Double.parseDouble(quantity) > 1.5){
+                    level = "high";
+                }else if(Double.parseDouble(quantity) < 0.3){
+                    level = "low";
+                }else{
+                    level = "moderate";
+                }
+                break;
+            case "sugars":
+                if(Double.parseDouble(quantity) > 22.5){
+                    level = "high";
+                }else if(Double.parseDouble(quantity) < 5){
+                    level = "low";
+                }else{
+                    level = "moderate";
+                }
+                break;
+            case "saturated-fat":
+                if(Double.parseDouble(quantity) > 5){
+                    level = "high";
+                }else if(Double.parseDouble(quantity) < 1.5){
+                    level = "low";
+                }else{
+                    level = "moderate";
+                }
+                break;
+            case "fat":
+                if(Double.parseDouble(quantity) > 17.5){
+                    level = "high";
+                }else if(Double.parseDouble(quantity) < 3){
+                    level = "low";
+                }else{
+                    level = "moderate";
+                }
+                break;
+        }
+//        String level = products.getiLevel();
+
         String text = quantity + " g " + name + " in " + level + " quantity";
         TextView tvName = holder.tv_name;
         tvName.setText(text);

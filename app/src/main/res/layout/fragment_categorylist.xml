@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="?attr/actionBarSize"
-    >
+    android:background="#1111">
 
     <TextView
         android:id="@+id/category_bundle"
@@ -86,7 +86,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categoryList_rv"
+            android:id="@+id/recySearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical" />
