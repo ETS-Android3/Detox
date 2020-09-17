@@ -39,6 +39,7 @@
         android:text="Choose your best diet" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_start"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -65,9 +66,8 @@
             android:layout_width="120dp"
             android:layout_height="80dp"
             android:layout_margin="20dp"
-            android:textColorHint="#FFFFFF"
-            android:hint="healthy center "
-            android:drawableLeft="@drawable/ic_baseline_map_24"/>
+            android:textColorHint="@color/black"
+            android:hint="healthy center " />
 
     </LinearLayout>
 

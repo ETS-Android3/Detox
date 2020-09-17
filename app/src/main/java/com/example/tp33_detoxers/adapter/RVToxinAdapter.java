@@ -128,7 +128,7 @@ public class RVToxinAdapter extends RecyclerView.Adapter<RVToxinAdapter.ViewHold
         notifyDataSetChanged();
     }
 
-
+    //filter the ingredient based on the illness
     public Filter getFilter() {
         return filter;
     }
@@ -152,6 +152,7 @@ public class RVToxinAdapter extends RecyclerView.Adapter<RVToxinAdapter.ViewHold
                 case "High cholesterol":
                     result.add("fat");
                     result.add("saturated-fat");
+                    break;
             }
 
             if (constraint.toString().equals("All")){

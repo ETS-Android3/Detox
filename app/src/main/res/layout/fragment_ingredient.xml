@@ -4,25 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:layout_marginBottom="?attr/actionBarSize"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-<!--<androidx.coordinatorlayout.widget.CoordinatorLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:orientation="vertical">-->
-
 
     <androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-        android:layout_marginBottom="?attr/actionBarSize"
-    android:orientation="vertical">
+
+    android:orientation="vertical"
+        android:background="@color/colorPrimary">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="Product Detail"
+                app:titleTextColor="@color/black"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
+        android:layout_margin="10dp"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -42,16 +51,17 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
         <TextView
+            android:id="@+id/tv_spTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
-            android:text="Choose illness:"
-            android:textSize="15dp"
+            android:text="Select health concern:"
+            android:textSize="15sp"
             android:fontFamily="sans-serif-condensed"/>
 
         <androidx.appcompat.widget.AppCompatSpinner
@@ -68,6 +78,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -76,6 +88,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp" />
+
+    <TextView
+        android:id="@+id/tv_list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal" />
 
     <ListView
         android:id="@+id/listView"
@@ -86,5 +107,4 @@
         android:layout_margin="10dp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
-<!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 </ScrollView>

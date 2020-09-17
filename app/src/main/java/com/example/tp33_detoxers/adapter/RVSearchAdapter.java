@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,11 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tp33_detoxers.R;
 import com.example.tp33_detoxers.fragment.IngredientFragment;
+import com.example.tp33_detoxers.model.IngredientDetail;
 import com.example.tp33_detoxers.model.SearchResult;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RVSearchAdapter extends RecyclerView.Adapter<RVSearchAdapter.ViewHolder> {

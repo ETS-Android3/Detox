@@ -15,7 +15,8 @@
         android:roundIcon="@drawable/circle_cropped"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="fullSensor" />
         <activity android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>

@@ -18,6 +18,14 @@ public class HomeFragment extends Fragment {
         View homeView = inflater.inflate(R.layout.fragment_home, container, false);
         Button bt_health = homeView.findViewById(R.id.bt_tips);
         Button bt_about = homeView.findViewById(R.id.bt_aboutUs);
+        Button bt_start = homeView.findViewById(R.id.btn_start);
+
+        bt_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new SearchFragment()).addToBackStack(null).commit();
+            }
+        });
 
         bt_health.setOnClickListener(new View.OnClickListener() {
             @Override

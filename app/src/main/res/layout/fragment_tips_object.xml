@@ -1,61 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    android:layout_marginBottom="?attr/actionBarSize"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="15dp"
-        android:textSize="20sp"
-        android:text="Choose Information:" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chip_tips"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        app:singleSelection="true"
-        app:selectionRequired="true"
-        app:checkedChip="@id/chip_dietary"
-        android:layout_gravity="center_horizontal" >
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_dietary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:text="Dietary advice"/>
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:text="illness info"/>
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_risk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:text="Potential risk"/>
-
-    </com.google.android.material.chip.ChipGroup>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:padding="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:padding="3dp"
         app:strokeColor="@color/card_stork_color" >
 
         <LinearLayout
-            android:layout_margin="15dp"
+            android:layout_marginVertical="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -63,14 +26,85 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dietary advice"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:text="Choose tips:" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_tips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                app:checkedChip="@id/chip_dietary"
+                android:layout_gravity="center_horizontal" >
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_dietary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:text="Dietary advice"
+                    android:textSize="15sp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:text="Prevention"
+                    android:textSize="15sp"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_risk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:text="Potential risk"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        app:strokeColor="@color/card_stork_color" >
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_tipsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="fill"
+                android:padding="4dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="fill"
+                android:padding="4dp"
+                android:textSize="20sp"/>
 
 
         </LinearLayout>
-
-
     </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

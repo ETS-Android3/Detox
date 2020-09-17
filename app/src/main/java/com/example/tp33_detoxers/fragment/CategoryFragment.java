@@ -41,7 +41,7 @@ public class CategoryFragment extends Fragment {
         meat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFrag("Meats");
+                replaceFrag("Meat");
             }
         });
 

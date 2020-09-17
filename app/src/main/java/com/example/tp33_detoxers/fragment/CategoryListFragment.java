@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
@@ -20,9 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tp33_detoxers.R;
 import com.example.tp33_detoxers.SearchAPI;
-import com.example.tp33_detoxers.adapter.RVSearchAdapter;
-import com.example.tp33_detoxers.model.IngredientDetail;
-import com.example.tp33_detoxers.model.SearchResult;
+import com.example.tp33_detoxers.adapter.RVCategoryAdapter;
+import com.example.tp33_detoxers.model.CategoryResult;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONArray;
 
@@ -30,118 +31,115 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryListFragment extends Fragment {
-
-
     private SearchAPI searchAPI;
     private TextView bundle;
     private ProgressBar progressBar;
     private String category;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private List<SearchResult> products;
-    private RVSearchAdapter adapter;
-    private String selectedIngredient = "all";
-    private String selectedLevel = "all";
-    private List<SearchResult> filterResult;
+    private List<CategoryResult> categoryProducts;
+    private RVCategoryAdapter categoryAdapter;
+    private String selectedIngredient = "All";
+    private String selectedLevel = "All";
     //private searchProduct search = new searchProduct(); //
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View catListView = inflater.inflate(R.layout.fragment_categorylist, container, false);
+        MaterialToolbar toolbar = catListView.findViewById(R.id.toolbar_category_list);
+        categoryProducts = new ArrayList<>();
         recyclerView = catListView.findViewById(R.id.recySearch);
-        products = new ArrayList<>();
+
         TextView categoryName = catListView.findViewById(R.id.category_bundle);
         searchAPI = new SearchAPI();
         Spinner sp_ingredient = catListView.findViewById(R.id.categoryList_sp_ingredient);
         Spinner sp_ingredientLevel = catListView.findViewById(R.id.categoryList_sp_ingredient_level);
-        adapter = new RVSearchAdapter(products);
-        filterResult = new ArrayList<>();
-        products = new ArrayList<>();
+
         progressBar = catListView.findViewById(R.id.progress_category);
         progressBar.setVisibility(View.GONE);
-//        resultListViewModel = new ViewModelProvider(this.requireActivity()).get(resultListViewModel.class);
+
 
 
         if (getArguments() != null) { //make sure the bundle contains category info
             category = getArguments().getString("CATEGORY");
+            toolbar.setTitle(category);
             categoryName.setText(category);
-            searchProduct search = new searchProduct();
-            search.execute(category); //***
+            searchCategoryList searchCategory = new searchCategoryList();
+            searchCategory.execute(category);
         }
-//        sp_ingredient.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {}
-//
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//
-//            }
-//        });
-//
-//        sp_ingredientLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                selectedLevel = parent.getItemAtPosition(position).toString().toLowerCase();
-//                search.execute(category, selectedIngredient, selectedLevel);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                selectedLevel = "all";
-//            }
-//        });
 
+        categoryAdapter = new RVCategoryAdapter(categoryProducts);
+
+        sp_ingredient.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedIngredient = parent.getItemAtPosition(position).toString();
+                if(selectedLevel.equals("All") & !selectedIngredient.equals("All")){
+                    Toast.makeText(getActivity(), "Please select the ingredient level", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        sp_ingredientLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedLevel = parent.getItemAtPosition(position).toString();
+                if (selectedLevel.equals("All") & !selectedIngredient.equals("All")){
+                    Toast.makeText(getActivity(), "Please select the ingredient", Toast.LENGTH_LONG).show();
+                }else if(!selectedLevel.equals("All") & !selectedIngredient.equals("All")){
+                    String filtered = selectedIngredient + "," + selectedLevel;
+                    categoryAdapter.getFilter().filter(filtered);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         return catListView;
     }
 
-    private void saveData(String name, String url, String id){
-        SearchResult searchResult = new SearchResult(url, name, id);
-        products.add(searchResult);
-        adapter.addProducts(products);
+    private void saveData(String name, String url, String id,String fat,String sugar,String salt,String saturated){
+        CategoryResult categoryResult = new CategoryResult(id,url, name,sugar,salt, fat, saturated);
+        categoryProducts.add(categoryResult);
+        categoryAdapter.addCategory(categoryProducts);
     }
 
-    public class searchProduct extends AsyncTask<String,Void,RVSearchAdapter>{
+    public class searchCategoryList extends AsyncTask<String,Void,List<CategoryResult>>{
 
         @Override
-        protected RVSearchAdapter doInBackground(String... strings) {
-            String result = SearchAPI.search(strings[0]);
+        protected List<CategoryResult> doInBackground(String... strings) {
+            String result = SearchAPI.searchCategory(strings[0]);
 
             try{
-                JSONArray j = new JSONArray(SearchAPI.getSource(result));
+                JSONArray j = new JSONArray(SearchAPI.getCategory(result));
 
-                    for(int i = 0; i < 20; i++){
-
+                    for(int i = 0; i < j.length(); i++){
                         String name = j.getJSONObject(i).getString("product_name");
                         String id = j.getJSONObject(i).getString("code");
                         String url = j.getJSONObject(i).getString("image_url");
-                        saveData(name, url, id);
-
-//                        if ((j.getJSONObject(i).has("image_url")) && (j.getJSONObject(i).has("nutrient_levels"))
-//                                && (j.getJSONObject(i).has("product_name"))
-//                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("saturated-fat"))
-//                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("sugars"))
-//                        && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("fat"))
-//                                && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("salt"))
-//                                && (j.getJSONObject(i).getJSONObject("nutriments")!= null)
-//                        ) {
-//                                String name = j.getJSONObject(i).getString("product_name");
-//                                String id = j.getJSONObject(i).getString("_id");
-//                                String url = j.getJSONObject(i).getString("image_url");
-//                                saveData(name, url, id);
-//                        }
+                        String fat = j.getJSONObject(i).getString("fat_100g");
+                        String sugar = j.getJSONObject(i).getString("sugars_100g");
+                        String salt = j.getJSONObject(i).getString("salt_100g");
+                        String saturated = j.getJSONObject(i).getString("saturated-fat_100g");
+                        saveData(name, url, id,fat,sugar,salt,saturated);
                     }
 
             }
             catch (Exception e){
                         e.printStackTrace();
                     }
-            adapter = new RVSearchAdapter(products);
-            return adapter;
+            return categoryProducts;
         }
 
         @Override
@@ -150,20 +148,16 @@ public class CategoryListFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(RVSearchAdapter a){
+        protected void onPostExecute(List<CategoryResult> c){
+            categoryAdapter = new RVCategoryAdapter(categoryProducts);
             progressBar.setVisibility(View.GONE);
             //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-            recyclerView.setAdapter(a);
+            categoryAdapter.getFilter().filter(selectedIngredient);
+            recyclerView.setAdapter(categoryAdapter);
             layoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(layoutManager);
+
         }
     }
-
-
-
-
-
-
-
 
 }

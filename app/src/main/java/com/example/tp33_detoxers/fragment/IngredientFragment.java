@@ -5,14 +5,17 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -39,9 +42,11 @@ public class IngredientFragment extends Fragment {
 
     private SimpleAdapter listAdapter;
     private ListView ingredientList;
-    private SearchAPI searchAPI= null;
+    private SearchAPI searchAPI;
     private TextView tv_name;
     private TextView tv_title;
+    private TextView tv_list_title;
+    private TextView tv_spTitle;
     private ImageView iv_products;
     private Spinner sp_illness;
     private RecyclerView toxinRecycler;
@@ -60,23 +65,29 @@ public class IngredientFragment extends Fragment {
                              Bundle savedInstanceState){
         View ingredientView = inflater.inflate(R.layout.fragment_ingredient, container, false);
 
+        searchAPI = new SearchAPI();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("id", Context.MODE_PRIVATE);
         String pId = sharedPreferences.getString("id", null);
 
+        getIngredients g = new getIngredients();
+        g.execute(pId);
+
         tv_name = ingredientView.findViewById(R.id.tv_pName);
         tv_title = ingredientView.findViewById(R.id.tv_title);
+        tv_list_title = ingredientView.findViewById(R.id.tv_list_title);
+        tv_spTitle = ingredientView.findViewById(R.id.tv_spTitle);
         iv_products = ingredientView.findViewById(R.id.iv_products);
         ingredientList = ingredientView.findViewById(R.id.listView);
         sp_illness =  ingredientView.findViewById(R.id.sp_illness);
         sp_illness.setSelection(0);
-
+        tv_spTitle.setVisibility(View.GONE);
+        sp_illness.setVisibility(View.GONE);
         iDetail = new ArrayList<>();
         toxinAdapter = new RVToxinAdapter(iDetail);
         toxinRecycler = ingredientView.findViewById(R.id.rv_toxin);
 //        toxinLevelViewModel = new ViewModelProvider(this.getActivity()).get(ToxinLevelViewModel.class);
 
-        getIngredients g = new getIngredients();
-        g.execute(pId);
+
 
         //filter the toxin when change the spinner
         sp_illness.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -98,6 +109,26 @@ public class IngredientFragment extends Fragment {
         toxinAdapter.addLevel(iDetail);
     }
 
+    public static void justifyListViewHeightBasedOnChildren(ListView listView){
+        ListAdapter adapter = listView.getAdapter();
+
+        if(adapter == null){
+            return;
+        }
+        ViewGroup vg = listView;
+        int totalHeight = 0;
+        for (int i = 0; i < 5; i++) {
+            View listItem = adapter.getView(i, null, vg);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams par = listView.getLayoutParams();
+        par.height = totalHeight + (listView.getDividerHeight() * 5);
+        listView.setLayoutParams(par);
+        listView.requestLayout();
+    }
+
     // get ingredients from the api
     public class getIngredients extends AsyncTask<String, Void, ArrayList<String>>{
 
@@ -106,7 +137,12 @@ public class IngredientFragment extends Fragment {
             ArrayList<String> list = new ArrayList<>();
             String result = SearchAPI.searchProductDetail(s[0]);
             try{
-                JSONObject j = new JSONObject(SearchAPI.getDetail(result));
+                String json = SearchAPI.getDetail(result);
+                if(json.equals("No info found")){
+                    list.add("0");
+                    return list;
+                }
+                JSONObject j = new JSONObject(json);
                 String pName = j.getString("product_name");
                 String url = j.getString("image_url");
                 for (String value : iName) {
@@ -125,56 +161,44 @@ public class IngredientFragment extends Fragment {
             }catch (Exception e){
                 e.printStackTrace();
             }
-//            try{
-//                JSONObject j = new JSONObject(SearchAPI.getDetail(result));
-//                String pName = j.getString("product_name");
-//                String url = j.getString("image_front_url");
-//                for (String value : iName) {
-//                    String quantity = j.getJSONObject("nutriments").getString(value + "_100g");
-//                    if(quantity.length() > 6){
-//                        quantity = quantity.substring(0, 6);
-//                    }
-//                    list.add(quantity);
-//                }
-//                for (String value: levelName){
-//                    String level = j.getJSONObject("nutrient_levels").getString(value);
-//                    list.add(level);
-//                }
-//                list.add(pName);
-//                list.add(url);
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
             return list;
         }
 
         @Override
         protected void onPostExecute(ArrayList<String> l){
-            tv_title.setText("Toxin level for 100g");
-            tv_name.setText(l.get(iName.length+levelName.length));
-            Picasso.get().load(l.get(iName.length+levelName.length+1)).into(iv_products);
-            ingredientArray = new ArrayList<>();
-            for(int i = 0; i < iName.length; i++){
-                HashMap<String, String> map = new HashMap<>();
-                map.put("Ingredient Name", iName[i]);
-                map.put("Ingredient Quantity", l.get(i));
-                ingredientArray.add(map);
-            }
-            for(int i = 0; i <iName.length;i++ ){
-                for (int j = 0; j< levelName.length;j++){
-                    if (iName[i].equals(levelName[j])){
-                        saveLevel(levelName[j],l.get(i),l.get(iName.length+j));
+            if(l.get(0).equals("0")){
+                Toast.makeText(getActivity(), "No result found", Toast.LENGTH_LONG).show();
+            }else{
+                tv_title.setText("Toxin level for 100g");
+                tv_name.setText(l.get(iName.length+levelName.length));
+                Picasso.get().load(l.get(iName.length+levelName.length+1)).into(iv_products);
+                tv_spTitle.setVisibility(View.VISIBLE);
+                sp_illness.setVisibility(View.VISIBLE);
+                ingredientArray = new ArrayList<>();
+                for(int i = 0; i < iName.length; i++){
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("Ingredient Name", iName[i]);
+                    map.put("Ingredient Quantity", l.get(i));
+                    ingredientArray.add(map);
+                }
+                for(int i = 0; i <iName.length;i++ ){
+                    for (int j = 0; j< levelName.length;j++){
+                        if (iName[i].equals(levelName[j])){
+                            saveLevel(levelName[j],l.get(i),l.get(iName.length+j));
+                        }
                     }
                 }
-            }
-            listAdapter = new SimpleAdapter(getActivity(), ingredientArray, R.layout.listview_ingredient, colHEAD, dataCell);
-            ingredientList.setAdapter(listAdapter);
-            toxinAdapter.getFilter().filter("All");
-            toxinRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-            toxinRecycler.setAdapter(toxinAdapter);
-            layoutManager = new LinearLayoutManager(getActivity());
-            toxinRecycler.setLayoutManager(layoutManager);
+                tv_list_title.setText("Ingredient list per 100 g");
+                listAdapter = new SimpleAdapter(getActivity(), ingredientArray, R.layout.listview_ingredient, colHEAD, dataCell);
+                ingredientList.setAdapter(listAdapter);
 
+                justifyListViewHeightBasedOnChildren(ingredientList);
+                toxinAdapter.getFilter().filter("All");
+                toxinRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+                toxinRecycler.setAdapter(toxinAdapter);
+                layoutManager = new LinearLayoutManager(getActivity());
+                toxinRecycler.setLayoutManager(layoutManager);
+            }
     }
     }
 }

@@ -66,7 +66,9 @@ public class ScanFragment extends Fragment {
     }
 
     public void ScanButton(View view){
-        IntentIntegrator.forSupportFragment(ScanFragment.this).initiateScan();
+        IntentIntegrator integrator = new IntentIntegrator(getActivity());
+        integrator.setOrientationLocked(false);
+        integrator.forSupportFragment(ScanFragment.this).initiateScan();
     }
 
     //get the scan results:
