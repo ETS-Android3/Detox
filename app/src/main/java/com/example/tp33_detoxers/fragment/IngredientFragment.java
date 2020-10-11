@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -26,7 +27,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tp33_detoxers.R;
 import com.example.tp33_detoxers.SearchAPI;
 import com.example.tp33_detoxers.adapter.RVToxinAdapter;
+import com.example.tp33_detoxers.database.IntakeDatabase;
 import com.example.tp33_detoxers.model.IngredientDetail;
+import com.example.tp33_detoxers.model.IntakeProduct;
+import com.example.tp33_detoxers.viewModel.IntakeViewModel;
 import com.example.tp33_detoxers.viewModel.ToxinLevelViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -53,10 +57,14 @@ public class IngredientFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private RVToxinAdapter toxinAdapter;
 
+    private IntakeDatabase db = null;
+    private IntakeViewModel intakeViewModel;
+
     private String[] colHEAD = new String[] {"Ingredient Name", "Ingredient Quantity"};
     private int[] dataCell = new int[] {R.id.ingredient_name, R.id.ingredient_quantity};
     private String[] iName = new String[] {"energy", "sodium","sugars","proteins","carbohydrates","saturated-fat","salt","fat",};
     private String[] levelName = new String[] {"salt","sugars","saturated-fat","fat"};
+    private ArrayList<String> levelNumber = new ArrayList<>();
 
     public IngredientFragment() {}
 
@@ -69,11 +77,13 @@ public class IngredientFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("id", Context.MODE_PRIVATE);
         String pId = sharedPreferences.getString("id", null);
 
+
         getIngredients g = new getIngredients();
         g.execute(pId);
 
         tv_name = ingredientView.findViewById(R.id.tv_pName);
         tv_title = ingredientView.findViewById(R.id.tv_title);
+        Button bt_add = ingredientView.findViewById(R.id.bt_addList);
         tv_list_title = ingredientView.findViewById(R.id.tv_list_title);
         tv_spTitle = ingredientView.findViewById(R.id.tv_spTitle);
         iv_products = ingredientView.findViewById(R.id.iv_products);
@@ -85,9 +95,6 @@ public class IngredientFragment extends Fragment {
         iDetail = new ArrayList<>();
         toxinAdapter = new RVToxinAdapter(iDetail);
         toxinRecycler = ingredientView.findViewById(R.id.rv_toxin);
-//        toxinLevelViewModel = new ViewModelProvider(this.getActivity()).get(ToxinLevelViewModel.class);
-
-
 
         //filter the toxin when change the spinner
         sp_illness.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -100,6 +107,21 @@ public class IngredientFragment extends Fragment {
             }
         });
 
+        //add to the intake list
+        bt_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = tv_name.getText().toString();
+                String salt = levelNumber.get(0);
+                String sugars = levelNumber.get(1);
+                String saturated = levelNumber.get(2);
+                String fat = levelNumber.get(3);
+                String url = levelNumber.get(levelNumber.size()-1);
+                insertAsync insertAsync = new insertAsync();
+                insertAsync.execute(pId,name, url,sugars,salt,saturated,fat);
+            }
+        });
+
         return ingredientView;
     }
 
@@ -109,6 +131,7 @@ public class IngredientFragment extends Fragment {
         toxinAdapter.addLevel(iDetail);
     }
 
+    //change the list height to fit the screen
     public static void justifyListViewHeightBasedOnChildren(ListView listView){
         ListAdapter adapter = listView.getAdapter();
 
@@ -154,6 +177,7 @@ public class IngredientFragment extends Fragment {
                 }
                 for (String value: levelName){
                     String level = j.getString(value + "_100g");
+                    levelNumber.add(level);
                     list.add(level);
                 }
                 list.add(pName);
@@ -172,6 +196,7 @@ public class IngredientFragment extends Fragment {
                 tv_title.setText("Toxin level for 100g");
                 tv_name.setText(l.get(iName.length+levelName.length));
                 Picasso.get().load(l.get(iName.length+levelName.length+1)).into(iv_products);
+                levelNumber.add(l.get(iName.length+levelName.length+1));
                 tv_spTitle.setVisibility(View.VISIBLE);
                 sp_illness.setVisibility(View.VISIBLE);
                 ingredientArray = new ArrayList<>();
@@ -200,5 +225,44 @@ public class IngredientFragment extends Fragment {
                 toxinRecycler.setLayoutManager(layoutManager);
             }
     }
+    }
+
+    //insert the data to the intake database
+    public class insertAsync extends AsyncTask<String, Void, List<String>>{
+
+        @Override
+        protected List<String> doInBackground(String... s) {
+            List<String> result = new ArrayList<>();
+            try{
+                IntakeProduct intakeProduct = intakeViewModel.findByProductId(s[0]); //check whether the product is existed in the database
+                String name = s[1];
+                String url = s[2];
+                String sugar = s[3];
+                String salt = s[4];
+                String fat = s[5];
+                String saturated = s[6];
+                if(intakeProduct == null){
+                    IntakeProduct source = new IntakeProduct(s[0],url,name,sugar,salt,fat,saturated);
+                    intakeViewModel.insert(source); //insert the data into database
+                    result.add(name);
+                }else {
+                    result.add("None");
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(List<String> result) {
+            // return the result of inserting into the database and show the notice whether the product is added into the database
+            if (result.get(0) == "None"){ //check the return value
+                Toast.makeText(getActivity(), "This product has been added to the intake list", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(getActivity(), "Added product: " + result.get(0), Toast.LENGTH_LONG).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new IntakeFragment()).addToBackStack(null).commit();
+            }
+        }
     }
 }

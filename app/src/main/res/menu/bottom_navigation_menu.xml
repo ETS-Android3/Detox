@@ -22,8 +22,8 @@
 
     <item
         android:id="@+id/page_setting"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Setting" />
+        android:icon="@drawable/ic_baseline_folder_24"
+        android:title="My Meals" />
 
 
 </menu>
