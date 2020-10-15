@@ -10,35 +10,49 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tp33_detoxers.MainActivity;
 import com.example.tp33_detoxers.R;
 import com.example.tp33_detoxers.model.IntakeProduct;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RVIntakeAdapter extends RecyclerView.Adapter<RVIntakeAdapter.ViewHolder> {
     private List<IntakeProduct> intakeProductList;
+    private double[] num;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView productView;
+        private ImageView minus;
+        private ImageView plus;
+        private TextView num;
 
         private ViewHolder(View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.rv_intakeImage);
             productView = itemView.findViewById(R.id.rv_intakeName);
+            minus = itemView.findViewById(R.id.btn_minus);
+            plus = itemView.findViewById(R.id.btn_plus);
+            num = itemView.findViewById(R.id.tv_pieces);
         }
     }
 
     public RVIntakeAdapter(List<IntakeProduct> intakeProducts) {
         intakeProductList = intakeProducts;
+        num = new double[50];
+        Arrays.fill(num,0);
     }
 
     public void addIntakes(List<IntakeProduct> intakes){
         intakeProductList = intakes;
         notifyDataSetChanged();
+    }
+
+    public double[] getNum(){
+        return num;
     }
 
     @NonNull
@@ -57,9 +71,39 @@ public class RVIntakeAdapter extends RecyclerView.Adapter<RVIntakeAdapter.ViewHo
         final IntakeProduct intake = intakeProductList.get(position);
         TextView tvName = holder.productView;
         ImageView imageView = holder.imageView;
+        TextView tvNum = holder.num;
+        ImageView imMinus = holder.minus;
+        ImageView imPlus = holder.plus;
         tvName.setText(intake.getpName());
         String url = intake.getpUrl();
         Picasso.get().load(url).into(imageView);
+        java.text.DecimalFormat myFormat = new java.text.DecimalFormat("0.0");
+        final double[] number = {Double.parseDouble(tvNum.getText().toString())};
+        if (number[0] == 0 ){
+            imMinus.setClickable(false);
+        }
+        imMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (number[0] > 0 ){
+                    number[0] -= 0.5;
+                    num[position] = number[0];
+                    String result = myFormat.format(number[0]);
+                    tvNum.setText(result);
+                }
+            }
+        });
+
+        imPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                number[0] += 0.5;
+                num[position] = number[0];
+                String result = myFormat.format(number[0]);
+                tvNum.setText(result);
+            }
+        });
+
     }
 
     @Override

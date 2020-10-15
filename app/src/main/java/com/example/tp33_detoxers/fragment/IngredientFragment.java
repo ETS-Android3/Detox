@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -48,6 +49,7 @@ public class IngredientFragment extends Fragment {
     private ListView ingredientList;
     private SearchAPI searchAPI;
     private TextView tv_name;
+    private TextView tv_quantity;
     private TextView tv_title;
     private TextView tv_list_title;
     private TextView tv_spTitle;
@@ -69,11 +71,19 @@ public class IngredientFragment extends Fragment {
     public IngredientFragment() {}
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        intakeViewModel = new ViewModelProvider(this.getActivity()).get(IntakeViewModel.class);
+        intakeViewModel.initializeVars(this.getActivity().getApplication());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View ingredientView = inflater.inflate(R.layout.fragment_ingredient, container, false);
 
         searchAPI = new SearchAPI();
+        db = IntakeDatabase.getInstance(this.getContext());
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("id", Context.MODE_PRIVATE);
         String pId = sharedPreferences.getString("id", null);
 
@@ -83,6 +93,7 @@ public class IngredientFragment extends Fragment {
 
         tv_name = ingredientView.findViewById(R.id.tv_pName);
         tv_title = ingredientView.findViewById(R.id.tv_title);
+        tv_quantity = ingredientView.findViewById(R.id.tv_pQuantity);
         Button bt_add = ingredientView.findViewById(R.id.bt_addList);
         tv_list_title = ingredientView.findViewById(R.id.tv_list_title);
         tv_spTitle = ingredientView.findViewById(R.id.tv_spTitle);
@@ -112,13 +123,14 @@ public class IngredientFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String name = tv_name.getText().toString();
+                String quantity = tv_quantity.getText().toString();
                 String salt = levelNumber.get(0);
                 String sugars = levelNumber.get(1);
                 String saturated = levelNumber.get(2);
                 String fat = levelNumber.get(3);
                 String url = levelNumber.get(levelNumber.size()-1);
                 insertAsync insertAsync = new insertAsync();
-                insertAsync.execute(pId,name, url,sugars,salt,saturated,fat);
+                insertAsync.execute(pId,name, url,quantity,sugars,salt,saturated, fat);
             }
         });
 
@@ -168,6 +180,7 @@ public class IngredientFragment extends Fragment {
                 JSONObject j = new JSONObject(json);
                 String pName = j.getString("product_name");
                 String url = j.getString("image_url");
+                String allQuantity = j.getString("quantity");
                 for (String value : iName) {
                     String quantity = j.getString(value + "_100g");
                     if(quantity.length() > 6){
@@ -182,6 +195,7 @@ public class IngredientFragment extends Fragment {
                 }
                 list.add(pName);
                 list.add(url);
+                list.add(allQuantity);
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -195,6 +209,7 @@ public class IngredientFragment extends Fragment {
             }else{
                 tv_title.setText("Toxin level for 100g");
                 tv_name.setText(l.get(iName.length+levelName.length));
+                tv_quantity.setText(l.get(iName.length+levelName.length+2));
                 Picasso.get().load(l.get(iName.length+levelName.length+1)).into(iv_products);
                 levelNumber.add(l.get(iName.length+levelName.length+1));
                 tv_spTitle.setVisibility(View.VISIBLE);
@@ -237,12 +252,13 @@ public class IngredientFragment extends Fragment {
                 IntakeProduct intakeProduct = intakeViewModel.findByProductId(s[0]); //check whether the product is existed in the database
                 String name = s[1];
                 String url = s[2];
-                String sugar = s[3];
-                String salt = s[4];
-                String fat = s[5];
-                String saturated = s[6];
+                String quantity = s[3];
+                String sugar = s[4];
+                String salt = s[5];
+                String fat = s[6];
+                String saturated = s[7];
                 if(intakeProduct == null){
-                    IntakeProduct source = new IntakeProduct(s[0],url,name,sugar,salt,fat,saturated);
+                    IntakeProduct source = new IntakeProduct(s[0],url,name,sugar,salt,fat,saturated,quantity);
                     intakeViewModel.insert(source); //insert the data into database
                     result.add(name);
                 }else {
@@ -257,7 +273,7 @@ public class IngredientFragment extends Fragment {
         @Override
         protected void onPostExecute(List<String> result) {
             // return the result of inserting into the database and show the notice whether the product is added into the database
-            if (result.get(0) == "None"){ //check the return value
+            if (result.get(0).equals("None")){ //check the return value
                 Toast.makeText(getActivity(), "This product has been added to the intake list", Toast.LENGTH_LONG).show();
             }else{
                 Toast.makeText(getActivity(), "Added product: " + result.get(0), Toast.LENGTH_LONG).show();

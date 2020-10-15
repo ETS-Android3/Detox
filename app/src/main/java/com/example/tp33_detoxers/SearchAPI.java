@@ -18,10 +18,10 @@ public class SearchAPI {
     }
 
     //private static final String BASE_URL = "https://world.openfoodfacts.org/";
-    private static final String BASE_URL_code = "https://nkibw6j0k9.execute-api.ap-southeast-2.amazonaws.com/testing/code?code=";
-    private static final String BASE_URL_search = "https://5dfe32pww8.execute-api.ap-southeast-2.amazonaws.com/withkrishna/firstresc?ingredient_text=";
-    private static final String BASE_URL_tips = "https://b015a34w80.execute-api.ap-southeast-2.amazonaws.com/beta/tips?illness=";
-    private static final String BASE_URL_category = "https://kcruzvo2dd.execute-api.ap-southeast-2.amazonaws.com/Beta_stage/category?ingr_text=";
+    private static final String BASE_URL_code = "https://b303hajwja.execute-api.ap-southeast-2.amazonaws.com/beta/code?code=";
+    private static final String BASE_URL_search = "https://jzdv34tx7c.execute-api.ap-southeast-2.amazonaws.com/beta/my-ingr-text?ingredient_text=";
+    private static final String BASE_URL_tips = "https://toa0uxhpwh.execute-api.ap-southeast-2.amazonaws.com/beta/tips?illness=";
+    private static final String BASE_URL_category = "https://hxy2zuq9yl.execute-api.ap-southeast-2.amazonaws.com/beta/mycategory?category=";
 
     //BASE_URL + "cgi/search.pl?search_terms=" + keyword + "&search_simple=1&page_size=20&json=1"
 

@@ -16,9 +16,6 @@ public interface IntakeDao {
     @Query("SELECT * FROM intakeproduct")
     LiveData<List<IntakeProduct>> getAll();
 
-    @Query("SELECT * FROM intakeproduct WHERE uid = :productId LIMIT 1")
-    IntakeProduct findById(int productId);
-
     @Insert
     void insertAll(IntakeProduct... intakeProducts);
 
@@ -31,7 +28,7 @@ public interface IntakeDao {
     @Update
     void updateIntakeProducts(IntakeProduct... intakeProducts);
 
-    @Query("SELECT * FROM intakeproduct WHERE product_id = :productId LIMIT 1")
+    @Query("SELECT * FROM intakeproduct WHERE product_id = :productId")
     IntakeProduct findByProductId(String productId);
 
     @Query("DELETE FROM intakeproduct")

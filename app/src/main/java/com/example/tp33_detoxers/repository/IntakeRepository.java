@@ -8,7 +8,6 @@ import com.example.tp33_detoxers.dao.IntakeDao;
 import com.example.tp33_detoxers.database.IntakeDatabase;
 import com.example.tp33_detoxers.model.IntakeProduct;
 
-import java.security.PublicKey;
 import java.util.List;
 
 public class IntakeRepository {

@@ -10,27 +10,30 @@ public class IntakeProduct {
     public int uid;
 
     @ColumnInfo(name = "product_id")
-    private String pId;
+    public String pId;
 
     @ColumnInfo(name = "product_url")
-    private String pUrl;
+    public String pUrl;
 
     @ColumnInfo(name = "product_name")
-    private String pName;
+    public String pName;
 
     @ColumnInfo(name = "product_sugar")
-    private String pSugar;
+    public String pSugar;
 
     @ColumnInfo(name = "product_salt")
-    private String pSalt;
+    public String pSalt;
 
     @ColumnInfo(name = "product_fat")
-    private String pFat;
+    public String pFat;
 
     @ColumnInfo(name = "product_qSaturated")
-    private String pSaturated;
+    public String pSaturated;
 
-    public IntakeProduct(String pId, String pUrl, String pName, String pSugar, String pSalt, String pFat, String pSaturated) {
+    @ColumnInfo(name="product_quantity")
+    public String pQuantity;
+
+    public IntakeProduct(String pId, String pUrl, String pName, String pSugar, String pSalt, String pFat, String pSaturated, String pQuantity) {
         this.pId = pId;
         this.pUrl = pUrl;
         this.pName = pName;
@@ -38,6 +41,11 @@ public class IntakeProduct {
         this.pSalt = pSalt;
         this.pFat = pFat;
         this.pSaturated = pSaturated;
+        this.pQuantity = pQuantity;
+    }
+
+    public int getUid() {
+        return uid;
     }
 
     public String getpId() {
@@ -66,5 +74,9 @@ public class IntakeProduct {
 
     public String getpSaturated() {
         return pSaturated;
+    }
+
+    public String getpQuantity() {
+        return pQuantity;
     }
 }
