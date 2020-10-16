@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -9,6 +9,7 @@
     android:background="@color/colorPrimary">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/catList_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -23,79 +24,92 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/category_bundle"
-        android:textColor="#658543"
-        android:layout_width="match_parent"
+<!--    <TextView-->
+<!--        android:id="@+id/category_bundle"-->
+<!--        android:textColor="#658543"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:text="This is category list"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:textSize="20dp"-->
+<!--        android:gravity="center"/>-->
+    <Button
+        android:layout_below="@+id/catList_appbar"
+        android:id="@+id/filterBtn"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="This is category list"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp"
-        android:gravity="center"/>
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_gravity="start"
+        android:drawableLeft="@drawable/ic_twotone_filter_list_24"
         android:layout_marginLeft="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:text="Show"
-            android:layout_marginRight="10dp"/>
-        <Spinner
-            android:id="@+id/categoryList_sp_ingredient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:entries="@array/nutrient_array"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ingredient"
-            android:layout_marginRight="10dp"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="in"/>
-        <Spinner
-            android:id="@+id/categoryList_sp_ingredient_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:entries="@array/nutrient_level_array"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="level"/>
+        android:text="Ingredient Filter"/>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
+<!--    <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:orientation="horizontal">-->
 <!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:gravity="center"-->
-<!--            android:background="@drawable/et_background"-->
-<!--            android:text="This area will be replaced by a function bar" />-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="15dp"-->
+<!--            android:text="Show"-->
+<!--            android:layout_marginRight="10dp"/>-->
+<!--        <Spinner-->
+<!--            android:id="@+id/categoryList_sp_ingredient"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:entries="@array/nutrient_array"/>-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="ingredient"-->
+<!--            android:layout_marginRight="10dp"/>-->
+<!--    </androidx.appcompat.widget.LinearLayoutCompat>-->
+<!--    <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal">-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:text="in"/>-->
+<!--        <Spinner-->
+<!--            android:id="@+id/categoryList_sp_ingredient_level"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:entries="@array/nutrient_level_array"/>-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="level"/>-->
+
+<!--    </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="40dp"-->
+    <!--            android:gravity="center"-->
+    <!--            android:background="@drawable/et_background"-->
+    <!--            android:text="This area will be replaced by a function bar" />-->
     <ProgressBar
+        android:layout_below="@+id/filterBtn"
         android:id="@+id/progress_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="40dp"
-        android:layout_gravity="center" />
+        android:layout_centerHorizontal="true" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_below="@+id/progress_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -106,17 +120,18 @@
             android:id="@+id/recySearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:scrollbars="vertical" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>
 
 
-<!--<TextView-->
-<!--android:layout_width="80dp"-->
-<!--android:layout_height="150dp"-->
-<!--android:layout_margin="10dp"-->
-<!--android:gravity="center_horizontal"-->
-<!--android:text="This is where the drop down list will go"-->
-<!--android:background="@drawable/et_background"/>-->
+    <!--<TextView-->
+    <!--android:layout_width="80dp"-->
+    <!--android:layout_height="150dp"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:gravity="center_horizontal"-->
+    <!--android:text="This is where the drop down list will go"-->
+    <!--android:background="@drawable/et_background"/>-->

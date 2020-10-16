@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.tp33_detoxers.fragment.CategoryFragment;
 import com.example.tp33_detoxers.fragment.HomeFragment;
 import com.example.tp33_detoxers.fragment.IntakeFragment;
-import com.example.tp33_detoxers.fragment.MapFragment;
+//import com.example.tp33_detoxers.fragment.MapFragment;
 import com.example.tp33_detoxers.fragment.ScanFragment;
 import com.example.tp33_detoxers.fragment.SearchFragment;
 import com.example.tp33_detoxers.fragment.SettingFragment;

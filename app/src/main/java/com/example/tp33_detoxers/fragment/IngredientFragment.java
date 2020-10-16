@@ -228,7 +228,12 @@ public class IngredientFragment extends Fragment {
                 for(int i = 0; i < iName.length; i++){
                     HashMap<String, String> map = new HashMap<>();
                     map.put("Ingredient Name", iName[i]);
-                    map.put("Ingredient Quantity", l.get(i));
+                    if (iName[i].equals("energy")){
+                        map.put("Ingredient Quantity", l.get(i) + " kJ");
+                    } else {
+                        map.put("Ingredient Quantity", l.get(i) + " g");
+                    }
+
                     ingredientArray.add(map);
                 }
                 for(int i = 0; i <iName.length;i++ ){

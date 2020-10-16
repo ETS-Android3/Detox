@@ -15,21 +15,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="keep your health"
-        android:textSize="25sp"
-        android:textColor="#FFFFEE"
-        android:textStyle="bold"
+        android:text="Keep you away from toxins"
         android:fontFamily="serif-monospace"
+        android:textSize="22sp"
+        android:textColor="#FFFFEE"
+        android:textStyle="italic|bold"
         android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textColor="#FFFFEE"
-        android:textStyle="bold"
-        android:fontFamily="serif-monospace"
-        android:text="away from toxin"
-        android:layout_gravity="center_horizontal" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="25sp"-->
+<!--        android:textColor="#FFFFEE"-->
+<!--        android:textStyle="bold"-->
+<!--        android:text=" from toxins"-->
+<!--        android:layout_gravity="center_horizontal" />-->
+<!--    android:fontFamily="serif-monospace"-->
 
 </LinearLayout>
