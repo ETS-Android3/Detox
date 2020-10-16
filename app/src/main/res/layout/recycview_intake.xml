@@ -49,7 +49,6 @@
                 android:id="@+id/tv_pieces"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:text="1.0"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:layout_gravity="center" />

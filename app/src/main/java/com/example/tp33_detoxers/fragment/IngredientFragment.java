@@ -33,6 +33,7 @@ import com.example.tp33_detoxers.model.IngredientDetail;
 import com.example.tp33_detoxers.model.IntakeProduct;
 import com.example.tp33_detoxers.viewModel.IntakeViewModel;
 import com.example.tp33_detoxers.viewModel.ToxinLevelViewModel;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -40,6 +41,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class IngredientFragment extends Fragment {
     private List<HashMap<String,String>> ingredientArray;
@@ -106,6 +108,14 @@ public class IngredientFragment extends Fragment {
         iDetail = new ArrayList<>();
         toxinAdapter = new RVToxinAdapter(iDetail);
         toxinRecycler = ingredientView.findViewById(R.id.rv_toxin);
+
+        MaterialToolbar toolbar = ingredientView.findViewById(R.id.ingredient_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).onBackPressed();
+            }
+        });
 
         //filter the toxin when change the spinner
         sp_illness.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

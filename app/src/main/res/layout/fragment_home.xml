@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:gravity="center_horizontal"
+            app:navigationIcon="@mipmap/ic_logo"
             app:title="Detox"
             app:titleTextColor="@color/black"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />
@@ -23,52 +24,56 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
-        android:layout_width="240dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/logo"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="5dp" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:textSize="24sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        android:text="Choose your best diet" />
+        android:text="Search Toxins in Food" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_start"
-        android:layout_width="140dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:hint="Get Start Now"
-        android:textColorHint="@color/black" />
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#61D9D9"
+        android:drawableLeft="@drawable/ic_baseline_start_24"
+        app:cornerRadius="10dp"
+        android:hint="Start Now"
+        android:textSize="24sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="40dp"
-        android:orientation="horizontal" >
-
-        <com.google.android.material.button.MaterialButton
+    <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_tips"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:layout_margin="20dp"
-            android:textColorHint="@color/black"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
+            android:drawableLeft="@drawable/ic_eco_24px"
+            android:textSize="24sp"
+            app:cornerRadius="10dp"
+            android:backgroundTint="#F7D94C"
             android:hint="Healthy tips" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_aboutUs"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:layout_margin="20dp"
-            android:textColorHint="@color/black"
-            android:hint="healthy center " />
-
-    </LinearLayout>
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:textSize="24sp"
+            app:cornerRadius="10dp"
+            android:backgroundTint="#EA8875"
+            android:hint="About us" />
 
 </LinearLayout>

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.tp33_detoxers.R;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -37,6 +38,13 @@ public class ScanFragment extends Fragment {
         tv_scan = scanView.findViewById(R.id.tv_scan);
         Button bt_scan = scanView.findViewById(R.id.bt_scan);
         Button bt_search = scanView.findViewById(R.id.bt_searchCode);
+        MaterialToolbar toolbar = scanView.findViewById(R.id.toolbar_scan);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).onBackPressed();
+            }
+        });
 
         bt_scan.setOnClickListener(new View.OnClickListener() {
             @Override

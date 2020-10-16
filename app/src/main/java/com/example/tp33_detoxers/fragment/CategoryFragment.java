@@ -13,6 +13,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.tp33_detoxers.R;
+import com.google.android.material.appbar.MaterialToolbar;
+
+import java.util.Objects;
 
 public class CategoryFragment extends Fragment {
 
@@ -37,6 +40,13 @@ public class CategoryFragment extends Fragment {
         dairy = category.findViewById(R.id.category_dairy);
         snack = category.findViewById(R.id.category_snack);
         drink = category.findViewById(R.id.category_drinks);
+        MaterialToolbar toolbar = category.findViewById(R.id.category_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).onBackPressed();
+            }
+        });
 
         meat.setOnClickListener(new View.OnClickListener() {
             @Override

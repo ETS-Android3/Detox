@@ -19,8 +19,10 @@
             android:layout_height="wrap_content" >
 
             <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/report_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                 app:title="My Meals Report"
                 app:titleTextColor="@color/black"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary" />
@@ -60,40 +62,26 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_report"
-            android:layout_width="340dp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp" />
 
-        <RelativeLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="10dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/bt_compare"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="35dp"
-                android:text="Compare"
-                android:textColor="@color/black" />
-
-            <Button
-                android:id="@+id/bt_save"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="Save"
-                android:layout_marginRight="35dp"
-                android:layout_alignParentEnd="true"
-                android:textColor="@color/black"
-                />
-
-        </RelativeLayout>
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="30dp"
+            android:gravity="center"
+            android:text="Compare with daily standards"
+            android:textSize="20sp" />
         
-        
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bar_chart"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="30dp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 

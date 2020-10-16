@@ -12,10 +12,11 @@
         android:layout_height="wrap_content" >
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_category_list"
+            android:id="@+id/toolbar_scan"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:gravity="center_horizontal"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             app:title="Scan"
             app:titleTextColor="@color/black"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />
@@ -41,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
             android:textColorHint="@color/black"
+            app:cornerRadius="10dp"
             android:hint="Scan"
             android:layout_gravity="center" />
 
@@ -50,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
             android:textColorHint="@color/black"
+            app:cornerRadius="10dp"
             android:hint="See details"
             android:layout_gravity="center" />
     </LinearLayout>

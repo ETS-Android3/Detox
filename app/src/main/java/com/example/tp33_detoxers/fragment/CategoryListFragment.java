@@ -29,6 +29,7 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CategoryListFragment extends Fragment {
     private SearchAPI searchAPI;
@@ -59,7 +60,12 @@ public class CategoryListFragment extends Fragment {
         progressBar = catListView.findViewById(R.id.progress_category);
         progressBar.setVisibility(View.GONE);
 
-
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).onBackPressed();
+            }
+        });
 
         if (getArguments() != null) { //make sure the bundle contains category info
             category = getArguments().getString("CATEGORY");

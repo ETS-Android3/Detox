@@ -43,16 +43,14 @@ public class RVReportAdapter extends RecyclerView.Adapter<RVReportAdapter.ViewHo
         int rowPos = holder.getAdapterPosition();
         TextView tvName = holder.tv_name;
         TextView tvUnits = holder.tv_units;
-        TextView tvPerc = holder.tv_percentage;
         ImageView imageView = holder.imageView;
         if(rowPos == 0){
             tvName.setText("Ingredient");
             tvUnits.setText("Total units");
-            tvPerc.setText("Percentage");
         }else{
             final ReportRecord report = reportRecords.get(rowPos-1);
             String name = report.getrName();
-            String quantity = report.getrUnits();
+            double quantity = Double.parseDouble(report.getrUnits());
             String levels = report.getrLevel();
             switch (levels){
                 case "low":
@@ -65,9 +63,9 @@ public class RVReportAdapter extends RecyclerView.Adapter<RVReportAdapter.ViewHo
                     Picasso.get().load(R.drawable.redcircle).placeholder(R.drawable.redcircle).into(imageView);
                     break;
             }
+            String quantity_df = new java.text.DecimalFormat("#0.000").format(quantity);
             tvName.setText(name);
-            tvUnits.setText(quantity);
-            tvPerc.setText((report.getrPercent()));
+            tvUnits.setText(quantity_df + " g");
         }
     }
 
@@ -80,7 +78,6 @@ public class RVReportAdapter extends RecyclerView.Adapter<RVReportAdapter.ViewHo
         private ImageView imageView;
         private TextView tv_name;
         private TextView tv_units;
-        private TextView tv_percentage;
 
         private ViewHolder(View itemView){
             super(itemView);
@@ -88,7 +85,6 @@ public class RVReportAdapter extends RecyclerView.Adapter<RVReportAdapter.ViewHo
             imageView = itemView.findViewById(R.id.rv_circle);
             tv_name = itemView.findViewById(R.id.report_title);
             tv_units = itemView.findViewById(R.id.report_quantity);
-            tv_percentage = itemView.findViewById(R.id.report_percent);
         }
     }
 

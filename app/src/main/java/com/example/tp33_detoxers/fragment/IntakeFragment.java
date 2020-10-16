@@ -24,6 +24,7 @@ import com.example.tp33_detoxers.adapter.RVIntakeAdapter;
 import com.example.tp33_detoxers.database.IntakeDatabase;
 import com.example.tp33_detoxers.model.IntakeProduct;
 import com.example.tp33_detoxers.viewModel.IntakeViewModel;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 
@@ -39,11 +40,11 @@ public class IntakeFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private RVIntakeAdapter adapter;
     private List<IntakeProduct> intakes;
-    private double sugarSum = 0.0;
-    private double saltSum = 0.0;
-    private double fatSum = 0.0;
-    private double saturatedSum = 0.0;
-    private double quantitySum = 0.0;
+    private double sugarSum;
+    private double saltSum;
+    private double fatSum;
+    private double saturatedSum;
+    private double quantitySum;
     private ArrayList<String> sugars = new ArrayList<>();
     private ArrayList<String> salts = new ArrayList<>();
     private ArrayList<String> fats = new ArrayList<>();
@@ -66,6 +67,13 @@ public class IntakeFragment extends Fragment {
         recyclerView = intakeView.findViewById(R.id.recyIntake);
         intakes = new ArrayList<>();
         adapter = new RVIntakeAdapter(intakes);
+        MaterialToolbar toolbar = intakeView.findViewById(R.id.intake_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).onBackPressed();
+            }
+        });
         Button bt_addNew = intakeView.findViewById(R.id.bt_addnew);
         Button bt_delete = intakeView.findViewById(R.id.bt_removeAll);
         Button bt_calculate = intakeView.findViewById(R.id.calculate);
@@ -128,6 +136,10 @@ public class IntakeFragment extends Fragment {
             public void onClick(View v) {
                 ArrayList<Double> list = new ArrayList<>();
                 double[] num = adapter.getNum();
+                sugarSum = 0;
+                saltSum = 0;
+                fatSum = 0;
+                saturatedSum = 0;
                 list = calculateAll(num);
                 AppCompatActivity activity = (AppCompatActivity)v.getContext();
                 SharedPreferences sharedPreferences = activity.getSharedPreferences("list", Context.MODE_PRIVATE);
@@ -173,10 +185,10 @@ public class IntakeFragment extends Fragment {
         ArrayList<Double> list = new ArrayList<>();
         for(int i = 0; i <quantities.size(); i++ ){
             double quantityNum = Double.parseDouble(quantities.get(i));
-            sugarSum += Double.parseDouble(sugars.get(i))*quantityNum*number[i];
-            saltSum += Double.parseDouble(salts.get(i))*quantityNum*number[i];
-            fatSum += Double.parseDouble(fats.get(i))*quantityNum*number[i];
-            saturatedSum += Double.parseDouble(saturateds.get(i))*quantityNum*number[i];
+            sugarSum += Double.parseDouble(sugars.get(i))*quantityNum/100*number[i];
+            saltSum += Double.parseDouble(salts.get(i))*quantityNum/100*number[i];
+            fatSum += Double.parseDouble(fats.get(i))*quantityNum/100*number[i];
+            saturatedSum += Double.parseDouble(saturateds.get(i))*quantityNum/100*number[i];
             quantitySum += quantityNum*number[i];
         }
         list.add(sugarSum);

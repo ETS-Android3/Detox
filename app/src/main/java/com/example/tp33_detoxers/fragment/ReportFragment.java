@@ -20,6 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tp33_detoxers.R;
 import com.example.tp33_detoxers.adapter.RVReportAdapter;
 import com.example.tp33_detoxers.model.ReportRecord;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
@@ -27,14 +34,19 @@ import com.squareup.picasso.Picasso;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ReportFragment extends Fragment {
     private List<ReportRecord> reportRecords;
     private String[] rName = new String[] {"sugars","salt","saturated-fat","fat"};
+    private float maxNum = 0;
 
     private RecyclerView reportRecycler;
     private RecyclerView.LayoutManager layoutManager;
     private RVReportAdapter reportAdapter;
+
+    private BarChart barChart;
+    private BarData barData;
 
     public ReportFragment() {
     }
@@ -49,14 +61,21 @@ public class ReportFragment extends Fragment {
         Type type = new TypeToken<ArrayList<String>>() {}.getType();
         ArrayList<String> array = gson.fromJson(json, type);
 
+        MaterialToolbar toolbar = reportView.findViewById(R.id.report_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).onBackPressed();
+            }
+        });
 
         ImageView imageView = reportView.findViewById(R.id.iv_report);
         TextView tv_suggest = reportView.findViewById(R.id.tv_suggest);
         reportRecycler = reportView.findViewById(R.id.rv_report);
+        barChart = reportView.findViewById(R.id.bar_chart);
+
         reportRecords = new ArrayList<>();
         reportAdapter = new RVReportAdapter(reportRecords);
-        Button bt_compare = reportView.findViewById(R.id.bt_compare);
-        Button bt_save = reportView.findViewById(R.id.bt_save);
         ArrayList<String> arrayLevel = new ArrayList<>();
         int risk = 0;
         String suggestion = "";
@@ -138,6 +157,9 @@ public class ReportFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         reportRecycler.setLayoutManager(layoutManager);
 
+        maxNum = Math.max(90, maxNum);
+        drawBarChart(array,maxNum);
+
         return reportView;
     }
 
@@ -146,4 +168,66 @@ public class ReportFragment extends Fragment {
         reportRecords.add(record);
         reportAdapter.addLevel(reportRecords);
     }
+
+    //set the recommended daily intake for adults
+    private ArrayList<BarEntry> barSuggest(){
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        barEntries.add(new BarEntry(1, 90));
+        barEntries.add(new BarEntry(2, 6));
+        barEntries.add(new BarEntry(3, 20));
+        barEntries.add(new BarEntry(4, 70));
+        return barEntries;
+    }
+
+    //set the actual intakes
+    private ArrayList<BarEntry> barActual(ArrayList<String> list) {
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        maxNum = Float.parseFloat(list.get(0));
+        for(int i = 0; i < list.size(); i++){
+            float num = Float.parseFloat(list.get(i));
+            if(num > maxNum){
+                maxNum = num;
+            }
+            barEntries.add(new BarEntry(i, num));
+        }
+        return barEntries;
+    }
+
+    //draw the bar chart
+    private void drawBarChart(ArrayList<String> list, float num) {
+        BarDataSet barDataSet1 = new BarDataSet(barSuggest(),"Recommended");
+        barDataSet1.setColor(Color.GREEN);
+        BarDataSet barDataSet2 = new BarDataSet(barActual(list), "Actual");
+        barDataSet2.setColor(Color.BLUE);
+        barData = new BarData(barDataSet1,barDataSet2);
+        barChart.setData(barData);
+
+        //set the x axis
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(rName));
+        xAxis.setCenterAxisLabels(true);
+        xAxis.setGranularity(1f);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelCount(rName.length);
+
+        //set the layout of the bar chart
+        float barSpace = 0.1f;
+        float groupSpace = 0.1f;
+
+        //get the highest value of y axis
+        String df = new java.text.DecimalFormat("#0.0").format(num);
+        float newNum = (float) (Float.parseFloat(df)*1.1);
+
+        barChart.getDescription().setEnabled(false);
+        barChart.setDrawGridBackground(false);
+        barChart.getAxisRight().setEnabled(false);
+        barData.setBarWidth(0.35f);
+        barChart.getAxisLeft().setAxisMinimum(0);
+        barChart.getAxisLeft().setAxisMaximum(newNum);
+        barChart.getXAxis().setAxisMaximum(4);
+        barChart.getXAxis().setAxisMinimum(0);
+        barChart.groupBars(0, groupSpace, barSpace);
+        barChart.invalidate();
+    }
+
 }

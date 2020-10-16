@@ -2,6 +2,8 @@ package com.example.tp33_detoxers.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.BulletSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,8 +69,7 @@ public class TipsObjectFragment extends Fragment {
                 JSONObject j = new JSONObject(SearchAPI.getTips(result));
 
                 String type = j.getString(strings[1]);
-                String type_1 = type.replaceAll("\\[|\\]","");
-                tips = type_1.split(",");
+                tips = type.split("\\.,");
 
             }
             catch (Exception e){
@@ -79,14 +80,31 @@ public class TipsObjectFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String[] l){
-            String result = l[0];
-            for(int i = 1; i < l.length; i++){
-                if(!Character.isDigit(l[i].trim().charAt(0))){
-                    result += l[i];
-                }else{
-                    result += "\n\n" + l[i].trim();
+            String result = "";
+            for(int i = 0; i < l.length; i++){
+                if(l[i].contains(":")){
+                    int pos = l[i].indexOf(":");
+                    String[] kind = l[i].substring(pos+1).split(",");
+                    result += "\u25CF" + " "+ l[i].substring(0,pos+1) + "\n";
+                    for(int j = 0; j < kind.length-1; j++){
+                        result += "  " + "\u25AA" + " " + kind[j].trim() + "\n";
+                    }
+                    result += "  " + "\u25AA" + " " + kind[kind.length-1].trim();
+                }else {
+                    if(i == l.length-1){
+                        result += "\u25CF" + " " + l[l.length-1].trim();
+                    }else {
+                        result += "\u25CF" + " "+ l[i].trim() + "\n\n";
+                    }
                 }
+
+//                if(!Character.isDigit(l[i].trim().charAt(0))){
+//                    result += l[i];
+//                }else{
+//                    result += "\n\n" + l[i].trim();
+//                }
             }
+
             tv_tips.setText(result);
         }
     }

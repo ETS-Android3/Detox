@@ -13,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,11 +20,13 @@ import com.example.tp33_detoxers.R;
 import com.example.tp33_detoxers.adapter.RVSearchAdapter;
 import com.example.tp33_detoxers.model.SearchResult;
 import com.example.tp33_detoxers.SearchAPI;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SearchFragment extends Fragment {
     private SearchAPI searchAPI=null;
@@ -49,6 +50,13 @@ public class SearchFragment extends Fragment {
 
         final EditText et_search = searchView.findViewById(R.id.ed_search);
         final Button btn_search =searchView.findViewById(R.id.btn_search);
+        MaterialToolbar toolbar = searchView.findViewById(R.id.search_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Objects.requireNonNull(getActivity()).onBackPressed();
+            }
+        });
         progressBar = searchView.findViewById(R.id.progress_circular);
         progressBar.setVisibility(View.GONE);
 

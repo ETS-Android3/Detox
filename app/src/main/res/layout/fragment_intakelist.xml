@@ -18,8 +18,10 @@
         android:layout_height="wrap_content" >
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/intake_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             app:title="My Meals"
             app:titleTextColor="@color/black"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />
@@ -40,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginVertical="10dp"
+        app:cornerRadius="10dp"
         android:drawableTop="@drawable/ic_baseline_add_circle_outline_24"
         android:text="Add new Product"
         android:textColor="@color/black"
@@ -57,17 +60,19 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="35dp"
-            android:text="Remove all"
-            android:textColor="@color/black" />
+            app:cornerRadius="10dp"
+            android:hint="Remove all"
+            android:textColorHint="@color/black" />
 
         <Button
             android:id="@+id/calculate"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="Calculate Intakes"
+            android:hint="Calculate Intakes"
             android:layout_marginRight="35dp"
+            app:cornerRadius="10dp"
             android:layout_alignParentEnd="true"
-            android:textColor="@color/black"
+            android:textColorHint="@color/black"
              />
 
     </RelativeLayout>

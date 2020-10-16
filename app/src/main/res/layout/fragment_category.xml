@@ -13,9 +13,11 @@
         android:layout_height="wrap_content" >
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/category_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:gravity="center_horizontal"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             app:title="Category"
             app:titleTextColor="@color/black"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />

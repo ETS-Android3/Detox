@@ -14,6 +14,7 @@ import com.example.tp33_detoxers.R;
 import com.example.tp33_detoxers.model.IntakeProduct;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +28,7 @@ public class RVIntakeAdapter extends RecyclerView.Adapter<RVIntakeAdapter.ViewHo
         private TextView productView;
         private ImageView minus;
         private ImageView plus;
-        private TextView num;
+        private TextView piece;
 
         private ViewHolder(View itemView) {
             super(itemView);
@@ -36,14 +37,14 @@ public class RVIntakeAdapter extends RecyclerView.Adapter<RVIntakeAdapter.ViewHo
             productView = itemView.findViewById(R.id.rv_intakeName);
             minus = itemView.findViewById(R.id.btn_minus);
             plus = itemView.findViewById(R.id.btn_plus);
-            num = itemView.findViewById(R.id.tv_pieces);
+            piece = itemView.findViewById(R.id.tv_pieces);
         }
     }
 
     public RVIntakeAdapter(List<IntakeProduct> intakeProducts) {
         intakeProductList = intakeProducts;
         num = new double[50];
-        Arrays.fill(num,0);
+        Arrays.fill(num,1.0);
     }
 
     public void addIntakes(List<IntakeProduct> intakes){
@@ -67,29 +68,32 @@ public class RVIntakeAdapter extends RecyclerView.Adapter<RVIntakeAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RVIntakeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final IntakeProduct intake = intakeProductList.get(position);
         TextView tvName = holder.productView;
         ImageView imageView = holder.imageView;
-        TextView tvNum = holder.num;
+        TextView tvPiece = holder.piece;
         ImageView imMinus = holder.minus;
         ImageView imPlus = holder.plus;
         tvName.setText(intake.getpName());
+        double iniPiece = num[position];
+        tvPiece.setText(String.valueOf(iniPiece));
         String url = intake.getpUrl();
         Picasso.get().load(url).into(imageView);
-        java.text.DecimalFormat myFormat = new java.text.DecimalFormat("0.0");
-        final double[] number = {Double.parseDouble(tvNum.getText().toString())};
-        if (number[0] == 0 ){
+        DecimalFormat myFormat = new DecimalFormat("0.0");
+        //final double[] number = {Double.parseDouble(tvPiece.getText().toString())};
+        //num[position] = number[0];
+        if (num[position] == 0 ){
             imMinus.setClickable(false);
         }
         imMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (number[0] > 0 ){
-                    number[0] -= 0.5;
-                    num[position] = number[0];
-                    String result = myFormat.format(number[0]);
-                    tvNum.setText(result);
+                if (num[position] > 0 ){
+                    num[position] -= 0.5;
+                    //num[position] = number[0];
+                    String result = myFormat.format(num[position]);
+                    tvPiece.setText(result);
                 }
             }
         });
@@ -97,10 +101,10 @@ public class RVIntakeAdapter extends RecyclerView.Adapter<RVIntakeAdapter.ViewHo
         imPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                number[0] += 0.5;
-                num[position] = number[0];
-                String result = myFormat.format(number[0]);
-                tvNum.setText(result);
+                num[position] += 0.5;
+                //num[position] = number[0];
+                String result = myFormat.format(num[position]);
+                tvPiece.setText(result);
             }
         });
 
