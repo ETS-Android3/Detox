@@ -62,7 +62,7 @@
             android:textSize="24sp"
             app:cornerRadius="10dp"
             android:backgroundTint="#F7D94C"
-            android:hint="Healthy tips" />
+            android:hint="Healthy Tips" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_aboutUs"
@@ -74,6 +74,6 @@
             android:textSize="24sp"
             app:cornerRadius="10dp"
             android:backgroundTint="#EA8875"
-            android:hint="About us" />
+            android:hint="About Us" />
 
 </LinearLayout>

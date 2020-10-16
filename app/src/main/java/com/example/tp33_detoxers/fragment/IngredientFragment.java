@@ -219,7 +219,7 @@ public class IngredientFragment extends Fragment {
             }else{
                 tv_title.setText("Toxin level for 100g");
                 tv_name.setText(l.get(iName.length+levelName.length));
-                tv_quantity.setText(l.get(iName.length+levelName.length+2));
+                tv_quantity.setText(l.get(iName.length+levelName.length+2) + " g");
                 Picasso.get().load(l.get(iName.length+levelName.length+1)).into(iv_products);
                 levelNumber.add(l.get(iName.length+levelName.length+1));
                 tv_spTitle.setVisibility(View.VISIBLE);

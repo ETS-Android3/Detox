@@ -157,8 +157,7 @@ public class ReportFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         reportRecycler.setLayoutManager(layoutManager);
 
-        maxNum = Math.max(90, maxNum);
-        drawBarChart(array,maxNum);
+        drawBarChart(array);
 
         return reportView;
     }
@@ -194,7 +193,7 @@ public class ReportFragment extends Fragment {
     }
 
     //draw the bar chart
-    private void drawBarChart(ArrayList<String> list, float num) {
+    private void drawBarChart(ArrayList<String> list) {
         BarDataSet barDataSet1 = new BarDataSet(barSuggest(),"Recommended");
         barDataSet1.setColor(Color.GREEN);
         BarDataSet barDataSet2 = new BarDataSet(barActual(list), "Actual");
@@ -215,7 +214,8 @@ public class ReportFragment extends Fragment {
         float groupSpace = 0.1f;
 
         //get the highest value of y axis
-        String df = new java.text.DecimalFormat("#0.0").format(num);
+        maxNum = Math.max(90, maxNum);
+        String df = new java.text.DecimalFormat("#0.0").format(maxNum);
         float newNum = (float) (Float.parseFloat(df)*1.1);
 
         barChart.getDescription().setEnabled(false);

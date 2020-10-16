@@ -61,7 +61,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginLeft="35dp"
             app:cornerRadius="10dp"
-            android:hint="Remove all"
+            android:hint="Remove All"
             android:textColorHint="@color/black" />
 
         <Button

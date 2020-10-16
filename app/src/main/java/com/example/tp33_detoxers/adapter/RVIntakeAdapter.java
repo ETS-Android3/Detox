@@ -1,6 +1,7 @@
 package com.example.tp33_detoxers.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tp33_detoxers.R;
+import com.example.tp33_detoxers.fragment.IngredientFragment;
 import com.example.tp33_detoxers.model.IntakeProduct;
 import com.squareup.picasso.Picasso;
 
@@ -107,6 +110,23 @@ public class RVIntakeAdapter extends RecyclerView.Adapter<RVIntakeAdapter.ViewHo
                 tvPiece.setText(result);
             }
         });
+
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity)v.getContext();
+                String id = intake.getpId();
+                SharedPreferences sharedPreferences = activity.getSharedPreferences("id", Context.MODE_PRIVATE);
+                SharedPreferences.Editor spEdit = sharedPreferences.edit();
+                spEdit.putString("id",id);
+                spEdit.apply();
+
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new IngredientFragment()).addToBackStack(null).commit();
+            }
+        };
+
+        holder.imageView.setOnClickListener(onClickListener);
+        holder.productView.setOnClickListener(onClickListener);
 
     }
 

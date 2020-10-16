@@ -78,14 +78,14 @@
                         android:layout_width="130dp"
                         android:layout_height="100dp"
                         android:layout_marginBottom="5dp"
-                        android:src="@drawable/meat" />
+                        android:src="@drawable/bread" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_horizontal"
-                        android:text="Meat"
+                        android:text="Bread"
                         android:textAlignment="center"
                         android:textColor="#658543"
                         android:textSize="16dp"
@@ -205,7 +205,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_horizontal"
-                        android:text="Dairy"
+                        android:text="Cheese"
                         android:textAlignment="center"
                         android:textColor="#658543"
                         android:textSize="16dp"
@@ -244,7 +244,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_horizontal"
-                        android:text="Snacks"
+                        android:text="Biscuits and cakes"
                         android:textAlignment="center"
                         android:textColor="#658543"
                         android:textSize="16dp"
@@ -284,7 +284,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_horizontal"
-                        android:text="Drinks"
+                        android:text="Beverages"
                         android:textAlignment="center"
                         android:textColor="#658543"
                         android:textSize="16dp"

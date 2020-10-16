@@ -53,7 +53,7 @@
             android:layout_marginHorizontal="40dp"
             android:textColorHint="@color/black"
             app:cornerRadius="10dp"
-            android:hint="See details"
+            android:hint="See Details"
             android:layout_gravity="center" />
     </LinearLayout>
 

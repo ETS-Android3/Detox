@@ -51,7 +51,7 @@ public class CategoryFragment extends Fragment {
         meat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFrag("Meat");
+                replaceFrag("Bread");
             }
         });
 
@@ -72,21 +72,21 @@ public class CategoryFragment extends Fragment {
         dairy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFrag("Dairy");
+                replaceFrag("Cheese");
             }
         });
 
         snack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFrag("Snacks");
+                replaceFrag("Biscuits and cakes");
             }
         });
 
         drink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFrag("Drinks");
+                replaceFrag("Beverages");
             }
         });
 
