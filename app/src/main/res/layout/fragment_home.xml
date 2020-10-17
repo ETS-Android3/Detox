@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
     android:layout_marginBottom="?attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
@@ -23,12 +29,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ImageView
+    <com.app.abby.xbanner.XBanner
+        android:id="@+id/xbanner"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/logo"
-        android:layout_marginTop="5dp" />
+        android:layout_height="260dp" />
+
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="250dp"
@@ -76,4 +81,5 @@
             android:backgroundTint="#EA8875"
             android:hint="About Us" />
 
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

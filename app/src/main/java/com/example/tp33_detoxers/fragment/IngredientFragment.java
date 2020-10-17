@@ -1,15 +1,17 @@
 package com.example.tp33_detoxers.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -27,13 +29,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tp33_detoxers.R;
 import com.example.tp33_detoxers.SearchAPI;
+import com.example.tp33_detoxers.adapter.DialogColorAdapter;
+import com.example.tp33_detoxers.adapter.IngredientAdapter;
 import com.example.tp33_detoxers.adapter.RVToxinAdapter;
 import com.example.tp33_detoxers.database.IntakeDatabase;
+import com.example.tp33_detoxers.model.IngredientAll;
 import com.example.tp33_detoxers.model.IngredientDetail;
 import com.example.tp33_detoxers.model.IntakeProduct;
 import com.example.tp33_detoxers.viewModel.IntakeViewModel;
-import com.example.tp33_detoxers.viewModel.ToxinLevelViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -44,11 +49,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class IngredientFragment extends Fragment {
-    private List<HashMap<String,String>> ingredientArray;
     private List<IngredientDetail> iDetail;
+    private List<IngredientAll> iAll;
 
-    private SimpleAdapter listAdapter;
-    private ListView ingredientList;
     private SearchAPI searchAPI;
     private TextView tv_name;
     private TextView tv_quantity;
@@ -64,10 +67,19 @@ public class IngredientFragment extends Fragment {
     private IntakeDatabase db = null;
     private IntakeViewModel intakeViewModel;
 
-    private String[] colHEAD = new String[] {"Ingredient Name", "Ingredient Quantity"};
-    private int[] dataCell = new int[] {R.id.ingredient_name, R.id.ingredient_quantity};
-    private String[] iName = new String[] {"energy", "sodium","sugars","proteins","carbohydrates","saturated-fat","salt","fat",};
+    private GridView gridView;
+    private IngredientAdapter gridAdapter;
+    private DialogColorAdapter dialogColorAdapter;
+
+    private View getListview;
+    private SimpleAdapter adapter;
+
+    private String[] iName = new String[] {"energy", "sodium","sugars","proteins","carbohydrates","saturated-fat","salt","fat"};
     private String[] levelName = new String[] {"salt","sugars","saturated-fat","fat"};
+    private String[] colHEAD = new String[] {"circle", "text"};
+    private int[] dataCell = new int[] {R.id.rv_circle, R.id.rv_quantity};
+    private String[] color = new String[] {"red","yellow", "green"};
+    private ArrayList<HashMap<String, String>> hashMapArrayList = new ArrayList<>();
     private ArrayList<String> levelNumber = new ArrayList<>();
 
     public IngredientFragment() {}
@@ -89,7 +101,6 @@ public class IngredientFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("id", Context.MODE_PRIVATE);
         String pId = sharedPreferences.getString("id", null);
 
-
         getIngredients g = new getIngredients();
         g.execute(pId);
 
@@ -97,10 +108,10 @@ public class IngredientFragment extends Fragment {
         tv_title = ingredientView.findViewById(R.id.tv_title);
         tv_quantity = ingredientView.findViewById(R.id.tv_pQuantity);
         Button bt_add = ingredientView.findViewById(R.id.bt_addList);
+        Button bt_help = ingredientView.findViewById(R.id.bt_helper);
         tv_list_title = ingredientView.findViewById(R.id.tv_list_title);
         tv_spTitle = ingredientView.findViewById(R.id.tv_spTitle);
         iv_products = ingredientView.findViewById(R.id.iv_products);
-        ingredientList = ingredientView.findViewById(R.id.listView);
         sp_illness =  ingredientView.findViewById(R.id.sp_illness);
         sp_illness.setSelection(0);
         tv_spTitle.setVisibility(View.GONE);
@@ -108,6 +119,10 @@ public class IngredientFragment extends Fragment {
         iDetail = new ArrayList<>();
         toxinAdapter = new RVToxinAdapter(iDetail);
         toxinRecycler = ingredientView.findViewById(R.id.rv_toxin);
+        gridView = ingredientView.findViewById(R.id.gridView);
+        iAll = new ArrayList<>();
+        gridAdapter = new IngredientAdapter(getActivity(), iAll);
+        dialogColorAdapter = new DialogColorAdapter(getActivity(), color);
 
         MaterialToolbar toolbar = ingredientView.findViewById(R.id.ingredient_toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -116,6 +131,9 @@ public class IngredientFragment extends Fragment {
                 Objects.requireNonNull(getActivity()).onBackPressed();
             }
         });
+
+        addMap(color);
+
 
         //filter the toxin when change the spinner
         sp_illness.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -133,7 +151,7 @@ public class IngredientFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String name = tv_name.getText().toString();
-                String quantity = tv_quantity.getText().toString();
+                String quantity = tv_quantity.getText().toString().split(" ")[0];
                 String salt = levelNumber.get(0);
                 String sugars = levelNumber.get(1);
                 String saturated = levelNumber.get(2);
@@ -144,6 +162,27 @@ public class IngredientFragment extends Fragment {
             }
         });
 
+        //click the button to show the information
+        bt_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialAlertDialogBuilder(getContext())
+                        .setTitle("Introduce the meaning of the circle")
+                        .setAdapter(dialogColorAdapter, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setPositiveButton("Back", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).show();
+            }
+        });
+
         return ingredientView;
     }
 
@@ -151,6 +190,26 @@ public class IngredientFragment extends Fragment {
         IngredientDetail ingredientDetails = new IngredientDetail(name, number, level);
         iDetail.add(ingredientDetails);
         toxinAdapter.addLevel(iDetail);
+    }
+
+    public void saveAllIngredient(String name, String number){
+        IngredientAll ingredientAlls = new IngredientAll(name, number);
+        iAll.add(ingredientAlls);
+        gridAdapter.addData(iAll);
+    }
+
+    public void CreateDialog() {
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        getListview = inflater.inflate(R.layout.recycview_toxins, null);
+    }
+
+    public void addMap(String[] array) {
+        HashMap<String, String> map = new HashMap<>();
+        for(int i = 0; i < array.length; i++){
+            map.put("circle","red");
+            map.put("text","Ingredient is in high quantity and need to reconsider the intake");
+            hashMapArrayList.add(map);
+        }
     }
 
     //change the list height to fit the screen
@@ -224,12 +283,8 @@ public class IngredientFragment extends Fragment {
                 levelNumber.add(l.get(iName.length+levelName.length+1));
                 tv_spTitle.setVisibility(View.VISIBLE);
                 sp_illness.setVisibility(View.VISIBLE);
-                ingredientArray = new ArrayList<>();
                 for(int i = 0; i < iName.length; i++){
-                    HashMap<String, String> map = new HashMap<>();
-                    map.put("Ingredient Name", iName[i]);
-                    map.put("Ingredient Quantity", l.get(i));
-                    ingredientArray.add(map);
+                    saveAllIngredient(iName[i],l.get(i));
                 }
                 for(int i = 0; i <iName.length;i++ ){
                     for (int j = 0; j< levelName.length;j++){
@@ -239,10 +294,7 @@ public class IngredientFragment extends Fragment {
                     }
                 }
                 tv_list_title.setText("Ingredient list per 100 g");
-                listAdapter = new SimpleAdapter(getActivity(), ingredientArray, R.layout.listview_ingredient, colHEAD, dataCell);
-                ingredientList.setAdapter(listAdapter);
-
-                justifyListViewHeightBasedOnChildren(ingredientList);
+                gridView.setAdapter(gridAdapter);
                 toxinAdapter.getFilter().filter("All");
                 toxinRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
                 toxinRecycler.setAdapter(toxinAdapter);
