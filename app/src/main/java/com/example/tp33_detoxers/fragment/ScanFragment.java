@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.example.tp33_detoxers.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
@@ -38,6 +40,8 @@ public class ScanFragment extends Fragment {
         tv_scan = scanView.findViewById(R.id.tv_scan);
         Button bt_scan = scanView.findViewById(R.id.bt_scan);
         Button bt_search = scanView.findViewById(R.id.bt_searchCode);
+        ImageView ivScan = scanView.findViewById(R.id.iv_scan);
+        Picasso.get().load(R.drawable.scanimage).placeholder(R.drawable.scanimage).fit().into(ivScan);
         MaterialToolbar toolbar = scanView.findViewById(R.id.toolbar_scan);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

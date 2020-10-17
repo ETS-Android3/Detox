@@ -1,155 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:layout_marginBottom="?attr/actionBarSize"
-    android:fillViewport="true">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+        android:background="@color/colorPrimary">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/ingredient_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                app:title="Product Detail"
+                app:titleTextColor="@color/black"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical">
+        android:layout_margin="10dp"
+        android:background="#FFFFFF"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/iv_products"
+            android:layout_width="190dp"
+            android:layout_height="200dp"
+            android:layout_margin="6dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/ingredient_appbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/ingredient_toolbar"
-                    style="@style/Widget.MaterialComponents.Toolbar.Primary"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-                    app:title="Product Detail"
-                    app:titleTextColor="@color/black" />
-
-            </com.google.android.material.appbar.AppBarLayout>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_below="@+id/ingredient_appbar"
-                android:id="@+id/product_top"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/iv_products"
-                    android:layout_width="190dp"
-                    android:layout_height="150dp"
-                    android:layout_marginRight="6dp" />
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_pName"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="5dp"
-                        android:layout_marginTop="20dp" />
-
-                    <TextView
-                        android:id="@+id/tv_pQuantity"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp" />
-
-                    <Button
-                        android:id="@+id/bt_addList"
-                        style="?attr/materialButtonOutlinedStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="5dp"
-                        android:layout_marginVertical="10dp"
-                        android:hint="Add to My List"
-                        android:textSize="13dp"
-                        android:textColorHint="@color/black"
-                        app:cornerRadius="10dp" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_below="@+id/product_top"
-                android:id="@+id/product_concern"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_spTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="Select health concern:"
-                    android:textSize="15sp" />
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/sp_illness"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:entries="@array/illness_array" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
+        <TextView
+            android:id="@+id/tv_pName"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginHorizontal="5dp" />
 
             <TextView
-                android:layout_below="@+id/product_concern"
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_pQuantity"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp" />
+
+            <Button
+                android:id="@+id/bt_addList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_baseline_add_to_photos_24"
+                android:hint="Add to List"
+                app:cornerRadius="10dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:textColorHint="@color/black"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="5dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_below="@+id/tv_title"
-                android:id="@+id/rv_toxin"
-                android:layout_width="260dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/line"
-                android:layout_margin="10dp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <TextView
-                android:layout_below="@+id/rv_toxin"
-                android:id="@+id/tv_list_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <ListView
-                android:layout_below="@+id/tv_list_title"
-                android:id="@+id/listView"
-                android:layout_width="260dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="10dp"
-                android:background="@drawable/line" />
-        </RelativeLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <TextView
+            android:id="@+id/tv_spTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"
+            android:text="Select Your Health Concern:"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/sp_illness"
+            android:layout_width="200dp"
+            android:layout_gravity="center"
+            android:spinnerMode="dropdown"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:entries="@array/illness_array" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/bt_helper"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            app:cornerRadius="10dp"
+            android:layout_gravity="center_vertical"
+            android:drawableLeft="@drawable/ic_baseline_help_outline_24"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_toxin"
+        android:layout_width="260dp"
+        android:background="#FFFFFF"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp" />
+
+    <TextView
+        android:id="@+id/tv_list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal" />
+
+        
+        <GridView
+            android:id="@+id/gridView"
+            android:numColumns="2"
+            android:background="#FFFFFF"
+            android:layout_gravity="center"
+            android:verticalSpacing="2dp"
+            android:horizontalSpacing="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="40dp"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

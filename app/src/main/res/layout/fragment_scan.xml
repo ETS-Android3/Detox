@@ -24,38 +24,36 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:src="@drawable/scanimage"/>
-
-    <LinearLayout
+        android:id="@+id/iv_scan"
         android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginBottom="10dp" />
+
+    <Button
+        android:id="@+id/bt_scan"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal" >
+        android:layout_margin="20dp"
+        android:textColorHint="@color/black"
+        app:cornerRadius="10dp"
+        android:textSize="24sp"
+        android:backgroundTint="#00AA90"
+        android:drawableLeft="@drawable/ic_baseline_photo_camera_24"
+        android:hint="Scan"
+        android:layout_gravity="center" />
 
-        <Button
-            android:id="@+id/bt_scan"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:textColorHint="@color/black"
-            app:cornerRadius="10dp"
-            android:hint="Scan"
-            android:layout_gravity="center" />
 
-        <Button
-            android:id="@+id/bt_searchCode"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:textColorHint="@color/black"
-            app:cornerRadius="10dp"
-            android:hint="See Details"
-            android:layout_gravity="center" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/bt_searchCode"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="#99CA60"
+        android:drawableLeft="@drawable/ic_baseline_start_24"
+        android:hint="See Details"
+        android:textColorHint="@color/black"
+        android:textSize="24sp"
+        app:cornerRadius="10dp" />
 
     <TextView
         android:id="@+id/tv_scan"

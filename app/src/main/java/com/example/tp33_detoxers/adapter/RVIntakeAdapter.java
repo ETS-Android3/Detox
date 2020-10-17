@@ -84,17 +84,17 @@ public class RVIntakeAdapter extends RecyclerView.Adapter<RVIntakeAdapter.ViewHo
         String url = intake.getpUrl();
         Picasso.get().load(url).into(imageView);
         DecimalFormat myFormat = new DecimalFormat("0.0");
-        //final double[] number = {Double.parseDouble(tvPiece.getText().toString())};
-        //num[position] = number[0];
-        if (num[position] == 0 ){
+        final double[] number = {Double.parseDouble(tvPiece.getText().toString())};
+        num[position] = number[0];
+        if (number[0] == 0 ){
             imMinus.setClickable(false);
         }
         imMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (num[position] > 0 ){
-                    num[position] -= 0.5;
-                    //num[position] = number[0];
+                    number[0] -= 0.5;
+                    num[position] = number[0];
                     String result = myFormat.format(num[position]);
                     tvPiece.setText(result);
                 }
@@ -104,8 +104,8 @@ public class RVIntakeAdapter extends RecyclerView.Adapter<RVIntakeAdapter.ViewHo
         imPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                num[position] += 0.5;
-                //num[position] = number[0];
+                number[0] += 0.5;
+                num[position] = number[0];
                 String result = myFormat.format(num[position]);
                 tvPiece.setText(result);
             }

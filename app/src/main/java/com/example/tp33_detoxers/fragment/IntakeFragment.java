@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +83,11 @@ public class IntakeFragment extends Fragment {
         intakeViewModel.getAllIntakes().observe(getViewLifecycleOwner(), new Observer<List<IntakeProduct>>() {
             @Override
             public void onChanged(@Nullable List<IntakeProduct> intakeProducts) {
+                sugars.clear();
+                salts.clear();
+                fats.clear();
+                saturateds.clear();
+                quantities.clear();
                 for(IntakeProduct temp: intakeProducts){
                     String sugar = temp.getpSugar();
                     String salt = temp.getpSalt();
@@ -161,7 +167,13 @@ public class IntakeFragment extends Fragment {
                         .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ReportFragment()).addToBackStack(null).commit();
+                                if(quantities.size() < 1){
+                                    Toast toast = Toast.makeText(getActivity(), "Please add product first!", Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                }else{
+                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ReportFragment()).addToBackStack(null).commit();
+                                }
                             }
                         }).show();
             }

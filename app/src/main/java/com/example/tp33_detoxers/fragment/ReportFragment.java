@@ -80,6 +80,7 @@ public class ReportFragment extends Fragment {
         int risk = 0;
         String suggestion = "";
 
+        //set the level of different ingredients
         for(int i = 0; i < rName.length; i++){
             String name = rName[i];
             String quantity = array.get(i);
@@ -127,6 +128,7 @@ public class ReportFragment extends Fragment {
             saveReport(name, quantity, Double.toString(percentage),levels);
         }
 
+        //set the icon of the notification
         for(int i = 0; i < arrayLevel.size(); i++){
             if(arrayLevel.get(i).equals("high")){
                 risk = -1;
@@ -152,6 +154,7 @@ public class ReportFragment extends Fragment {
             tv_suggest.setTextColor(Color.parseColor("#C73E3A"));
         }
 
+        //set the recyclerview
         reportRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         reportRecycler.setAdapter(reportAdapter);
         layoutManager = new LinearLayoutManager(getActivity());
@@ -182,7 +185,7 @@ public class ReportFragment extends Fragment {
     private ArrayList<BarEntry> barActual(ArrayList<String> list) {
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         maxNum = Float.parseFloat(list.get(0));
-        for(int i = 0; i < list.size(); i++){
+        for(int i = 0; i < list.size()-1; i++){
             float num = Float.parseFloat(list.get(i));
             if(num > maxNum){
                 maxNum = num;
@@ -214,8 +217,9 @@ public class ReportFragment extends Fragment {
         float groupSpace = 0.1f;
 
         //get the highest value of y axis
-        maxNum = Math.max(90, maxNum);
-        String df = new java.text.DecimalFormat("#0.0").format(maxNum);
+        double newA = 0;
+        newA = Math.max(90, maxNum);
+        String df = new java.text.DecimalFormat("#0.0").format(newA);
         float newNum = (float) (Float.parseFloat(df)*1.1);
 
         barChart.getDescription().setEnabled(false);
