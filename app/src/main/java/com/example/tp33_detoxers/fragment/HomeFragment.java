@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
         bt_about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new MapFragment()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new AboutUsFragment()).addToBackStack(null).commit();
             }
         });
         return homeView;

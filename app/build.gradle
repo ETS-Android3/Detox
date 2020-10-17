@@ -72,8 +72,10 @@ dependencies {
     //fragment
     implementation 'me.yokeyword:fragmentationx:1.0.2'
     implementation 'me.yokeyword:fragmentationx-swipeback:1.0.2'
-    //map
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    //rotating text
+    implementation 'com.sdsmdg.harjot:rotatingtext:1.0.2'
+
+
 
 
 

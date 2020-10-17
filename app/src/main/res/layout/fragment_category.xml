@@ -9,6 +9,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/category_tb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -24,43 +25,38 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/categoryTitle_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:text="Category"
-        android:textColor="#658543"
-        android:textStyle="bold"
-        android:textSize="25dp"
+<!--    <TextView-->
+<!--        android:id="@+id/categoryTitle_tv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="?attr/actionBarSize"-->
+<!--        android:text="Category"-->
+<!--        android:textColor="#658543"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textSize="25dp"-->
 
-        />
+<!--        />-->
 
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/categoryTitle_tv">
+        android:layout_below="@id/category_tb">
 
 
-        <GridLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/categoryTitle_tv"
             android:layout_margin="25dp"
             android:layout_gravity="center_horizontal"
-            android:columnCount="2"
-            android:rowCount="3">
+            >
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/category_meat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_rowWeight="1"
-                android:layout_column="0"
-                android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:layout_margin="15dp"
                 android:elevation="8dp"
@@ -94,13 +90,10 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:layout_toRightOf="@+id/category_meat"
                 android:id="@+id/category_veggie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_rowWeight="1"
-                android:layout_column="1"
-                android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:layout_margin="15dp"
                 android:elevation="8dp"
@@ -134,13 +127,10 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:layout_below="@+id/category_meat"
                 android:id="@+id/category_fruit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_rowWeight="1"
-                android:layout_column="0"
-                android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:layout_margin="15dp"
                 android:elevation="8dp"
@@ -173,13 +163,11 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:layout_toRightOf="@+id/category_fruit"
+                android:layout_below="@id/category_veggie"
                 android:id="@+id/category_dairy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_rowWeight="1"
-                android:layout_column="1"
-                android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:layout_margin="15dp"
                 android:elevation="8dp"
@@ -195,8 +183,6 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="130dp"
                         android:layout_height="100dp"
-                        android:layout_row="1"
-                        android:layout_column="3"
                         android:layout_marginBottom="5dp"
                         android:src="@drawable/dairy" />
 
@@ -214,13 +200,10 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:layout_below="@id/category_fruit"
                 android:id="@+id/category_snack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_row="2"
-                android:layout_rowWeight="1"
-                android:layout_column="0"
-                android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:layout_margin="15dp"
                 android:elevation="8dp"
@@ -244,7 +227,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:gravity="center_horizontal"
-                        android:text="Biscuits and cakes"
+                        android:text="Biscuits / Cakes"
                         android:textAlignment="center"
                         android:textColor="#658543"
                         android:textSize="16dp"
@@ -254,13 +237,11 @@
 
 
             <androidx.cardview.widget.CardView
+                android:layout_toRightOf="@id/category_snack"
+                android:layout_below="@id/category_dairy"
                 android:id="@+id/category_drinks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_row="2"
-                android:layout_rowWeight="1"
-                android:layout_column="1"
-                android:layout_columnWeight="1"
                 android:layout_gravity="fill"
                 android:layout_margin="15dp"
                 android:elevation="8dp"
@@ -294,7 +275,7 @@
 
 
 
-        </GridLayout>
+        </RelativeLayout>
 
 
     </ScrollView>
