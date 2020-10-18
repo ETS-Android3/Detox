@@ -139,7 +139,7 @@ public class ReportFragment extends Fragment {
         }
         if (risk == 1){
             Picasso.get().load(R.drawable.ic_report_problem_24px).placeholder(R.drawable.ic_report_problem_24px).into(imageView);
-            suggestion = "Be Care of Toxins";
+            suggestion = "Be Aware of Toxin Level";
             tv_suggest.setText(suggestion);
             tv_suggest.setTextColor(Color.parseColor("#F9BF45"));
         }else if(risk == 0){

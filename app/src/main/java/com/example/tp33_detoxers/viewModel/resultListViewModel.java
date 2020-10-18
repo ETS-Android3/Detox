@@ -9,11 +9,11 @@ import com.example.tp33_detoxers.model.SearchResult;
 
 import java.util.List;
 
-public class IngredientListViewModel extends ViewModel {
+public class resultListViewModel extends ViewModel {
 
     private MutableLiveData<List<SearchResult>> resultList;
 
-    public IngredientListViewModel() {
+    public resultListViewModel() {
         resultList = new MutableLiveData<>();
     }
 
@@ -22,8 +22,8 @@ public class IngredientListViewModel extends ViewModel {
         return resultList;
     }
 
-    public void setSearchResult(List<SearchResult> ingredientLists){
-        resultList.setValue(ingredientLists);
+    public void setSearchResult(List<SearchResult> resultLists){
+        resultList.setValue(resultLists);
     }
 
 }

@@ -54,15 +54,15 @@ public class DialogColorAdapter extends BaseAdapter {
             switch (colorName){
                 case "red":
                     Picasso.get().load(R.drawable.redcircle).placeholder(R.drawable.redcircle).into(imageView);
-                    message = "-- Ingredient is in high quantity and need to reconsider the intake";
+                    message = "-- The ingredient is in high quantity and may exacerbate your condition\n ";
                     break;
                 case "yellow":
                     Picasso.get().load(R.drawable.yellowcircle).placeholder(R.drawable.yellowcircle).into(imageView);
-                    message = "-- Ingredient is in moderate quantity";
+                    message = "-- The ingredient is in moderate quantity and should be portioned appropriately\n ";
                     break;
                 case "green":
                     Picasso.get().load(R.drawable.greencircle).placeholder(R.drawable.greencircle).into(imageView);
-                    message = "-- Ingredient is in low quantity";
+                    message = "-- The ingredient is in low quantity and is considered a healthy amount\n ";
                     break;
             }
             textView.setText(message);

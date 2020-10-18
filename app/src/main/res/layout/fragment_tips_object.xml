@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -10,29 +10,33 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/object_cardView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         android:padding="3dp"
         app:strokeColor="@color/card_stork_color" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_marginVertical="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/object_tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:text="Choose tips:" />
 
             <com.google.android.material.chip.ChipGroup
+                android:layout_below="@+id/object_tv1"
                 android:id="@+id/chip_tips"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +44,7 @@
                 app:singleSelection="true"
                 app:selectionRequired="true"
                 app:checkedChip="@id/chip_dietary"
-                android:layout_gravity="center_horizontal" >
+                android:layout_centerHorizontal="true">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_dietary"
@@ -68,18 +72,19 @@
 
             </com.google.android.material.chip.ChipGroup>
 
-        </LinearLayout>
+        </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
+        android:layout_below="@id/object_cardView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="20dp"
         android:padding="10dp"
         app:strokeColor="@color/card_stork_color" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,6 +101,7 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:layout_below="@+id/tv_tipsTitle"
                 android:id="@+id/tv_tips"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,7 +110,7 @@
                 android:textSize="20sp"/>
 
 
-        </LinearLayout>
+        </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
-</LinearLayout>
+</RelativeLayout>

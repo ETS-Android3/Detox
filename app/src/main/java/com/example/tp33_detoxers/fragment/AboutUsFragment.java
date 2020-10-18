@@ -38,7 +38,7 @@ public class AboutUsFragment extends Fragment {
                 "Through our research, we found that these conditions are highly affected by sugar, salt, fat and saturated fat." +
                 "We consider these ingredients toxins as they may exacerbate the aforementioned conditions.\n\n" +
                 "This application will help to highlight the quantities of toxins within food products to better manage your health concerns!");
-        text.setTextSize(16);
+        text.setTextSize(18);
         text.setTextColor(Color.parseColor("#FFFFFF"));
         text.setGravity(Gravity.LEFT);
 

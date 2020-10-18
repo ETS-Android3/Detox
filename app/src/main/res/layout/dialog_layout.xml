@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Filter"
-        android:textColor="#ffffff"
+        android:textColor="@color/black"
         android:gravity="center"
         android:background="@drawable/dialog_titlebar"
         android:textSize="15dp"

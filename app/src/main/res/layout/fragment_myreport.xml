@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_marginBottom="?attr/actionBarSize"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
+    android:fillViewport="true">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -14,75 +13,90 @@
         android:layout_marginBottom="?attr/actionBarSize"
         android:orientation="vertical">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/report_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-                app:title="My Meals Report"
-                app:titleTextColor="@color/black"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-        
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginVertical="10dp"
-            android:orientation="horizontal" >
-            
-            <ImageView
-                android:id="@+id/iv_report"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_alignParentStart="true"/>
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/report_appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/report_toolbar"
+                    style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                    app:title="My Meals Report"
+                    app:titleTextColor="@color/black" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <RelativeLayout
+                android:layout_below="@id/report_appbar"
+                android:id="@+id/report"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_report"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true" />
+
+                <TextView
+                    android:id="@+id/tv_suggest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:textSize="25sp" />
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/tv_suggest"
+                android:layout_below="@id/report"
+                android:id="@+id/intake_summary_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_alignParentEnd="true"
-                android:textSize="25sp" />
+                android:layout_centerHorizontal="true"
+                android:text="My meals summary "
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@+id/intake_summary_tv"
+                android:id="@+id/rv_report"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:layout_below="@+id/rv_report"
+                android:id="@+id/daily_standard_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="Compare with recommended daily standards"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_below="@+id/daily_standard_tv"
+                android:id="@+id/bar_chart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="5dp" />
         </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:layout_marginLeft="20dp"
-            android:text="Your Meals Summary: "
-            android:textColor="@color/black" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_report"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginHorizontal="30dp"
-            android:gravity="center"
-            android:text="Compare with daily standards"
-            android:textSize="20sp" />
-        
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/bar_chart"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginVertical="5dp"
-            android:layout_marginHorizontal="30dp" />
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </ScrollView>
