@@ -34,10 +34,10 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <RelativeLayout
-                android:layout_below="@id/report_appbar"
                 android:id="@+id/report"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
+                android:layout_below="@id/report_appbar"
                 android:layout_marginHorizontal="25dp"
                 android:layout_marginVertical="10dp"
                 android:orientation="horizontal">
@@ -58,45 +58,62 @@
                     android:textSize="25sp" />
             </RelativeLayout>
 
-            <TextView
-                android:layout_below="@id/report"
-                android:id="@+id/intake_summary_tv"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="My meals summary "
-                android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold"/>
+                android:id="@+id/myMeal_summary_title"
+                android:gravity="center"
+                android:layout_below="@id/report"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/intake_summary_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="My meals summary "
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/report_helper"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="35dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@drawable/ic_baseline_help_outline_24"
+                    app:cornerRadius="10dp" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_below="@+id/intake_summary_tv"
                 android:id="@+id/rv_report"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/myMeal_summary_title"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="10dp" />
 
             <TextView
-                android:layout_below="@+id/rv_report"
                 android:id="@+id/daily_standard_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_report"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="Compare with recommended daily standards"
                 android:textSize="15dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <com.github.mikephil.charting.charts.BarChart
-                android:layout_below="@+id/daily_standard_tv"
                 android:id="@+id/bar_chart"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                android:layout_below="@+id/daily_standard_tv"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp" />
         </RelativeLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </ScrollView>
+
