@@ -27,6 +27,7 @@ import com.example.tp33_detoxers.model.IntakeProduct;
 import com.example.tp33_detoxers.viewModel.IntakeViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -51,6 +52,8 @@ public class IntakeFragment extends Fragment {
     private ArrayList<String> fats = new ArrayList<>();
     private ArrayList<String> saturateds = new ArrayList<>();
     private ArrayList<String> quantities = new ArrayList<>();
+    private Button bt_calculate;
+    private  Button bt_delete;
 
     public IntakeFragment() {
     }
@@ -76,8 +79,8 @@ public class IntakeFragment extends Fragment {
             }
         });
         Button bt_addNew = intakeView.findViewById(R.id.bt_addnew);
-        Button bt_delete = intakeView.findViewById(R.id.bt_removeAll);
-        Button bt_calculate = intakeView.findViewById(R.id.calculate);
+        bt_delete = intakeView.findViewById(R.id.bt_removeAll);
+        bt_calculate = intakeView.findViewById(R.id.calculate);
 
         //observe the view model
         intakeViewModel.getAllIntakes().observe(getViewLifecycleOwner(), new Observer<List<IntakeProduct>>() {
@@ -168,9 +171,10 @@ public class IntakeFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if(quantities.size() < 1){
-                                    Toast toast = Toast.makeText(getActivity(), "Please add product first!", Toast.LENGTH_LONG);
-                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
+                                    Snackbar.make(bt_calculate, "Please add product first!", Snackbar.LENGTH_LONG).show();
+//                                    Toast toast = Toast.makeText(getActivity(), "Please add product first!", Toast.LENGTH_LONG);
+//                                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                                    toast.show();
                                 }else{
                                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ReportFragment()).addToBackStack(null).commit();
                                 }
@@ -230,7 +234,8 @@ public class IntakeFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
+            Snackbar.make(bt_delete, s, Snackbar.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -249,7 +254,8 @@ public class IntakeFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Toast.makeText(getActivity(), "All the data are deleted.", Toast.LENGTH_LONG).show();
+            Snackbar.make(bt_delete, "All the data are deleted.", Snackbar.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), "All the data are deleted.", Toast.LENGTH_LONG).show();
         }
     }
 }

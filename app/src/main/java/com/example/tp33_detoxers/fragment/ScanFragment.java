@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tp33_detoxers.R;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.squareup.picasso.Picasso;
@@ -62,7 +63,8 @@ public class ScanFragment extends Fragment {
             public void onClick(View v) {
                 String a = tv_scan.getText().toString();
                 if(a.equals("")){
-                    Toast.makeText(getActivity(), "Please scan the barcode first", Toast.LENGTH_LONG).show();
+                    Snackbar.make(bt_search, "Please scan the barcode first", Snackbar.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity(), "Please scan the barcode first", Toast.LENGTH_LONG).show();
                 }else {
                     String id = tv_scan.getText().toString();
                     SharedPreferences sharedPreferences = getActivity().getSharedPreferences("id", Context.MODE_PRIVATE);
@@ -90,7 +92,8 @@ public class ScanFragment extends Fragment {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() == null) {
-                Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_LONG).show();
+                Snackbar.make(getView(), "Cancelled", Snackbar.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_LONG).show();
             }else {
                 tv_scan.setText(result.getContents());
             }

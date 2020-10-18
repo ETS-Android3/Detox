@@ -39,6 +39,7 @@ import com.example.tp33_detoxers.model.IntakeProduct;
 import com.example.tp33_detoxers.viewModel.IntakeViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
@@ -81,7 +82,7 @@ public class IngredientFragment extends Fragment {
     private String[] color = new String[] {"red","yellow", "green"};
     private ArrayList<HashMap<String, String>> hashMapArrayList = new ArrayList<>();
     private ArrayList<String> levelNumber = new ArrayList<>();
-
+    private Button bt_add;
     public IngredientFragment() {}
 
     @Override
@@ -107,7 +108,7 @@ public class IngredientFragment extends Fragment {
         tv_name = ingredientView.findViewById(R.id.tv_pName);
         tv_title = ingredientView.findViewById(R.id.tv_title);
         tv_quantity = ingredientView.findViewById(R.id.tv_pQuantity);
-        Button bt_add = ingredientView.findViewById(R.id.bt_addList);
+        bt_add = ingredientView.findViewById(R.id.bt_addList);
         Button bt_help = ingredientView.findViewById(R.id.bt_helper);
         tv_list_title = ingredientView.findViewById(R.id.tv_list_title);
         tv_spTitle = ingredientView.findViewById(R.id.tv_spTitle);
@@ -274,7 +275,8 @@ public class IngredientFragment extends Fragment {
         @Override
         protected void onPostExecute(ArrayList<String> l){
             if(l.get(0).equals("0")){
-                Toast.makeText(getActivity(), "No result found", Toast.LENGTH_LONG).show();
+                Snackbar.make(getView(), "Oops, no result found! ", Snackbar.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), "No result found", Toast.LENGTH_LONG).show();
             }else{
                 tv_title.setText("Toxin level for 100g");
                 tv_name.setText(l.get(iName.length+levelName.length));
@@ -336,9 +338,11 @@ public class IngredientFragment extends Fragment {
         protected void onPostExecute(List<String> result) {
             // return the result of inserting into the database and show the notice whether the product is added into the database
             if (result.get(0).equals("None")){ //check the return value
-                Toast.makeText(getActivity(), "This product has been added to the intake list", Toast.LENGTH_LONG).show();
+                Snackbar.make(bt_add, "This product has been added to the intake list", Snackbar.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), "This product has been added to the intake list", Toast.LENGTH_LONG).show();
             }else{
-                Toast.makeText(getActivity(), "Added product: " + result.get(0), Toast.LENGTH_LONG).show();
+                Snackbar.make(bt_add, "Added product: " + result.get(0), Snackbar.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), "Added product: " + result.get(0), Toast.LENGTH_LONG).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new IntakeFragment()).addToBackStack(null).commit();
             }
         }

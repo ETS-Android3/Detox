@@ -59,8 +59,8 @@ public class CategoryListFragment extends Fragment {
     private CharSequence[] levelItems;
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
-    private RadioButton radiobtn1;
-    private RadioButton radiobtn2;
+    private RadioButton rb1;
+    private RadioButton rb2;
     //private searchProduct search = new searchProduct(); //
 
 
@@ -98,20 +98,60 @@ public class CategoryListFragment extends Fragment {
                 Button cancelButton = builder.findViewById(R.id.btn_dialog_cancel);
                 radioGroup1 =  builder.findViewById(R.id.rg_1);
                 radioGroup2 = builder.findViewById(R.id.rg_2);
+                RadioButton sugar = builder.findViewById(R.id.rb_sugar);
+                RadioButton salt = builder.findViewById(R.id.rb_salt);
+                RadioButton fat = builder.findViewById(R.id.rb_fat);
+                RadioButton satfat = builder.findViewById(R.id.rb_satfat);
+                RadioButton low = builder.findViewById(R.id.rb_low);
+                RadioButton mid = builder.findViewById(R.id.rb_mid);
+                RadioButton high = builder.findViewById(R.id.rb_high);
+
+                switch(selectedIngredient){
+                    case "Sugars":
+                        sugar.setChecked(true);
+                        break;
+                    case "Salt":
+                        salt.setChecked(true);
+                        break;
+                    case "Fat":
+                        fat.setChecked(true);
+                        break;
+                    case "Saturated-fat":
+                        satfat.setChecked(true);
+                        break;
+                    default:
+                        break;
+                }
+
+                switch(selectedLevel){
+                    case "Low":
+                        low.setChecked(true);
+                        break;
+                    case "Moderate":
+                        mid.setChecked(true);
+                        break;
+                    case "High":
+                        high.setChecked(true);
+                        break;
+                    default:
+                        break;
+                }
+
+
                 radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch(checkedId){
-                            case R.id.rb_1:
+                            case R.id.rb_sugar:
                                 selectedIngredient = "Sugars";
                                 break;
-                            case R.id.rb_2:
+                            case R.id.rb_salt:
                                 selectedIngredient = "Salt";
                                 break;
-                            case R.id.rb_3:
+                            case R.id.rb_fat:
                                 selectedIngredient = "Fat";
                                 break;
-                            case R.id.rb_4:
+                            case R.id.rb_satfat:
                                 selectedIngredient = "Saturated-fat";
                                 break;
                         }
@@ -122,13 +162,13 @@ public class CategoryListFragment extends Fragment {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch(checkedId){
-                            case R.id.rb_5:
+                            case R.id.rb_low:
                                 selectedLevel = "Low";
                                 break;
-                            case R.id.rb_6:
+                            case R.id.rb_mid:
                                 selectedLevel = "Moderate";
                                 break;
-                            case R.id.rb_7:
+                            case R.id.rb_high:
                                 selectedLevel = "High";
                                 break;
                         }

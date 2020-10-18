@@ -21,6 +21,7 @@ import com.example.tp33_detoxers.adapter.RVSearchAdapter;
 import com.example.tp33_detoxers.model.SearchResult;
 import com.example.tp33_detoxers.SearchAPI;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 
@@ -35,7 +36,8 @@ public class SearchFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private List<SearchResult> products;
     private RVSearchAdapter adapter;
-
+    private Button btn_search;
+//    final Button btn_search;
 
     public SearchFragment() {}
 
@@ -49,7 +51,8 @@ public class SearchFragment extends Fragment {
         products = new ArrayList<>();
 
         final EditText et_search = searchView.findViewById(R.id.ed_search);
-        final Button btn_search =searchView.findViewById(R.id.btn_search);
+        btn_search =searchView.findViewById(R.id.btn_search);
+//        final Button btn_search =searchView.findViewById(R.id.btn_search);
         MaterialToolbar toolbar = searchView.findViewById(R.id.search_toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +148,8 @@ public class SearchFragment extends Fragment {
         protected void onPostExecute(RVSearchAdapter a){
             progressBar.setVisibility(View.GONE);
             if (a == null){
-                Toast.makeText(getActivity(), "No result found", Toast.LENGTH_LONG).show();
+                Snackbar.make(btn_search, "No result found", Snackbar.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), "No result found", Toast.LENGTH_LONG).show();
             }else {
                 //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
                 recyclerView.setAdapter(a);
