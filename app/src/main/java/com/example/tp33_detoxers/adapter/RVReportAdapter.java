@@ -63,7 +63,7 @@ public class RVReportAdapter extends RecyclerView.Adapter<RVReportAdapter.ViewHo
                     Picasso.get().load(R.drawable.redcircle).placeholder(R.drawable.redcircle).into(imageView);
                     break;
             }
-            String quantity_df = new java.text.DecimalFormat("#0.000").format(quantity);
+            String quantity_df = new java.text.DecimalFormat("#0.###").format(quantity);
             tvName.setText(name);
             tvUnits.setText(quantity_df + " g");
         }

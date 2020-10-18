@@ -1,6 +1,7 @@
 package com.example.tp33_detoxers.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,20 +19,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tp33_detoxers.R;
+import com.example.tp33_detoxers.adapter.DialogColorAdapter;
 import com.example.tp33_detoxers.adapter.RVReportAdapter;
 import com.example.tp33_detoxers.model.ReportRecord;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -39,11 +49,13 @@ import java.util.Objects;
 public class ReportFragment extends Fragment {
     private List<ReportRecord> reportRecords;
     private String[] rName = new String[] {"sugars","salt","saturated-fat","fat"};
+    private String[] color = new String[] {"red","yellow", "green"};
     private float maxNum = 0;
 
     private RecyclerView reportRecycler;
     private RecyclerView.LayoutManager layoutManager;
     private RVReportAdapter reportAdapter;
+    private DialogColorAdapter dialogColorAdapter;
 
     private BarChart barChart;
     private BarData barData;
@@ -73,9 +85,11 @@ public class ReportFragment extends Fragment {
         TextView tv_suggest = reportView.findViewById(R.id.tv_suggest);
         reportRecycler = reportView.findViewById(R.id.rv_report);
         barChart = reportView.findViewById(R.id.bar_chart);
+        Button bt_helper = reportView.findViewById(R.id.report_helper);
 
         reportRecords = new ArrayList<>();
         reportAdapter = new RVReportAdapter(reportRecords);
+        dialogColorAdapter = new DialogColorAdapter(getActivity(), color);
         ArrayList<String> arrayLevel = new ArrayList<>();
         int risk = 0;
         String suggestion = "";
@@ -154,6 +168,26 @@ public class ReportFragment extends Fragment {
             tv_suggest.setTextColor(Color.parseColor("#C73E3A"));
         }
 
+        bt_helper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialAlertDialogBuilder(getContext())
+                        .setTitle("Introduce the meaning of the circle")
+                        .setAdapter(dialogColorAdapter, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setPositiveButton("Back", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).show();
+            }
+        });
+
         //set the recyclerview
         reportRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         reportRecycler.setAdapter(reportAdapter);
@@ -228,10 +262,26 @@ public class ReportFragment extends Fragment {
         barData.setBarWidth(0.35f);
         barChart.getAxisLeft().setAxisMinimum(0);
         barChart.getAxisLeft().setAxisMaximum(newNum);
+        barChart.getAxisLeft().setValueFormatter(new MyValueFormatter());
         barChart.getXAxis().setAxisMaximum(4);
         barChart.getXAxis().setAxisMinimum(0);
         barChart.groupBars(0, groupSpace, barSpace);
         barChart.invalidate();
+    }
+
+    //set the format of y axis
+    private class MyValueFormatter extends ValueFormatter{
+        private DecimalFormat mFormat;
+
+        public MyValueFormatter() {
+            mFormat = new DecimalFormat("###");
+        }
+
+        @Override
+        public String getFormattedValue(float value){
+            return mFormat.format(value) + " g";
+        }
+
     }
 
 }

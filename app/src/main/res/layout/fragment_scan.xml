@@ -42,7 +42,6 @@
         android:textColorHint="@color/black"
         app:cornerRadius="10dp"
         android:textSize="24sp"
-        android:backgroundTint="#00AA90"
         android:drawableLeft="@drawable/ic_baseline_photo_camera_24"
         android:hint="Scan"
         android:layout_gravity="center" />
@@ -53,7 +52,6 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="#99CA60"
         android:drawableLeft="@drawable/ic_baseline_start_24"
         android:hint="See Details"
         android:textColorHint="@color/black"

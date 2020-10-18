@@ -44,6 +44,7 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -199,11 +200,6 @@ public class IngredientFragment extends Fragment {
         gridAdapter.addData(iAll);
     }
 
-    public void CreateDialog() {
-        LayoutInflater inflater = LayoutInflater.from(getActivity());
-        getListview = inflater.inflate(R.layout.recycview_toxins, null);
-    }
-
     public void addMap(String[] array) {
         HashMap<String, String> map = new HashMap<>();
         for(int i = 0; i < array.length; i++){
@@ -278,6 +274,7 @@ public class IngredientFragment extends Fragment {
                 Snackbar.make(getView(), "Oops, no result found! ", Snackbar.LENGTH_LONG).show();
 //                Toast.makeText(getActivity(), "No result found", Toast.LENGTH_LONG).show();
             }else{
+                DecimalFormat format = new DecimalFormat("#0.000");
                 tv_title.setText("Toxin level for 100g");
                 tv_name.setText(l.get(iName.length+levelName.length));
                 tv_quantity.setText(l.get(iName.length+levelName.length+2) + " g");
@@ -285,8 +282,11 @@ public class IngredientFragment extends Fragment {
                 levelNumber.add(l.get(iName.length+levelName.length+1));
                 tv_spTitle.setVisibility(View.VISIBLE);
                 sp_illness.setVisibility(View.VISIBLE);
+                //saveAllIngredient(iName[0],l.get(0));
                 for(int i = 0; i < iName.length; i++){
-                    saveAllIngredient(iName[i],l.get(i));
+                    Double num = Double.parseDouble(l.get(i));
+                    String df = new java.text.DecimalFormat("#0.###").format(num);
+                    saveAllIngredient(iName[i],df);
                 }
                 for(int i = 0; i <iName.length;i++ ){
                     for (int j = 0; j< levelName.length;j++){
