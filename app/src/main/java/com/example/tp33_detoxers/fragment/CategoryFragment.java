@@ -89,20 +89,8 @@ public class CategoryFragment extends Fragment {
                 replaceFrag("Beverages");
             }
         });
-
-
-
-
-
         return category;
     }
-
-//    private void replaceFragment(Fragment nextFragment){
-//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.container, nextFragment);
-//        fragmentTransaction.commit();
-//    }
 
     private void replaceFrag(String category){
         Fragment newFrag = new CategoryListFragment(); //When clicking any item on the list view, it'll open another fragment
@@ -112,12 +100,4 @@ public class CategoryFragment extends Fragment {
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.container, newFrag).addToBackStack(null).commit();
     }
-
-
-//    public void saveData(String category){
-//        SharedPreferences sp = getActivity().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE );
-//        SharedPreferences.Editor spEditor = sp.edit();
-//        spEditor.putString(CATEGORY, category );
-//        spEditor.apply();
-//    }
 }

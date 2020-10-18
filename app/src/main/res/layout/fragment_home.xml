@@ -67,7 +67,7 @@
             android:textSize="24sp"
             app:cornerRadius="10dp"
             android:backgroundTint="#F7D94C"
-            android:hint="Healthy Tips" />
+            android:hint="Health Tips" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_aboutUs"
