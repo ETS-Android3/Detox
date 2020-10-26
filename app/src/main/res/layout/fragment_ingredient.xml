@@ -155,7 +155,7 @@
         
         <GridView
             android:id="@+id/gridView"
-            android:numColumns="2"
+            android:numColumns="auto_fit"
             android:background="#FFFFFF"
             android:layout_gravity="center"
             android:verticalSpacing="2dp"

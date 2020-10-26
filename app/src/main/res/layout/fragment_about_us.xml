@@ -7,7 +7,8 @@
     android:layout_marginBottom="?attr/actionBarSize"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <LinearLayout
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimary">
 
@@ -27,34 +28,31 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-<!--    <TextView-->
-<!--        android:id="@+id/aboutUs_title"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:textStyle="bold"-->
-<!--        android:layout_gravity="center"/>-->
+
     <ImageView
-        android:layout_marginTop="10dp"
+        android:layout_marginVertical="10dp"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/no_background_logo"/>
 
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardElevation="5dp"
+        android:padding="5dp"
+        app:cardCornerRadius="40dp"
+        app:strokeColor="@color/card_stork_color">
     <TextView
         android:id="@+id/aboutUs_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@drawable/rounded_corner_dark_green"
+        android:background="@color/warmWhite"
         android:padding="30dp"
        />
-
-<!--    <com.sdsmdg.harjot.rotatingtext.RotatingTextWrapper-->
-<!--        android:id="@+id/aboutUs_switcher"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        />-->
-
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
 </ScrollView>

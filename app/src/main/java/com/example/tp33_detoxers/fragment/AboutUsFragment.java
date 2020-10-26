@@ -17,12 +17,14 @@ import java.util.Objects;
 
 public class AboutUsFragment extends Fragment {
 
-    TextView text;
+
+    public AboutUsFragment() {
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View aboutUs = inflater.inflate(R.layout.fragment_about_us, container, false);
-        text = aboutUs.findViewById(R.id.aboutUs_text);
+        TextView text = aboutUs.findViewById(R.id.aboutUs_text);
         MaterialToolbar toolbar = aboutUs.findViewById(R.id.aboutUs_toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +41,7 @@ public class AboutUsFragment extends Fragment {
                 "We consider these ingredients toxins as they may exacerbate the aforementioned conditions.\n\n" +
                 "This application will help to highlight the quantities of toxins within food products to better manage your health concerns!");
         text.setTextSize(18);
-        text.setTextColor(Color.parseColor("#FFFFFF"));
+        //text.setTextColor(Color.parseColor("#FFFFFF"));
         text.setGravity(Gravity.LEFT);
 
 
