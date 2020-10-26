@@ -54,14 +54,12 @@ public class CategoryListFragment extends Fragment {
     private RVCategoryAdapter categoryAdapter;
     private String selectedIngredient = "All";
     private String selectedLevel = "All";
+    private String confirmedIngredient = "All";
+    private String confirmedLevel = "All";
     private Button filterBtn;
-    private CharSequence[] ingredientItems;
-    private CharSequence[] levelItems;
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
-    private RadioButton rb1;
-    private RadioButton rb2;
-    //private searchProduct search = new searchProduct(); //
+
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,10 +69,8 @@ public class CategoryListFragment extends Fragment {
         categoryProducts = new ArrayList<>();
         recyclerView = catListView.findViewById(R.id.recySearch);
         filterBtn = catListView.findViewById(R.id.filterBtn);
-//        final Context context = getContext();
         searchAPI = new SearchAPI();
-//        Spinner sp_ingredient = catListView.findViewById(R.id.categoryList_sp_ingredient);
-//        Spinner sp_ingredientLevel = catListView.findViewById(R.id.categoryList_sp_ingredient_level);
+
 
         progressBar = catListView.findViewById(R.id.progress_category);
         progressBar.setVisibility(View.GONE);
@@ -98,6 +94,8 @@ public class CategoryListFragment extends Fragment {
                 Button cancelButton = builder.findViewById(R.id.btn_dialog_cancel);
                 radioGroup1 =  builder.findViewById(R.id.rg_1);
                 radioGroup2 = builder.findViewById(R.id.rg_2);
+                RadioButton all1 = builder.findViewById(R.id.rb_all1);
+                RadioButton all2 = builder.findViewById(R.id.rb_all2);
                 RadioButton sugar = builder.findViewById(R.id.rb_sugar);
                 RadioButton salt = builder.findViewById(R.id.rb_salt);
                 RadioButton fat = builder.findViewById(R.id.rb_fat);
@@ -105,8 +103,11 @@ public class CategoryListFragment extends Fragment {
                 RadioButton low = builder.findViewById(R.id.rb_low);
                 RadioButton mid = builder.findViewById(R.id.rb_mid);
                 RadioButton high = builder.findViewById(R.id.rb_high);
-
-                switch(selectedIngredient){
+                String ing;
+                switch(confirmedIngredient){
+                    case "All":
+                        all1.setChecked(true);
+                        break;
                     case "Sugars":
                         sugar.setChecked(true);
                         break;
@@ -123,7 +124,10 @@ public class CategoryListFragment extends Fragment {
                         break;
                 }
 
-                switch(selectedLevel){
+                switch(confirmedLevel){
+                    case "All":
+                        all2.setChecked(true);
+                        break;
                     case "Low":
                         low.setChecked(true);
                         break;
@@ -142,17 +146,29 @@ public class CategoryListFragment extends Fragment {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch(checkedId){
+                            case R.id.rb_all1:
+                                selectedIngredient = "All";
+                                all2.setEnabled(true);
+                                break;
                             case R.id.rb_sugar:
                                 selectedIngredient = "Sugars";
+                                all2.setChecked(false);
+                                all2.setEnabled(false);
                                 break;
                             case R.id.rb_salt:
                                 selectedIngredient = "Salt";
+                                all2.setChecked(false);
+                                all2.setEnabled(false);
                                 break;
                             case R.id.rb_fat:
                                 selectedIngredient = "Fat";
+                                all2.setChecked(false);
+                                all2.setEnabled(false);
                                 break;
                             case R.id.rb_satfat:
                                 selectedIngredient = "Saturated-fat";
+                                all2.setChecked(false);
+                                all2.setEnabled(false);
                                 break;
                         }
                     }
@@ -162,6 +178,9 @@ public class CategoryListFragment extends Fragment {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch(checkedId){
+                            case R.id.rb_all2:
+                                selectedLevel = "All";
+                                break;
                             case R.id.rb_low:
                                 selectedLevel = "Low";
                                 break;
@@ -177,8 +196,10 @@ public class CategoryListFragment extends Fragment {
                 dialogButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Snackbar.make(filterBtn, "You have selected " + selectedIngredient +" in "+ selectedLevel +" level!", Snackbar.LENGTH_LONG).show();
-                        String filtered = selectedIngredient + "," + selectedLevel;
+                        confirmedIngredient = selectedIngredient;
+                        confirmedLevel = selectedLevel;
+                        Snackbar.make(filterBtn, "You have selected " + confirmedIngredient +" in "+ confirmedLevel +" level!", Snackbar.LENGTH_LONG).show();
+                        String filtered = confirmedIngredient + "," + confirmedLevel;
                         categoryAdapter.getFilter().filter(filtered);
                         builder.dismiss();
                     }
@@ -206,41 +227,6 @@ public class CategoryListFragment extends Fragment {
         }
 
         categoryAdapter = new RVCategoryAdapter(categoryProducts);
-
-//        sp_ingredient.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                selectedIngredient = parent.getItemAtPosition(position).toString();
-//                if(selectedLevel.equals("All") & !selectedIngredient.equals("All")){
-//                    Toast.makeText(getActivity(), "Please select the ingredient level", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//
-
-//        sp_ingredientLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                selectedLevel = parent.getItemAtPosition(position).toString();
-//                if (selectedLevel.equals("All") & !selectedIngredient.equals("All")){
-//                    Toast.makeText(getActivity(), "Please select the ingredient", Toast.LENGTH_LONG).show();
-//                }else if(!selectedLevel.equals("All") & !selectedIngredient.equals("All")){
-//                    String filtered = selectedIngredient + "," + selectedLevel;
-//                    categoryAdapter.getFilter().filter(filtered);
-//                }
-//
-//            }
-
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//});
 
         return catListView;
     }

@@ -33,6 +33,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <RadioButton
+            android:id="@+id/rb_all1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="All"
+            android:layout_weight="1"/>
 
         <RadioButton
         android:id="@+id/rb_sugar"
@@ -41,6 +48,7 @@
         android:layout_marginLeft="16dp"
         android:text="Sugar"
         android:layout_weight="1"/>
+
         <RadioButton
             android:id="@+id/rb_salt"
             android:layout_width="wrap_content"
@@ -82,6 +90,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_all2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="All"
+            android:layout_weight="1"/>
 
         <RadioButton
             android:id="@+id/rb_low"
