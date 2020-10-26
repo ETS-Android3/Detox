@@ -274,7 +274,8 @@ public class CategoryListFragment extends Fragment {
             categoryAdapter = new RVCategoryAdapter(categoryProducts);
             progressBar.setVisibility(View.GONE);
             //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-            categoryAdapter.getFilter().filter(selectedIngredient);
+            String filtered = confirmedIngredient + "," + confirmedLevel;
+            categoryAdapter.getFilter().filter(filtered);
             recyclerView.setAdapter(categoryAdapter);
             layoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(layoutManager);

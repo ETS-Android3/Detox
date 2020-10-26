@@ -114,7 +114,7 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Vi
                             break;
                         case "Moderate":
                             for(CategoryResult item: categoryResults){
-                                if(Double.parseDouble(item.getqFat()) >= 3 | Double.parseDouble(item.getqFat()) <= 17.5){
+                                if(Double.parseDouble(item.getqFat()) >= 3 && Double.parseDouble(item.getqFat()) <= 17.5){
                                     categories.add(item);
                                 }
                             }
@@ -139,7 +139,7 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Vi
                             break;
                         case "Moderate":
                             for(CategoryResult item: categoryResults){
-                                if(Double.parseDouble(item.getqSalt()) >= 0.3 | Double.parseDouble(item.getqFat()) <= 1.5){
+                                if(Double.parseDouble(item.getqSalt()) >= 0.3 && Double.parseDouble(item.getqSalt()) <= 1.5){
                                     categories.add(item);
                                 }
                             }
@@ -164,7 +164,7 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Vi
                             break;
                         case "Moderate":
                             for(CategoryResult item: categoryResults){
-                                if(Double.parseDouble(item.getqSaturated()) >= 1.5 | Double.parseDouble(item.getqFat()) <= 5){
+                                if(Double.parseDouble(item.getqSaturated()) >= 1.5 && Double.parseDouble(item.getqSaturated()) <= 5){
                                     categories.add(item);
                                 }
                             }
@@ -189,7 +189,7 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Vi
                             break;
                         case "Moderate":
                             for(CategoryResult item: categoryResults){
-                                if(Double.parseDouble(item.getqSugar()) >= 5 | Double.parseDouble(item.getqFat()) <= 22.5){
+                                if(Double.parseDouble(item.getqSugar()) >= 5 && Double.parseDouble(item.getqSugar()) <= 22.5){
                                     categories.add(item);
                                 }
                             }
@@ -204,8 +204,38 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Vi
                     }
                     break;
                 case "All":
-                    categories.addAll(categoryResults);
-                    break;
+                    switch (ingredient[1]) {
+                        case "Low":
+                            for (CategoryResult item : categoryResults) {
+                                if (Double.parseDouble(item.getqSugar()) < 5 && Double.parseDouble(item.getqSaturated()) < 1.5
+                                        && Double.parseDouble(item.getqSalt()) < 0.3 && Double.parseDouble(item.getqFat()) < 3) {
+                                    categories.add(item);
+                                }
+                            }
+                            break;
+                        case "Moderate":
+                            for (CategoryResult item : categoryResults) {
+                                if ((Double.parseDouble(item.getqSugar()) >= 5 && Double.parseDouble(item.getqSugar()) <= 22.5) &&
+                                        (Double.parseDouble(item.getqFat()) >= 3 && Double.parseDouble(item.getqFat()) <= 17.5) &&
+                                        (Double.parseDouble(item.getqSaturated()) >= 1.5 && Double.parseDouble(item.getqSaturated()) <= 5) &&
+                                        (Double.parseDouble(item.getqSalt()) >= 0.3 && Double.parseDouble(item.getqSalt()) <= 1.5)) {
+                                    categories.add(item);
+                                }
+                            }
+                            break;
+                        case "High":
+                            for (CategoryResult item : categoryResults) {
+                                if (Double.parseDouble(item.getqSugar()) > 22.5 && Double.parseDouble(item.getqFat()) > 17.5
+                                        && Double.parseDouble(item.getqSaturated()) > 5 && Double.parseDouble(item.getqSalt()) > 1.5) {
+                                    categories.add(item);
+                                }
+                            }
+                            break;
+                        case "All":
+                            categories.addAll(categoryResults);
+                            break;
+                    }
+
             }
 
             FilterResults filterResults = new FilterResults();
