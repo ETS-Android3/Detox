@@ -1,153 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/alert_dialog_bg">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true">
 
-    <TextView
-        android:id="@+id/topbar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Filter"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:background="@drawable/dialog_titlebar"
-        android:textSize="15dp"
-       android:layout_marginBottom="5dp"/>
-
-    <TextView
-        android:layout_below="@+id/topbar"
-        android:id="@+id/selectIngredient_tv"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select an ingredient"
-        android:textStyle="bold"
-        android:textSize="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@drawable/alert_dialog_bg">
 
-    <RadioGroup
-        android:id="@+id/rg_1"
-        android:layout_below="@+id/selectIngredient_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <RadioButton
-            android:id="@+id/rb_all1"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Filter"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:background="@drawable/dialog_titlebar"
+            android:textSize="15dp"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_below="@+id/topbar"
+            android:id="@+id/selectIngredient_tv"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="All"
-            android:layout_weight="1"/>
+            android:text="Select an ingredient"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
 
-        <RadioButton
-        android:id="@+id/rb_sugar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:text="Sugar"
-        android:layout_weight="1"/>
-
-        <RadioButton
-            android:id="@+id/rb_salt"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/rg_1"
+            android:layout_below="@+id/selectIngredient_tv"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="Salt"
-            android:layout_weight="1"/>
-        <RadioButton
-            android:id="@+id/rb_fat"
-            android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <RadioButton
+                android:id="@+id/rb_all1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="All"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/rb_sugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="Sugar"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/rb_salt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="Salt"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/rb_fat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="Fat"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/rb_satfat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="Saturated-Fat"
+                android:layout_weight="1"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/selectLevel_tv"
+            android:layout_below="@+id/rg_1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="Fat"
-            android:layout_weight="1"/>
+            android:text="Select a level"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"/>
 
-        <RadioButton
-            android:id="@+id/rb_satfat"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:layout_below="@+id/selectLevel_tv"
+            android:id="@+id/rg_2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="Saturated-Fat"
-            android:layout_weight="1"/>
+            android:orientation="vertical">
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/rb_all2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="All"
+                android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/selectLevel_tv"
-        android:layout_below="@+id/rg_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Select a level"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        android:layout_marginBottom="5dp"/>
+            <RadioButton
+                android:id="@+id/rb_low"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="Low"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/rb_mid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="Moderate"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/rb_high"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="High"
+                android:layout_weight="1"/>
 
-    <RadioGroup
-        android:layout_below="@+id/selectLevel_tv"
-        android:id="@+id/rg_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/rb_all2"
-            android:layout_width="wrap_content"
+        </RadioGroup>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="All"
-            android:layout_weight="1"/>
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@+id/rg_2">
+            <Button
+                android:layout_marginRight="30dp"
+                android:id="@+id/btn_dialog_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:textSize="13dp"
+                />
 
-        <RadioButton
-            android:id="@+id/rb_low"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="Low"
-            android:layout_weight="1"/>
-        <RadioButton
-            android:id="@+id/rb_mid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="Moderate"
-            android:layout_weight="1"/>
-        <RadioButton
-            android:id="@+id/rb_high"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="High"
-            android:layout_weight="1"/>
+            <Button
+                android:id="@+id/btn_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                android:textSize="13dp"
 
+                />
+        </LinearLayout>
 
-    </RadioGroup>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_below="@+id/rg_2">
-        <Button
-            android:layout_marginRight="30dp"
-            android:id="@+id/btn_dialog_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:textSize="13dp"
-            />
+    </RelativeLayout>
 
-    <Button
-        android:id="@+id/btn_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Confirm"
-        android:textSize="13dp"
-
-       />
-    </LinearLayout>
-
-</RelativeLayout>
+</ScrollView>
