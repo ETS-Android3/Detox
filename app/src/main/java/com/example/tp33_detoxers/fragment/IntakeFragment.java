@@ -103,7 +103,6 @@ public class IntakeFragment extends Fragment {
                     saturateds.add(saturated);
                     quantities.add(quantity);
                     saveIntakes(temp.getpName(), temp.getpUrl(), temp.getpId(), sugar, salt, fat, saturated, quantity);
-
                 }
             }
         });
@@ -134,6 +133,7 @@ public class IntakeFragment extends Fragment {
                                 deleteAllAsync deleteAllAsync = new deleteAllAsync();
                                 deleteAllAsync.execute();
                                 intakes.clear();
+                                adapter.notifyDataSetChanged();
                             }
                         }).show();
             }
@@ -172,9 +172,6 @@ public class IntakeFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 if(quantities.size() < 1){
                                     Snackbar.make(bt_calculate, "Please add product first!", Snackbar.LENGTH_LONG).show();
-//                                    Toast toast = Toast.makeText(getActivity(), "Please add product first!", Toast.LENGTH_LONG);
-//                                    toast.setGravity(Gravity.CENTER, 0, 0);
-//                                    toast.show();
                                 }else{
                                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ReportFragment()).addToBackStack(null).commit();
                                 }
@@ -235,7 +232,6 @@ public class IntakeFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             Snackbar.make(bt_delete, s, Snackbar.LENGTH_LONG).show();
-//            Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -255,7 +251,6 @@ public class IntakeFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             Snackbar.make(bt_delete, "All the data are deleted.", Snackbar.LENGTH_LONG).show();
-//            Toast.makeText(getActivity(), "All the data are deleted.", Toast.LENGTH_LONG).show();
         }
     }
 }
