@@ -21,6 +21,7 @@ import com.example.tp33_detoxers.adapter.RVSearchAdapter;
 import com.example.tp33_detoxers.model.SearchResult;
 import com.example.tp33_detoxers.SearchAPI;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
@@ -37,7 +38,6 @@ public class SearchFragment extends Fragment {
     private List<SearchResult> products;
     private RVSearchAdapter adapter;
     private Button btn_search;
-//    final Button btn_search;
 
     public SearchFragment() {}
 
@@ -45,6 +45,8 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View searchView = inflater.inflate(R.layout.fragment_search, container, false);
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.getMenu().getItem(2).setChecked(true);
         searchAPI = new SearchAPI();
 
         recyclerView = searchView.findViewById(R.id.recySearch);
@@ -52,7 +54,6 @@ public class SearchFragment extends Fragment {
 
         final EditText et_search = searchView.findViewById(R.id.ed_search);
         btn_search =searchView.findViewById(R.id.btn_search);
-//        final Button btn_search =searchView.findViewById(R.id.btn_search);
         MaterialToolbar toolbar = searchView.findViewById(R.id.search_toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,21 +118,6 @@ public class SearchFragment extends Fragment {
                     String url = j.getJSONObject(i).getString("image_url");
                     saveData(name, url, id);
                 }
-
-//                    if ((j.getJSONObject(i).has("image_url")) && (j.getJSONObject(i).has("nutrient_levels"))
-//                            && (j.getJSONObject(i).has("product_name"))
-//                            && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("saturated-fat"))
-//                            && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("sugars"))
-//                            && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("fat"))
-//                            && (j.getJSONObject(i).getJSONObject("nutrient_levels").has("salt"))
-//                            && (j.getJSONObject(i).has("nutriments"))
-//                            &&(j.getJSONObject(i).getJSONObject("nutriments").length() != 0)
-//                    ){
-//                        String name = j.getJSONObject(i).getString("product_name");
-//                        String id = j.getJSONObject(i).getString("code");
-//                        String url = j.getJSONObject(i).getString("image_front_url");
-//                        saveData(name, url, id);}
-//                }
             }catch (Exception e){
                 e.printStackTrace();
             }

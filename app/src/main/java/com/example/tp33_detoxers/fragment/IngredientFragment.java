@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +17,9 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -84,6 +83,9 @@ public class IngredientFragment extends Fragment {
     private ArrayList<HashMap<String, String>> hashMapArrayList = new ArrayList<>();
     private ArrayList<String> levelNumber = new ArrayList<>();
     private Button bt_add;
+    private Button bt_help;
+    private LinearLayoutCompat layout1;
+    private LinearLayoutCompat layout2;
     public IngredientFragment() {}
 
     @Override
@@ -110,18 +112,24 @@ public class IngredientFragment extends Fragment {
         tv_title = ingredientView.findViewById(R.id.tv_title);
         tv_quantity = ingredientView.findViewById(R.id.tv_pQuantity);
         bt_add = ingredientView.findViewById(R.id.bt_addList);
-        Button bt_help = ingredientView.findViewById(R.id.bt_helper);
+        bt_help = ingredientView.findViewById(R.id.bt_helper);
         tv_list_title = ingredientView.findViewById(R.id.tv_list_title);
         tv_spTitle = ingredientView.findViewById(R.id.tv_spTitle);
         iv_products = ingredientView.findViewById(R.id.iv_products);
         sp_illness =  ingredientView.findViewById(R.id.sp_illness);
+        layout1 = ingredientView.findViewById(R.id.layout1);
+        layout2 = ingredientView.findViewById(R.id.layout2);
+        layout1.setVisibility(View.GONE);
+        layout2.setVisibility(View.GONE);
         sp_illness.setSelection(0);
         tv_spTitle.setVisibility(View.GONE);
         sp_illness.setVisibility(View.GONE);
         iDetail = new ArrayList<>();
         toxinAdapter = new RVToxinAdapter(iDetail);
         toxinRecycler = ingredientView.findViewById(R.id.rv_toxin);
+        toxinRecycler.setVisibility(View.GONE);
         gridView = ingredientView.findViewById(R.id.gridView);
+        gridView.setVisibility(View.GONE);
         iAll = new ArrayList<>();
         gridAdapter = new IngredientAdapter(getActivity(), iAll);
         dialogColorAdapter = new DialogColorAdapter(getActivity(), color);
@@ -170,12 +178,7 @@ public class IngredientFragment extends Fragment {
             public void onClick(View v) {
                 new MaterialAlertDialogBuilder(getContext())
                         .setTitle("Introduce the meaning of the circle")
-                        .setAdapter(dialogColorAdapter, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        })
+                        .setAdapter(dialogColorAdapter, null)
                         .setPositiveButton("Back", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -271,8 +274,15 @@ public class IngredientFragment extends Fragment {
         @Override
         protected void onPostExecute(ArrayList<String> l){
             if(l.get(0).equals("0")){
+                new MaterialAlertDialogBuilder(getContext())
+                        .setMessage("Oops, no result found! ")
+                        .setPositiveButton("Back", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Objects.requireNonNull(getActivity()).onBackPressed();
+                            }
+                        }).show();
                 Snackbar.make(getView(), "Oops, no result found! ", Snackbar.LENGTH_LONG).show();
-//                Toast.makeText(getActivity(), "No result found", Toast.LENGTH_LONG).show();
             }else{
                 DecimalFormat format = new DecimalFormat("#0.000");
                 tv_title.setText("Toxin level for 100g");
@@ -280,8 +290,12 @@ public class IngredientFragment extends Fragment {
                 tv_quantity.setText(l.get(iName.length+levelName.length+2) + " g");
                 Picasso.get().load(l.get(iName.length+levelName.length+1)).into(iv_products);
                 levelNumber.add(l.get(iName.length+levelName.length+1));
+                toxinRecycler.setVisibility(View.VISIBLE);
+                gridView.setVisibility(View.VISIBLE);
                 tv_spTitle.setVisibility(View.VISIBLE);
                 sp_illness.setVisibility(View.VISIBLE);
+                layout1.setVisibility(View.VISIBLE);
+                layout2.setVisibility(View.VISIBLE);
                 //saveAllIngredient(iName[0],l.get(0));
                 for(int i = 0; i < iName.length; i++){
                     Double num = Double.parseDouble(l.get(i));
@@ -338,11 +352,9 @@ public class IngredientFragment extends Fragment {
         protected void onPostExecute(List<String> result) {
             // return the result of inserting into the database and show the notice whether the product is added into the database
             if (result.get(0).equals("None")){ //check the return value
-                Snackbar.make(bt_add, "This product has been added to the intake list", Snackbar.LENGTH_LONG).show();
-//                Toast.makeText(getActivity(), "This product has been added to the intake list", Toast.LENGTH_LONG).show();
+                Snackbar.make(bt_add, "This product has been added to My Meals", Snackbar.LENGTH_LONG).show();
             }else{
                 Snackbar.make(bt_add, "Added product: " + result.get(0), Snackbar.LENGTH_LONG).show();
-//                Toast.makeText(getActivity(), "Added product: " + result.get(0), Toast.LENGTH_LONG).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new IntakeFragment()).addToBackStack(null).commit();
             }
         }

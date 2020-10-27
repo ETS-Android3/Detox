@@ -5,15 +5,17 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -26,10 +28,12 @@ import com.example.tp33_detoxers.database.IntakeDatabase;
 import com.example.tp33_detoxers.model.IntakeProduct;
 import com.example.tp33_detoxers.viewModel.IntakeViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -68,6 +72,8 @@ public class IntakeFragment extends Fragment {
                              Bundle savedInstanceState){
 
         View intakeView = inflater.inflate(R.layout.fragment_intakelist, container, false);
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.getMenu().getItem(4).setChecked(true);
         recyclerView = intakeView.findViewById(R.id.recyIntake);
         intakes = new ArrayList<>();
         adapter = new RVIntakeAdapter(intakes);
@@ -81,6 +87,27 @@ public class IntakeFragment extends Fragment {
         Button bt_addNew = intakeView.findViewById(R.id.bt_addnew);
         bt_delete = intakeView.findViewById(R.id.bt_removeAll);
         bt_calculate = intakeView.findViewById(R.id.calculate);
+        String[] items = new String[]{"1. Click 'Add New Product' button","2. Add new product to My Meals","3. Choose the piece of the products",
+                "4. Click 'Calculate Intake' button","5. Get the report of your intakes","6. Click 'Remove all' to clear" };
+
+        //set the information tips
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.action_help) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                    alertDialog.setTitle("The guide of using My Meals")
+                            .setItems(items, null)
+                            .setPositiveButton("Back", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            }).create().show();
+                }
+                return true;
+            }
+        });
 
         //observe the view model
         intakeViewModel.getAllIntakes().observe(getViewLifecycleOwner(), new Observer<List<IntakeProduct>>() {
@@ -194,6 +221,7 @@ public class IntakeFragment extends Fragment {
         adapter.addIntakes(intakes);
     }
 
+    //calculate the all ingredients of my meals
     private ArrayList<Double> calculateAll(double[] number){
         ArrayList<Double> list = new ArrayList<>();
         for(int i = 0; i <quantities.size(); i++ ){
@@ -250,7 +278,7 @@ public class IntakeFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Snackbar.make(bt_delete, "All the data are deleted.", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(bt_delete, "My meals are cleared now!", Snackbar.LENGTH_LONG).show();
         }
     }
 }

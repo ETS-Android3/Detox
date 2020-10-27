@@ -29,11 +29,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //switchNightMode();
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigation);
-
+        bottomNavigationView.setSelectedItemId(R.id.page_home);
         replaceFragment(new HomeFragment());
     }
 
@@ -56,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.page_scan:
                             replaceFragment(new ScanFragment());
                             break;
-                        case R.id.page_setting:
+                        case R.id.page_mymeals:
                             replaceFragment(new IntakeFragment());
                             break;
                     }
@@ -78,14 +76,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-//    private void switchNightMode() {
-//        //get the current mode
-//        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-//
-//        AppCompatDelegate.setDefaultNightMode(currentNightMode == Configuration.UI_MODE_NIGHT_NO ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
-////        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-////        finish();
-//    }
 
 }

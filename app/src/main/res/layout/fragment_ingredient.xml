@@ -30,6 +30,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -76,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:drawableLeft="@drawable/ic_baseline_add_to_photos_24"
-                android:hint="Add to List"
+                android:hint="Add to My Meal"
                 app:cornerRadius="10dp"
                 style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                 android:textColorHint="@color/black"
@@ -86,7 +87,6 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
         <TextView
             android:id="@+id/tv_spTitle"
@@ -108,6 +108,7 @@
             android:entries="@array/illness_array" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

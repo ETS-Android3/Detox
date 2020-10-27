@@ -22,6 +22,7 @@
             android:layout_height="?attr/actionBarSize"
             android:gravity="center_horizontal"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:menu="@menu/top_bar_menu"
             app:title="Scan"
             app:titleTextColor="@color/black"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />
@@ -43,31 +44,20 @@
         app:cornerRadius="10dp"
         android:textSize="24sp"
         android:drawableLeft="@drawable/ic_baseline_photo_camera_24"
-        android:hint="Scan"
+        android:hint="Scan Barcode"
         android:layout_gravity="center" />
 
 
-    <Button
-        android:id="@+id/bt_searchCode"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:drawableLeft="@drawable/ic_baseline_start_24"
-        android:hint="See Details"
-        android:textColorHint="@color/black"
-        android:textSize="24sp"
-        app:cornerRadius="10dp" />
-
-    <TextView
-        android:id="@+id/tv_scan"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:layout_margin="50dp"
-        android:hint="Result will be shown here" />
+<!--    <Button-->
+<!--        android:id="@+id/bt_searchCode"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:drawableLeft="@drawable/ic_baseline_start_24"-->
+<!--        android:hint="See Details"-->
+<!--        android:textColorHint="@color/black"-->
+<!--        android:textSize="24sp"-->
+<!--        app:cornerRadius="10dp" />-->
 
 </LinearLayout>
 </ScrollView>

@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:menu="@menu/top_bar_menu"
             app:title="My Meals"
             app:titleTextColor="@color/black"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />

@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.tp33_detoxers.R;
 import com.example.tp33_detoxers.adapter.FragTipsAdapter;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -27,6 +28,8 @@ public class TipsCollectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View healthyView = inflater.inflate(R.layout.fragment_tips_collection, container, false);
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.getMenu().getItem(0).setChecked(true);
 
         fragTipsAdapter = new FragTipsAdapter(this);
         viewPager = healthyView.findViewById(R.id.viewPage);

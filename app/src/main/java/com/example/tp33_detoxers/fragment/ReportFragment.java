@@ -35,6 +35,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -66,6 +67,8 @@ public class ReportFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View reportView = inflater.inflate(R.layout.fragment_myreport, container, false);
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.getMenu().getItem(4).setChecked(true);
 
         SharedPreferences report = getActivity().getSharedPreferences("list", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -173,12 +176,7 @@ public class ReportFragment extends Fragment {
             public void onClick(View v) {
                 new MaterialAlertDialogBuilder(getContext())
                         .setTitle("Introduce the meaning of the circle")
-                        .setAdapter(dialogColorAdapter, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        })
+                        .setAdapter(dialogColorAdapter, null)
                         .setPositiveButton("Back", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

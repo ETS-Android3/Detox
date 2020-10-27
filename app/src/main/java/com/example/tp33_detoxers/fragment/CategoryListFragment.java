@@ -34,6 +34,7 @@ import com.example.tp33_detoxers.SearchAPI;
 import com.example.tp33_detoxers.adapter.RVCategoryAdapter;
 import com.example.tp33_detoxers.model.CategoryResult;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -66,12 +67,14 @@ public class CategoryListFragment extends Fragment {
                              Bundle savedInstanceState){
         View catListView = inflater.inflate(R.layout.fragment_categorylist, container, false);
         MaterialToolbar toolbar = catListView.findViewById(R.id.toolbar_category_list);
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+        bottomNavigationView.getMenu().getItem(1).setChecked(true);
         categoryProducts = new ArrayList<>();
         recyclerView = catListView.findViewById(R.id.recySearch);
         filterBtn = catListView.findViewById(R.id.filterBtn);
         searchAPI = new SearchAPI();
 
-
+        //add the progress bar
         progressBar = catListView.findViewById(R.id.progress_category);
         progressBar.setVisibility(View.GONE);
 
@@ -216,12 +219,9 @@ public class CategoryListFragment extends Fragment {
         });
 
 
-
-
         if (getArguments() != null) { //make sure the bundle contains category info
             category = getArguments().getString("CATEGORY");
             toolbar.setTitle(category);
-//            categoryName.setText(category);
             searchCategoryList searchCategory = new searchCategoryList();
             searchCategory.execute(category);
         }
@@ -273,16 +273,12 @@ public class CategoryListFragment extends Fragment {
         protected void onPostExecute(List<CategoryResult> c){
             categoryAdapter = new RVCategoryAdapter(categoryProducts);
             progressBar.setVisibility(View.GONE);
-            //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
             String filtered = confirmedIngredient + "," + confirmedLevel;
             categoryAdapter.getFilter().filter(filtered);
             recyclerView.setAdapter(categoryAdapter);
             layoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(layoutManager);
-
         }
     }
-
-
 
 }
