@@ -243,6 +243,8 @@ public class CategoryListFragment extends Fragment {
             searchCategory.execute(category);
         }
 
+
+
         categoryAdapter = new RVCategoryAdapter(categoryProducts);
 
         return catListView;

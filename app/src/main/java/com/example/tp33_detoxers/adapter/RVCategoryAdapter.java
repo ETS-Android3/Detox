@@ -249,21 +249,22 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Vi
                     }
 
             }
-            String[] items = new String[]{"Try filtering different criteria"};
+            String items ="Try filtering different criteria";
             FilterResults filterResults = new FilterResults();
             filterResults.values = categories;
             if (categories.size() == 0) {
-                AlertDialog builder = new MaterialAlertDialogBuilder(context)
-                        .setTitle("No Result Found!")
-                        .setItems(items, null)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        }).create();
-                builder.show();
-
+                Toast toast = Toast.makeText(context,items, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+//                new MaterialAlertDialogBuilder(context)
+//                        .setTitle("No Result Found!")
+//                        .setMessage(items)
+//                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                            }
+//                        }).show();
             }
             return filterResults;
         }
@@ -275,6 +276,5 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Vi
             notifyDataSetChanged();
         }
     };
-
 
 }

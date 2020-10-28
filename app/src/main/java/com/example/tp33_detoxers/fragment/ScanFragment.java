@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,7 +51,9 @@ public class ScanFragment extends Fragment {
         Button bt_scan = scanView.findViewById(R.id.bt_scan);
         //Button bt_search = scanView.findViewById(R.id.bt_searchCode);
         ImageView ivScan = scanView.findViewById(R.id.iv_scan);
-//        Picasso.get().load(R.drawable.scanimage).placeholder(R.drawable.scanimage).fit().into(ivScan);
+//        int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+//        ivScan.getLayoutParams().height = (int) (width * 0.67);
+        Picasso.get().load(R.drawable.scan).fit().into(ivScan);
         MaterialToolbar toolbar = scanView.findViewById(R.id.toolbar_scan);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

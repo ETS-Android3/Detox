@@ -28,9 +28,9 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
+        android:id="@+id/iv_home"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:src="@drawable/trolley1"/>
+        android:layout_height="300dp" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -38,7 +38,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="#61D9D9"
         android:drawableLeft="@drawable/ic_baseline_start_24"

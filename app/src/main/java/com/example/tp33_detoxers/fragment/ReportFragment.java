@@ -230,9 +230,9 @@ public class ReportFragment extends Fragment {
     //draw the bar chart
     private void drawBarChart(ArrayList<String> list) {
         BarDataSet barDataSet1 = new BarDataSet(barSuggest(),"Recommended");
-        barDataSet1.setColor(Color.GREEN);
+        barDataSet1.setColor(Color.parseColor("#80B75F"));
         BarDataSet barDataSet2 = new BarDataSet(barActual(list), "Actual");
-        barDataSet2.setColor(Color.BLUE);
+        barDataSet2.setColor(Color.parseColor("#F7D94C"));
         barData = new BarData(barDataSet1,barDataSet2);
         barChart.setData(barData);
 
