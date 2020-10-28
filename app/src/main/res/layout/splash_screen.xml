@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Keep toxins away \n from you"
+        android:text="Keep toxins away"
         android:fontFamily="serif-monospace"
         android:textSize="22sp"
         android:textColor="#FFFFEE"
