@@ -83,7 +83,7 @@
                         android:gravity="center_horizontal"
                         android:text="Bread"
                         android:textAlignment="center"
-                        android:textColor="#658543"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="16dp"
                         android:textStyle="bold" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -120,7 +120,7 @@
                         android:gravity="center_horizontal"
                         android:text="Vegetable"
                         android:textAlignment="center"
-                        android:textColor="#658543"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="16dp"
                         android:textStyle="bold" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -156,7 +156,7 @@
                         android:gravity="center_horizontal"
                         android:text="Fruit"
                         android:textAlignment="center"
-                        android:textColor="#658543"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="16dp"
                         android:textStyle="bold" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -193,7 +193,7 @@
                         android:gravity="center_horizontal"
                         android:text="Cheese"
                         android:textAlignment="center"
-                        android:textColor="#658543"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="16dp"
                         android:textStyle="bold" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -229,7 +229,7 @@
                         android:gravity="center_horizontal"
                         android:text="Biscuits / Cakes"
                         android:textAlignment="center"
-                        android:textColor="#658543"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="16dp"
                         android:textStyle="bold" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -267,7 +267,7 @@
                         android:gravity="center_horizontal"
                         android:text="Beverages"
                         android:textAlignment="center"
-                        android:textColor="#658543"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="16dp"
                         android:textStyle="bold" />
                 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -87,23 +87,25 @@ public class IntakeFragment extends Fragment {
         Button bt_addNew = intakeView.findViewById(R.id.bt_addnew);
         bt_delete = intakeView.findViewById(R.id.bt_removeAll);
         bt_calculate = intakeView.findViewById(R.id.calculate);
-        String[] items = new String[]{"1. Click 'Add New Product' button","2. Add new product to My Meals","3. Choose the piece of the products",
-                "4. Click 'Calculate Intake' button","5. Get the report of your intakes","6. Click 'Remove all' to clear" };
+        String[] items = new String[]{"1. Click the 'Add New Product' button", "2. Use the search function to find your product","3. Click the 'Add To My Meals' button on the product's detail page","4. Repeat steps 1 to 3 for your remaining products",
+                "5. Click the 'Calculate Intake' button to generate your personalised intake report","6. To clear the list, click the 'Remove All' button" };
 
         //set the information tips
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.action_help) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                    alertDialog.setTitle("The guide of using My Meals")
+                    AlertDialog builder = new MaterialAlertDialogBuilder(getContext())
+                            .setTitle("How to use the My Meals function")
                             .setItems(items, null)
                             .setPositiveButton("Back", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
                                 }
-                            }).create().show();
+                            }).create();
+                    builder.show();
+
                 }
                 return true;
             }

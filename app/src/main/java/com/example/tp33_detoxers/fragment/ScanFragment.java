@@ -49,7 +49,7 @@ public class ScanFragment extends Fragment {
         Button bt_scan = scanView.findViewById(R.id.bt_scan);
         //Button bt_search = scanView.findViewById(R.id.bt_searchCode);
         ImageView ivScan = scanView.findViewById(R.id.iv_scan);
-        Picasso.get().load(R.drawable.scanimage).placeholder(R.drawable.scanimage).fit().into(ivScan);
+//        Picasso.get().load(R.drawable.scanimage).placeholder(R.drawable.scanimage).fit().into(ivScan);
         MaterialToolbar toolbar = scanView.findViewById(R.id.toolbar_scan);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,13 +65,13 @@ public class ScanFragment extends Fragment {
             }
         });
 
-        String[] items = new String[]{"1. Click the 'Scan' button","2. Scan the barcode of products","3. Get the ingredients details"};
+        String[] items = new String[]{"1. Click the 'Scan Barcode' button","2. Scan the barcode of the product","3. Once successful, you will see the product details!"};
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.action_help) {
                     AlertDialog builder = new MaterialAlertDialogBuilder(getContext())
-                            .setTitle("The guide of using scan function")
+                            .setTitle("How to use the scan function")
                             .setItems(items, null)
                             .setPositiveButton("Back", new DialogInterface.OnClickListener() {
                                 @Override

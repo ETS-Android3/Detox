@@ -1,22 +1,31 @@
 package com.example.tp33_detoxers.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tp33_detoxers.R;
 import com.example.tp33_detoxers.fragment.IngredientFragment;
 import com.example.tp33_detoxers.model.CategoryResult;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,6 +34,7 @@ import java.util.List;
 public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.ViewHolder> implements Filterable{
     private List<CategoryResult> categoryResults;  // original data
     private List<CategoryResult> categoryFiltered;  // the copy one
+    private Context context;
 
     public RVCategoryAdapter(List<CategoryResult> categoryList) {
         categoryResults = categoryList;
@@ -34,6 +44,7 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
         public TextView nameTextView;
+
 
         private ViewHolder(View itemView) {
             super(itemView);
@@ -46,7 +57,8 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Vi
     @NonNull
     @Override
     public RVCategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
+
         LayoutInflater inflater = LayoutInflater.from(context);
         //Inflate the view from an XML layout file
         View categoryView = inflater.inflate(R.layout.recycview_search, parent,false);
@@ -237,9 +249,22 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Vi
                     }
 
             }
-
+            String[] items = new String[]{"Try filtering different criteria"};
             FilterResults filterResults = new FilterResults();
             filterResults.values = categories;
+            if (categories.size() == 0) {
+                AlertDialog builder = new MaterialAlertDialogBuilder(context)
+                        .setTitle("No Result Found!")
+                        .setItems(items, null)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).create();
+                builder.show();
+
+            }
             return filterResults;
         }
 
@@ -250,4 +275,6 @@ public class RVCategoryAdapter extends RecyclerView.Adapter<RVCategoryAdapter.Vi
             notifyDataSetChanged();
         }
     };
+
+
 }

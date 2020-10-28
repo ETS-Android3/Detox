@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="#00AA90"
+    android:background="#94b56f"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Keep you food \n away from toxins"
+        android:text="Keep toxins away \n from you"
         android:fontFamily="serif-monospace"
         android:textSize="22sp"
         android:textColor="#FFFFEE"
@@ -23,7 +23,7 @@
         android:layout_gravity="center_horizontal" />
 
 <!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_width="wrap_content"-->94b56f
 <!--        android:layout_height="wrap_content"-->
 <!--        android:textSize="25sp"-->
 <!--        android:textColor="#FFFFEE"-->

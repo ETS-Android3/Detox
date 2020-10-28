@@ -8,11 +8,15 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,6 +26,7 @@ import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -60,6 +65,7 @@ public class CategoryListFragment extends Fragment {
     private Button filterBtn;
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
+    private  Snackbar snack;
 
 
 
@@ -84,6 +90,10 @@ public class CategoryListFragment extends Fragment {
                 Objects.requireNonNull(getActivity()).onBackPressed();
             }
         });
+
+
+
+
 
         filterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,10 +158,17 @@ public class CategoryListFragment extends Fragment {
                 radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
+
                         switch(checkedId){
                             case R.id.rb_all1:
                                 selectedIngredient = "All";
                                 all2.setEnabled(true);
+//                                low.setChecked(false);
+//                                low.setEnabled(false);
+//                                mid.setChecked(false);
+//                                mid.setEnabled(false);
+//                                high.setChecked(false);
+//                                high.setEnabled(false);
                                 break;
                             case R.id.rb_sugar:
                                 selectedIngredient = "Sugars";
@@ -201,9 +218,20 @@ public class CategoryListFragment extends Fragment {
                     public void onClick(View v) {
                         confirmedIngredient = selectedIngredient;
                         confirmedLevel = selectedLevel;
-                        Snackbar.make(filterBtn, "You have selected " + confirmedIngredient +" in "+ confirmedLevel +" level!", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(filterBtn, "You have selected " + confirmedIngredient +" in "+ confirmedLevel +" level!", Snackbar.LENGTH_LONG);
                         String filtered = confirmedIngredient + "," + confirmedLevel;
                         categoryAdapter.getFilter().filter(filtered);
+
+//                        int num = categoryAdapter.getItemCount();
+//                        if (num == 0){
+//                            snack = Snackbar.make(catListView, "No Result Found For "+confirmedIngredient+ " In "+confirmedLevel+ " Level!", Snackbar.LENGTH_LONG);
+//                            View view = snack.getView();
+//                            view.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.green));
+//                            FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) view.getLayoutParams();
+//                            param.gravity = Gravity.CENTER;
+//                            view.setLayoutParams(param);
+//                            snack.show();
+//                        }
                         builder.dismiss();
                     }
                 });

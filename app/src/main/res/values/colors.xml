@@ -3,12 +3,15 @@
     <color name="colorPrimary">#1111</color>
     <color name="colorPrimaryDark">#2D6D4B</color>
     <color name="colorAccent">#5b793a</color>
-    <color name="green">#00AA90</color>
+    <color name="green">#78caac</color>
+    <color name="navGreen">#619f88</color>
     <color name="yellow">#F9BF45</color>
     <color name="red">#C73E3A</color>
     <color name="black">#0C0C0C</color>
     <color name="grey">#787D7B</color>
     <color name= "darkGreen">#829550</color>
-    <color name= "warmWhite">#ffffee</color>
+    <color name= "warmWhite">#fdfff2</color>
 <!--    #5b793a-->
+<!--    #00AA90  The original darker green-->
+<!--    #78caac-->
 </resources>

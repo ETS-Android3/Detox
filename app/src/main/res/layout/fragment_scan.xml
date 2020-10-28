@@ -32,17 +32,18 @@
     <ImageView
         android:id="@+id/iv_scan"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_height="300dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/scan" />
 
     <Button
         android:id="@+id/bt_scan"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:textColorHint="@color/black"
         app:cornerRadius="10dp"
         android:textSize="24sp"
+        android:textColorHint="@color/black"
         android:drawableLeft="@drawable/ic_baseline_photo_camera_24"
         android:hint="Scan Barcode"
         android:layout_gravity="center" />

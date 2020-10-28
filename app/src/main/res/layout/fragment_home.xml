@@ -27,24 +27,15 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.app.abby.xbanner.XBanner
-        android:id="@+id/xbanner"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="260dp" />
+        android:layout_height="320dp"
+        android:src="@drawable/trolley1"/>
 
-
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:text="Search Toxins in Food" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_start"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
@@ -57,7 +48,7 @@
 
     <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_tips"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_gravity="center_horizontal"
@@ -69,7 +60,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_aboutUs"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_gravity="center_horizontal"
@@ -81,3 +72,17 @@
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>
+
+<!--<com.app.abby.xbanner.XBanner-->
+<!--android:id="@+id/xbanner"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="260dp" />-->
+
+<!--<com.google.android.material.textview.MaterialTextView-->
+<!--android:layout_width="250dp"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_gravity="center_horizontal"-->
+<!--android:layout_marginTop="20dp"-->
+<!--android:textSize="25sp"-->
+<!--android:textStyle="bold"-->
+<!--android:text="Search Toxins in Food" />-->

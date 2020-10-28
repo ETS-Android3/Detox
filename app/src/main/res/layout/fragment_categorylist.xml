@@ -48,6 +48,12 @@
         android:shadowRadius="10"
         android:textColorHint="@color/black"
         android:hint="Ingredient Filter"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/no_result_tv"
+        android:layout_below="@id/filterBtn"/>
 
 <!--    <androidx.appcompat.widget.LinearLayoutCompat-->
 <!--        android:layout_width="match_parent"-->
@@ -105,7 +111,7 @@
     <!--            android:background="@drawable/et_background"-->
     <!--            android:text="This area will be replaced by a function bar" />-->
     <ProgressBar
-        android:layout_below="@+id/filterBtn"
+        android:layout_below="@+id/no_result_tv"
         android:id="@+id/progress_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
