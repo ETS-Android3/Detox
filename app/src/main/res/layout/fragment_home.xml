@@ -43,7 +43,7 @@
         android:backgroundTint="#61D9D9"
         android:drawableLeft="@drawable/ic_baseline_start_24"
         app:cornerRadius="10dp"
-        android:hint="Start Now"
+        android:hint="Search Now"
         android:textSize="24sp" />
 
     <com.google.android.material.button.MaterialButton

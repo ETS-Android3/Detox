@@ -65,7 +65,7 @@ public class CategoryListFragment extends Fragment {
     private Button filterBtn;
     private RadioGroup radioGroup1;
     private RadioGroup radioGroup2;
-    private  Snackbar snack;
+
 
 
 
@@ -218,20 +218,9 @@ public class CategoryListFragment extends Fragment {
                     public void onClick(View v) {
                         confirmedIngredient = selectedIngredient;
                         confirmedLevel = selectedLevel;
-                        Snackbar.make(filterBtn, "You have selected " + confirmedIngredient +" in "+ confirmedLevel +" level!", Snackbar.LENGTH_LONG);
+                        Snackbar.make(filterBtn, "You have selected " + confirmedIngredient +" in "+ confirmedLevel +" level!", Snackbar.LENGTH_LONG).show();
                         String filtered = confirmedIngredient + "," + confirmedLevel;
                         categoryAdapter.getFilter().filter(filtered);
-
-//                        int num = categoryAdapter.getItemCount();
-//                        if (num == 0){
-//                            snack = Snackbar.make(catListView, "No Result Found For "+confirmedIngredient+ " In "+confirmedLevel+ " Level!", Snackbar.LENGTH_LONG);
-//                            View view = snack.getView();
-//                            view.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.green));
-//                            FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) view.getLayoutParams();
-//                            param.gravity = Gravity.CENTER;
-//                            view.setLayoutParams(param);
-//                            snack.show();
-//                        }
                         builder.dismiss();
                     }
                 });
