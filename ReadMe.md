@@ -60,3 +60,5 @@ Other setting of Android Studio:
 - click the 'scan' button to scan the bar code of products
 - after get the bar code, click the 'search' button to jump into the ingredient screen
 
+By Sandy Pan
+
